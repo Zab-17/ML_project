@@ -1,0 +1,212 @@
+parcelid:
+- unique identifier is dropped as it doesnot contribute to any trends
+
+
+
+airconditioningtypeid:
+- - Feature is dropped because 100% of its values are missing, so it provides no usable information for the model.
+
+
+architecturalstyletypeid:
+- Feature is dropped because 100% of its values are missing, so it provides no usable information for the model.
+
+
+basementsqft:
+- Feature is dropped because 99.95% of its values are missing, leaving only 1,627 usable observations.
+- Although the available values are associated with property value, the extremely high missingness makes the feature unreliable for the final model.
+- Dropping it avoids introducing a feature that would require additional assumptions and testing about the meaning of its missing values.
+
+
+
+bathroomcnt:
+- Feature is kept because it has very low missingness (0.1%) and shows a clear positive relationship with property value.
+- It will be treated as a numerical count, preserving fractional values such as 1.5 and 2.5.
+- The small number of missing values will be imputed using the median.
+
+
+bedroomcnt:
+- Feature is kept because it has very low missingness (0.099%) and shows a meaningful positive relationship with property value.
+- It will be treated as a numerical count, with zero bedrooms retained as a valid value.
+- The small number of missing values will be imputed using the median.
+
+
+
+buildingclasstypeid
+- Feature is dropped because 100% of its values are missing, so it provides no usable information for the model.
+
+
+buildingqualitytypeid:
+- Feature is kept because the different categories show substantially different property value distributions.
+- The foreign-key IDs will be treated as categorical values because the lookup table defining their meanings is unavailable; we will not assume that a higher ID represents higher building quality.
+- The categories will be one-hot encoded, with missing values represented as a separate "Unknown" category.
+
+
+calculatedbathnbr:
+- Feature is dropped because it is completely redundant with `bathroomcnt`.
+- When both values are available, they agree in 100% of the 2,868,061 observations.
+- `calculatedbathnbr` also has substantially more missing values than `bathroomcnt`, so `bathroomcnt` is retained as the bathroom-count feature.
+
+decktypeid:
+- Feature is dropped because 99.42% of its values are missing and only one category (66) is observed.
+- Since there is no variation among the recorded values, the feature provides no useful categorical information for distinguishing properties.
+
+calculatedfinishedsquarefeet:
+- Feature is kept because it has low missingness (1.51%) and a strong relationship with property value.
+- The feature is highly right-skewed, so it will be log-transformed before modeling.
+- Missing values will be imputed using the median.
+- The related features `finishedfloor1squarefeet`, `finishedsquarefeet12`, `finishedsquarefeet13`, `finishedsquarefeet15`, `finishedsquarefeet50`, and `finishedsquarefeet6` are dropped to avoid redundant square-footage measurements.
+
+fips:
+- Feature is kept because the three counties show different property-value distributions.
+- Missing values will be assigned to an `"Unknown"` category.
+- FIPS codes will be treated as categorical identifiers rather than numerical values.
+- The categories will be one-hot encoded.
+
+
+fireplacecnt:
+- Feature is dropped because 89.51% of its values are missing.
+- Although the recorded fireplace counts show a strong relationship with property value, only about 10.5% of properties have recorded values.
+- Dropping it avoids making assumptions about what the missing fireplace counts represent.
+
+
+
+**fullbathcnt:**
+- Feature is kept because it provides information beyond `bathroomcnt` and has a strong relationship with property value.
+- It has relatively low missingness (3.92%).
+- It will be treated as a numerical count.
+- Missing values will be imputed using the median.
+- No log transformation is applied.
+
+
+**garagecarcnt:**
+- Feature is dropped because more than 70% of its values are missing.
+
+**garagetotalsqft:**
+- Feature is dropped because more than 70% of its values are missing.
+
+**hashottuborspa:**
+- Feature is dropped because more than 70% of its values are missing.
+
+
+**heatingorsystemtypeid:**
+- Feature is kept because the different heating-system categories show substantially different property-value distributions.
+- The foreign-key IDs will be converted to their corresponding heating-system categories and treated as categorical values.
+- Missing values will be assigned to an `"Unknown"` category.
+- The categorical values will be one-hot encoded.
+
+
+
+
+
+**latitude:**
+- Feature is kept because it provides precise geographic information beyond the county-level `fips` feature.
+- Values will be converted from Zillow's scaled representation to standard latitude values by dividing by 1,000,000.
+- Missing values will be imputed using the median.
+
+**longitude:**
+- Feature is kept because it provides precise geographic information beyond the county-level `fips` feature.
+- Values will be converted from Zillow's scaled representation to standard longitude values by dividing by 1,000,000.
+- Missing values will be imputed using the median.
+
+
+**lotsizesquarefeet:**
+- Feature is kept because lot size provides additional information about the property and has a measurable monotonic relationship with property value.
+- The feature is extremely right-skewed, so it will be log-transformed before modeling.
+- Missing values will be imputed using the median.
+- No zero or negative values require special handling.
+
+**Pool-related features:**
+- `poolcnt`, `poolsizesum`, `pooltypeid10`, `pooltypeid2`, and `pooltypeid7` are dropped because they have approximately 99% missingness.
+- Keeping them would require making assumptions about the missing values, so they are excluded from the final model.
+
+
+**propertycountylandusecode:**
+- Kept because it has very low missingness and meaningful differences in property values across categories.
+- Treated as categorical.
+- Missing values are assigned to `"Unknown"`.
+- Due to the large number of categories (234), frequency encoding is used instead of one-hot encoding.
+- Frequencies are calculated from the training data only to prevent data leakage.
+
+
+**propertylandusetypeid:**
+- Kept because it has very low missingness (0.098%) and shows clear differences in property value across property types.
+- The IDs are treated as categorical values, not numerical values.
+- Missing values are assigned to an `"Unknown"` category.
+- One-hot encoding is used because there are only 16 observed categories.
+- `propertycountylandusecode` is also kept because it provides more detailed land-use information.
+
+
+**propertyzoningdesc:**
+- Dropped because of its high percentage of missing values.
+- The remaining observations are not sufficient to justify keeping the feature and handling the missing values.
+
+**rawcensustractandblock:**
+- Dropped to avoid adding another geographic identifier.
+- Geographic information is already represented by `fips`, `latitude`, and `longitude`.
+- Keeping the feature set simpler avoids unnecessary geographic redundancy.
+
+
+
+    **regionidcity, regionidcounty, regionidneighborhood, regionidzip:**
+- Dropped because their geographic information substantially overlaps with the existing `fips`, `latitude`, and `longitude` features.
+- These IDs would also introduce additional high-cardinality categorical features and require more complex encoding.
+- The existing geographic features provide sufficient location information while keeping the model simpler.
+
+
+
+
+**roomcnt:**
+- Dropped because the feature is poorly distributed, with approximately 77.6% of properties recorded as having zero rooms.
+- Although nonzero room counts show a relationship with property value, the large concentration at zero makes the feature unreliable as a measure of actual room count.
+- Related information is already captured by `bedroomcnt`, `bathroomcnt`, and `fullbathcnt`.
+
+
+
+
+
+
+**storytypeid:**
+- Dropped because of high missingness.
+
+**threequarterbathnbr:**
+- Dropped because of high missingness.
+
+**typeconstructiontypeid:**
+- Dropped because of high missingness.
+
+**unitcnt:**
+- Dropped because of high missingness.
+
+**yardbuildingsqft17:**
+- Dropped because of high missingness.
+
+**yardbuildingsqft26:**
+- Dropped because of high missingness.
+
+
+
+**yearbuilt:**
+- Kept because it has low missingness (1.60%) and provides information about property age.
+- Treated as a numerical feature because the ordering of years is meaningful.
+- Missing values are median-imputed.
+- No categorical encoding is required.
+
+
+### Label
+- **`taxvaluedollarcnt`** → the target/label for the regression model.
+- It has **1.15% missing values**; rows with missing labels will be removed.
+
+### Drop due to target leakage
+- **`structuretaxvaluedollarcnt`** → structure value.
+- **`landtaxvaluedollarcnt`** → land value.
+- These two sum to `taxvaluedollarcnt` exactly, so keeping them would directly reveal the target.
+
+### Drop due to strong target dependence
+- **`taxamount`** → correlation of **0.979** with the target and is derived from the same property-tax assessment information.
+
+### Other related columns dropped
+- **`assessmentyear`** → ~99.9% of values are 2016, so almost no useful variation.
+- **`taxdelinquencyflag`** → 98.1% missing.
+- **`taxdelinquencyyear`** → 98.1% missing.
+
+Therefore, the model will predict **`taxvaluedollarcnt`** using property characteristics, while excluding columns that directly contain or reveal the target.
