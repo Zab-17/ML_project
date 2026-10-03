@@ -26,6 +26,8 @@ HIGH_MISSINGNESS_LIMIT = 70  # percent; the line above which a column was droppe
 LEAKAGE_LIMIT = 0.85
 SAMPLE_ROWS = 400_000  # histograms only; keeps every figure under a few seconds
 RANDOM_SEED = 42
+UPPER_DISPLAY_QUANTILE = 0.99  # heavy tails would otherwise squeeze every histogram into one bar
+COUNT_DISPLAY_QUANTILES = (0.001, 0.999)
 
 KEPT_RAW_FEATURES = COUNT_FEATURES + SKEWED_AREA_FEATURES + ["latitude", "longitude"] \
                     + ONE_HOT_FEATURES + [ZONING_FEATURE]
@@ -68,7 +70,7 @@ def label_distribution_figure(label: pd.Series) -> None:
     """Why the label is heavy-tailed, and what a logarithm does to it."""
     positive = label[label > 0]
     figure, (left, right) = plt.subplots(1, 2, figsize=(11, 4))
-    left.hist(positive.clip(upper=positive.quantile(0.99)), bins=80, color=KEPT_COLOUR)
+    left.hist(positive.clip(upper=positive.quantile(UPPER_DISPLAY_QUANTILE)), bins=80, color=KEPT_COLOUR)
     left.set_title("Assessed value, clipped at the 99th percentile")
     left.set_xlabel("US dollars")
     right.hist(np.log1p(positive), bins=80, color=SECOND_COLOUR)
@@ -87,7 +89,8 @@ def area_transformation_figure(raw_sample: pd.DataFrame) -> None:
     for row, column in enumerate(SKEWED_AREA_FEATURES):
         values = raw_sample[column].dropna()
         values = values[values > 0]
-        panels[row][0].hist(values.clip(upper=values.quantile(0.99)), bins=80, color=DROPPED_COLOUR)
+        panels[row][0].hist(values.clip(upper=values.quantile(UPPER_DISPLAY_QUANTILE)), bins=80,
+                            color=DROPPED_COLOUR)
         panels[row][0].set_title(f"{column}: raw (skew {values.skew():.1f})")
         panels[row][1].hist(np.log1p(values), bins=80, color=KEPT_COLOUR)
         panels[row][1].set_title(f"{column}: log (skew {np.log1p(values).skew():.1f})")
@@ -104,8 +107,8 @@ def count_distribution_figure(raw_sample: pd.DataFrame) -> None:
     figure, panels = plt.subplots(1, 3, figsize=(12, 3.6))
     for axes, column in zip(panels, COUNT_FEATURES):
         values = raw_sample[column].dropna()
-        axes.hist(values.clip(lower=values.quantile(0.001), upper=values.quantile(0.999)),
-                  bins=40, color=KEPT_COLOUR)
+        lower, upper = (values.quantile(share) for share in COUNT_DISPLAY_QUANTILES)
+        axes.hist(values.clip(lower=lower, upper=upper), bins=40, color=KEPT_COLOUR)
         axes.set_title(f"{column}\nmissing {raw_sample[column].isna().mean() * 100:.2f}%, "
                        f"median {values.median():.0f}", fontsize=10)
         axes.set_ylabel("properties")

@@ -172,11 +172,47 @@ def constant_features(features: pd.DataFrame) -> list[str]:
     return sorted(features.columns[features.nunique() == 1])
 
 
-def write_outputs(train: pd.DataFrame, test: pd.DataFrame, report: dict) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+def with_label(features: pd.DataFrame, rows: pd.DataFrame) -> pd.DataFrame:
+    return pd.concat([features, rows[[LABEL]].reset_index(drop=True)], axis=1)
+
+
+def save_correlations(correlations: pd.Series) -> None:
+    ranked = correlations.sort_values(key=abs, ascending=False)
+    ranked.to_csv(PROCESSED_DIR / "label_correlations.csv", header=["correlation_with_label"])
+
+
+def save_datasets(train: pd.DataFrame, test: pd.DataFrame, report: dict) -> None:
     train.to_parquet(PROCESSED_DIR / "train.parquet", index=False)
     test.to_parquet(PROCESSED_DIR / "test.parquet", index=False)
     (PROCESSED_DIR / "cleaning_report.json").write_text(json.dumps(report, indent=2))
+
+
+def summarise(raw: pd.DataFrame, labelled: pd.DataFrame, train_rows: pd.DataFrame,
+              test_rows: pd.DataFrame, features: pd.DataFrame, parameters: FittedParameters,
+              correlations: pd.Series, dropped: dict[str, list[str]]) -> dict:
+    """The numbers the Phase 2 report quotes, gathered in one place."""
+    missing_per_numeric_feature = numeric_frame(labelled).isna().sum()
+    strongest = correlations.abs().sort_values(ascending=False).head(10)
+    return {
+        "rows_in_raw_file": len(raw),
+        "rows_dropped_missing_label": len(raw) - len(labelled),
+        "rows_kept": len(labelled),
+        "training_rows": len(train_rows),
+        "test_rows": len(test_rows),
+        "final_feature_count": features.shape[1],
+        "values_imputed_per_numeric_feature": missing_per_numeric_feature.astype(int).to_dict(),
+        "medians_used": {name: float(value) for name, value in parameters.medians.items()},
+        "categories_kept_per_feature": {name: len(values) for name, values in parameters.categories.items()},
+        "features_dropped_for_label_correlation": dropped["label_correlation"],
+        "features_dropped_for_no_variation": dropped["no_variation"],
+        "highest_label_correlations": strongest.round(4).to_dict(),
+    }
+
+
+def unusable_features(features: pd.DataFrame, correlations: pd.Series) -> dict[str, list[str]]:
+    """Features a model must not see: those that leak the label, and those that never vary."""
+    leaking = leaking_features(correlations)
+    return {"label_correlation": leaking, "no_variation": constant_features(features.drop(columns=leaking))}
 
 
 def main() -> None:
@@ -190,34 +226,16 @@ def main() -> None:
     test_features = transform(test_rows, parameters)
 
     correlations = label_correlations(train_features, train_rows[LABEL])
-    dropped_for_leakage = leaking_features(correlations)
-    dropped_for_no_variation = constant_features(train_features.drop(columns=dropped_for_leakage))
-    discarded = dropped_for_leakage + dropped_for_no_variation
+    dropped = unusable_features(train_features, correlations)
+    discarded = dropped["label_correlation"] + dropped["no_variation"]
     train_features = train_features.drop(columns=discarded)
     test_features = test_features.drop(columns=discarded)
 
-    correlations.sort_values(key=abs, ascending=False).to_csv(
-        PROCESSED_DIR / "label_correlations.csv", header=["correlation_with_label"])
-
-    report = {
-        "rows_in_raw_file": len(raw),
-        "rows_dropped_missing_label": len(raw) - len(labelled),
-        "rows_kept": len(labelled),
-        "training_rows": len(train_rows),
-        "test_rows": len(test_rows),
-        "final_feature_count": train_features.shape[1],
-        "values_imputed_per_numeric_feature": {
-            column: int(numeric_frame(labelled)[column].isna().sum()) for column in parameters.medians},
-        "medians_used": {k: float(v) for k, v in parameters.medians.items()},
-        "categories_kept_per_feature": {k: len(v) for k, v in parameters.categories.items()},
-        "features_dropped_for_label_correlation": dropped_for_leakage,
-        "features_dropped_for_no_variation": dropped_for_no_variation,
-        "highest_label_correlations": correlations.abs().sort_values(ascending=False).head(10).round(4).to_dict(),
-    }
-    write_outputs(pd.concat([train_features, train_rows[[LABEL]].reset_index(drop=True)], axis=1),
-                  pd.concat([test_features, test_rows[[LABEL]].reset_index(drop=True)], axis=1),
-                  report)
-    print(json.dumps(report, indent=2)[:2000])
+    report = summarise(raw, labelled, train_rows, test_rows, train_features,
+                       parameters, correlations, dropped)
+    save_correlations(correlations)
+    save_datasets(with_label(train_features, train_rows), with_label(test_features, test_rows), report)
+    print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":

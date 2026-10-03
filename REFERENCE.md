@@ -239,7 +239,7 @@ dataset is a small dishonesty that a careful reader will catch.
 
 | | His specification | What the code does | The reason |
 |---|---|---|---|
-| `propertyzoningdesc` | dropped | kept, one-hot | rule 3 — **still open, Zeyad has not decided** |
+| `propertyzoningdesc` | dropped | kept, one-hot | rule 3 — **settled on 3 October: Zeyad put the argument to Mohamed and the two agreed to keep the column** |
 | `propertycountylandusecode` | frequency encoding | one-hot | rule 3 permits only one-hot or embedding |
 | scaling | not mentioned | z-scores on all numeric features | rule 1 |
 | rare categories | not mentioned | 0.01% threshold, rest into Other | otherwise 183 near-empty columns |
@@ -264,6 +264,9 @@ licence forbids redistribution. Download it yourself and put it in `data/raw/`.
 
 ## 9. What is still open
 
-1. **`propertyzoningdesc`: keep it (13 features) or drop it to match Mohamed exactly (12)?**
-2. The report itself, which the two of you write from this document.
-3. Telling the professor about the competition licence.
+1. The report itself, which the two of you write from this document.
+2. Telling the professor about the competition licence.
+
+Settled on 3 October: `propertyzoningdesc` is kept, with its missing third held in an explicit
+`Unknown` column rather than filled in. Inventing a zoning code for a property that has none
+would be fabricating data; an `Unknown` column is honest and still usable by a model.
