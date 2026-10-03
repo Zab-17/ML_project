@@ -1,0 +1,146 @@
+%% Phase 1 report -- CSCE 3602 / DSCI 3415 Fundamentals of Machine Learning
+%% ACM interim article template (acmart), double column, 10 pt.
+%% Compile on Overleaf: New Project > Upload Project > select this folder's zip.
+\documentclass[sigconf,nonacm,10pt]{acmart}
+
+\usepackage{tabularx}
+
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{Fair Price in a Moving Market: Machine Learning for Egyptian Residential Real-Estate Valuation}
+\subtitle{Phase 1: Problem Identification and Project Specification}
+
+\author{Zeyad Khaled}
+\affiliation{%
+  \institution{The American University in Cairo}
+  \city{Cairo}
+  \country{Egypt}}
+
+\author{Mohamed Akram}
+\affiliation{%
+  \institution{The American University in Cairo}
+  \city{Cairo}
+  \country{Egypt}}
+
+\begin{abstract}
+Between 2021 and 2025 the Egyptian pound lost roughly two thirds of its value against the US dollar, urban inflation peaked at 38\%, and asking prices in some Cairo districts more than doubled within a single year. Egypt has no official house-price index, most sales are never formally registered, and valuation is still largely manual. Buyers, sellers and lenders therefore have no reliable, up-to-date answer to a simple question: \emph{what is a fair price for this property today?} This report specifies a supervised machine-learning project that predicts the fair asking price of Egyptian residential units from their listing attributes, and that stays accurate under inflation by retraining on newly collected data. We review prior hedonic and machine-learning valuation work, including the few studies on Egypt and neighbouring high-inflation markets, together with the pitfalls they expose. We then outline our approach and survey four public Egyptian listing datasets with 19,924 to 64,106 instances each, reporting their size, features, label, availability and limitations.
+\end{abstract}
+
+\keywords{real-estate valuation, hedonic pricing, regression, concept drift, Egypt, machine learning}
+
+\maketitle
+
+%% ------------------------------------------------------------------
+\section{Introduction}
+
+\subsection{Motivation}
+Egypt's housing market has been repriced by an unusual macroeconomic shock. Annual urban headline inflation reached a record 38.0\% in September 2023~\cite{capmas_sep23} and was still 14.5\% in August 2026~\cite{capmas_aug26}. The average official exchange rate moved from 15.6 Egyptian pounds (EGP) per US dollar in 2021 to 49.2 in 2025~\cite{wb_fx}, after a sequence of devaluations that ended with the float of 6 March 2024. Households responded by moving savings into property: JLL data reported by Ahram Online show year-on-year sale-price increases of 180\% in New Cairo and 175\% in 6th of October in the second quarter of 2024~\cite{ahram2024jll}.
+
+The sector matters to the whole economy. In fiscal year 2024/25, construction and real-estate activities together produced 17.5\% of Egypt's gross domestic product (GDP), about EGP~3.04 trillion~\cite{mped_gdp25}, in a country of 108 million residents~\cite{capmas_pop}. Mortgage lending is still small, about 0.3\% of GDP~\cite{dne2026mortgage}, but it is growing fast: licensed mortgage companies issued EGP~29.4 billion in the first nine months of 2025, 66\% more than a year earlier~\cite{fra_mortgage}.
+
+Despite this, reliable price information is missing. Neither the statistics agency (CAPMAS) nor the Central Bank of Egypt publishes a transaction-based house-price index, and researchers note ``a lack of evidence-based data on housing prices \dots\ in official sources''~\cite{elkhishin2022}. The only regularly published indicators come from listing portals, which state that their figures are based on sellers' own inputs~\cite{aqarmap2025trends}. Valuation is performed manually by licensed valuers; the Financial Regulatory Authority reissued its valuation standards in September 2026 and added a chapter on \emph{model valuation} without yet specifying what such a model must satisfy~\cite{enterprise2026valuers,dne2026fra}. A transparent, measurable and regularly retrained model therefore fills a real gap.
+
+\subsection{Problem Specification}
+\textbf{Task.} Given the attributes of a residential unit offered for sale in Egypt, predict its fair asking price in EGP. This is a supervised regression problem. We model the logarithm of the price per square metre and convert back to a total price, which reduces the influence of very large units and makes errors comparable across districts.
+
+\textbf{Inputs.} Structured listing attributes (property type, area in square metres, bedrooms, bathrooms, furnishing, completion status, payment method), location (governorate, city, district, compound, latitude and longitude) and, where available, the free-text description and amenities.
+
+\textbf{Output.} A point estimate and an interval for the asking price, plus a flag when a listed price is far above or below the estimate.
+
+\textbf{Scope and constraints.} Sale listings of residential units only; rentals and commercial units are excluded from the main model. The label is an \emph{asking} price, not a transaction price, because no public Egyptian transaction dataset exists. Prices drift quickly, so a model trained once will go stale; the project must measure this drift and correct for it by retraining.
+
+\textbf{Research questions.} (1) Which supervised models give the lowest error on Egyptian listings? (2) How much does accuracy degrade when a model trained on 2025 data is applied to 2026 data? (3) How much do location and text features add beyond basic attributes?
+
+%% ------------------------------------------------------------------
+\section{Literature Review}
+
+\subsection{Hedonic pricing and machine-learning valuation}
+Hedonic theory treats a property's price as the sum of implicit prices of its characteristics~\cite{rosen1974hedonic}; this is the theoretical basis for regressing price on listing attributes, traditionally with linear models. The Ames housing dataset (2,930 sales described by 80 variables) became the standard teaching benchmark for this task~\cite{decock2011ames}.
+
+Tree ensembles now dominate comparative studies. On 39,554 Hong Kong transactions with prices in real terms, Ho et al.\ report test $R^2$ values of 0.827 for a support vector machine, 0.903 for a random forest and 0.904 for gradient boosting on log price~\cite{ho2021predicting}. On more than 123,000 Swiss houses, Mayer et al.\ found gradient boosting the most accurate and robust regression the least volatile, and compared moving-window with extending-window \emph{updating} of the model over time~\cite{mayer2019estimation}, which is directly relevant to our retraining plan.
+
+Location and unstructured information add further signal. Law et al.\ raised $R^2$ on 40,470 London sales from 81.7\% (attributes only) to 84.7\% by adding street-level and satellite imagery, and showed that performance on a held-out borough is much lower (62.7\% to 76.5\%) than on a random split~\cite{law2019take}. Text is equally useful: regression on the wording of classified advertisements significantly lowered prediction error~\cite{abdallah2016text}, property descriptions improved automated valuation~\cite{baur2023automated}, and combining text and image embeddings with structured features cut the mean absolute error by up to 26\% on 52,851 Melbourne sales~\cite{hasan2024multimodal}.
+
+\subsection{Egypt and comparable markets}
+Peer-reviewed machine-learning work on Egyptian property prices is scarce. Mohamed et al.\ trained a three-layer neural network on 1,990 housing units from 28 Egyptian cities (2014--2022) and report a test mean absolute error of EGP~85,460~\cite{mohamed2023egypt}; however, their data were split at random across eight inflationary years, so future prices can leak into training. Abdrabo et al.\ applied spatial hedonic regression to quality of urban life and prices in Alexandria~\cite{abdrabo2022alex}, and El-Khishin and Rashwan used surveys of 401 households and 421 developers and brokers because official price data were unavailable~\cite{elkhishin2022}. We found no peer-reviewed study that uses Egyptian listing-portal data.
+
+The closest analogue is Istanbul, another high-inflation market: on 36,759 scraped listings, Tekin and Ucal Sari obtained a mean absolute percentage error (MAPE) of 34.4\% with linear regression ($R^2=0.62$), 21.8\% with XGBoost and 20.6\% with a random forest, and recommended retraining every month as prices rise~\cite{tekin2022istanbul}. On 247,517 Dubai one-bedroom transactions over 19 years, Balila and Shabri report a best $R^2$ of only 0.54 using a random split with no treatment of time~\cite{balila2024dubai}. Alzain et al.\ used listings from the Aqar application to price Saudi properties with neural networks~\cite{alzain2022saudi}. Table~\ref{tab:lit} summarises the quantitative results.
+
+\begin{table*}[t]
+\caption{Selected prior work and reported performance.}
+\label{tab:lit}
+\small
+\begin{tabularx}{\textwidth}{@{}lXXX@{}}
+\toprule
+Study & Market and data & Models & Reported result \\
+\midrule
+Ho et al.~\cite{ho2021predicting} & Hong Kong, 39,554 transactions, 1996--2014 & SVM, random forest, gradient boosting & Test $R^2$: 0.827 / 0.903 / 0.904 (log real price) \\
+Law et al.~\cite{law2019take} & London, 40,470 sales + images & Linear, XGBoost, deep networks & $R^2$ 81.7\% $\rightarrow$ 84.7\% with images; 62.7--76.5\% on held-out borough \\
+Hasan et al.~\cite{hasan2024multimodal} & Melbourne, 52,851 sales (preprint) & Gradient boosting + text/image embeddings & Up to 26\% lower mean absolute error than attributes only \\
+Tekin and Ucal Sari~\cite{tekin2022istanbul} & Istanbul, 36,759 listings (2020) & Linear, polynomial, tree, random forest, XGBoost & MAPE 34.4\% (linear) vs.\ 20.6\% (random forest) \\
+Balila and Shabri~\cite{balila2024dubai} & Dubai, 247,517 transactions, 2004--2023 & 8 models incl.\ SVM, random forest & Best $R^2$ 0.54; random forest $R^2$ 0.30 \\
+Mohamed et al.~\cite{mohamed2023egypt} & Egypt, 1,990 units, 2014--2022 & Multilayer perceptron & Test mean absolute error EGP 85,460 (random split) \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\subsection{Known pitfalls}
+Three lessons from the literature shape our design. \emph{Asking versus sale prices:} listed properties differ from sold ones and listing-based valuations of individual homes are biased upwards~\cite{kolbe2021listings}, although list-price indices track and even lead sale-price trends~\cite{lyons2019list}; we therefore state clearly that our target is the asking price. \emph{Duplicates:} the same property is often advertised several times, which is described as the main problem of listing data~\cite{loberto2020}; duplicates must be removed before splitting, or copies leak between training and test sets. \emph{Evaluation:} the relationship between inputs and price changes over time (concept drift), which is handled by retraining on recent data~\cite{gama2014drift}, and random cross-validation gives over-optimistic error estimates on spatial data~\cite{deppner2024spatial,roberts2017cv}. We therefore evaluate with time-ordered and location-grouped splits.
+
+%% ------------------------------------------------------------------
+\section{Proposed Approach}
+
+\textbf{Data preparation (Phase 2).} We will filter to residential sale listings; remove duplicates using the portal listing identifier and then a fuzzy key of property type, rounded area, bedrooms, district, price and rounded coordinates; remove ``wanted'' posts and outliers in price per square metre within each district; parse text fields (for example size strings mixing square feet and square metres); and delete all personal data such as agent names, phone numbers and e-mail addresses, including phone numbers written inside descriptions. Engineered features will include price per square metre (target), log area, district and compound encodings (one-hot, frequency or target encoding), distance to the city centre and major hubs from the coordinates, payment method (cash or instalments), completion status, amenity indicators, listing age and keyword features from the description using TF-IDF.
+
+\textbf{Model comparison (Phase 3).} We will compare a linear regression and regularised (ridge) baseline, K-nearest-neighbours regression, a decision tree, a random forest, gradient boosting (XGBoost or LightGBM) and support vector regression. Metrics will be the mean absolute error in EGP, MAPE, root mean squared error of the log price and $R^2$, estimated with cross-validation grouped by district.
+
+\textbf{Final model and datasets (Phase 4).} The main robustness test trains on August 2025 listings and tests on March 2026 listings from the same portal, which measures seven months of inflation drift directly. A second 2026 dataset, after removing listings shared with the first, serves as an external test set, and synthetic listings generated from the training distribution will be used where applicable to stress-test the model on rare property types.
+
+\textbf{Application.} We will build a web application, \emph{Fair Price Egypt}. A user enters a unit's details or pastes a listing; the application returns an estimated fair price range, the price per square metre compared with the district median, and a flag for over- or under-priced listings. Users and agents can report the final agreed sale price and correct wrong estimates. These reports are stored as new labelled data, and the model is retrained periodically on a recent time window, with its error on new reports monitored to detect drift. Because the portals' terms of use prohibit automated scraping~\cite{pf_terms}, the application does not scrape; beyond user reports, new data comes from newly published public dataset versions. Over time the user reports also build what no public source currently provides: real transaction prices.
+
+\textbf{Applications.} Buyers and sellers can check whether an asking price is fair; banks and mortgage companies can use it as a fast collateral cross-check; licensed valuers can use it as a transparent model-based benchmark under the new valuation standards; and developers and researchers gain an up-to-date price-per-square-metre signal by district.
+
+%% ------------------------------------------------------------------
+\section{Datasets}
+
+No public dataset of Egyptian property \emph{transactions} exists, so all candidate datasets contain listings (asking prices) collected from portals. We downloaded each dataset and counted its rows and columns ourselves; Table~\ref{tab:data} summarises them. All share the same label, the listed price in EGP.
+
+\begin{table*}[t]
+\caption{Egyptian residential listing datasets (rows and columns counted from the downloaded files).}
+\label{tab:data}
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.45cm}p{3.3cm}p{2.5cm}rrXp{2.1cm}@{}}
+\toprule
+ID & Dataset & Source, period & Rows & Cols & Example features & Licence \\
+\midrule
+D1 & Egypt Real Estate Data 2026~\cite{ds_2026pf} & Property Finder, Mar 2026 & 39,713 & 53 & property type, city/town/district/compound, latitude, longitude, area (m\textsuperscript{2}), bedrooms, bathrooms, furnished, completion status, payment method, amenities, description & CC BY-NC-SA 4.0 \\
+D2 & Egyptian Real Estate Listings~\cite{ds_2025pf} & Property Finder, Aug--Sep 2025 & 19,924 & 11 & type, location, size (sq ft / m\textsuperscript{2} text), bedrooms, bathrooms, payment method, down payment, available-from date, description & CC BY-SA 4.0 \\
+D3 & Egypt Property Finder Comprehensive~\cite{ds_2026pfc} & Property Finder, Feb 2026 & 64,106 & 23 & property type, location, latitude, longitude, size, bedrooms, bathrooms, amenities, category, price period & CC0 1.0 \\
+D4 & Egypt Houses Price~\cite{ds_2022olx} & OLX Egypt, 2022 & 27,361 & 12 & type, area, bedrooms, bathrooms, furnished, floor level, compound, payment option, delivery date, city & ``Original authors'' \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\textbf{D1: Egypt Real Estate Data 2026}~\cite{ds_2026pf}. The richest and most recent dataset: 39,713 listings (19,802 for sale and 19,910 monthly rentals) collected on 4--5 March 2026, with 53 columns including full coordinates and a city--town--district--compound hierarchy. The label is \texttt{price\_egp}, with \texttt{price\_period} separating sale from rent. \emph{Relevance:} primary dataset and 2026 test period. \emph{Limitations:} rent and sale are mixed; completion status and payment method are missing for about half the rows; there are extreme values up to EGP~1 billion and ``wanted'' posts; 13 columns contain agents' personal contact details that we will delete; the licence allows non-commercial use only.
+
+\textbf{D2: Egyptian Real Estate Listings}~\cite{ds_2025pf}. 19,924 sale listings collected around August 2025 with 11 columns. The label \texttt{price} is stored as text with thousands separators (about 2.7\% missing); size is a mixed string such as ``732 sqft / 68 sqm''; and the down payment is missing in 73\% of rows. \emph{Relevance:} the training period for the 2025$\rightarrow$2026 drift test; it shares only 56 listing identifiers with D1, so the two periods are almost disjoint. \emph{Limitations:} fewer features, text fields that need parsing, phone numbers inside many descriptions, and a licence stated inconsistently (CC BY-SA 4.0 in the metadata, CC BY 4.0 in the description).
+
+\textbf{D3: Egypt Property Finder Comprehensive}~\cite{ds_2026pfc}. The largest dataset: 64,106 listings collected on 19 February 2026 with 23 columns, covering residential and commercial sale and rent (for example 19,967 residential sale and 19,979 residential rent listings). \emph{Relevance:} extra training volume and an external test set. \emph{Limitations:} it was collected two weeks before D1 from the same portal, so 10,926 listings appear in both and must be removed from one of them; about 2,758 near-duplicates remain despite the page's claim of no duplicates; 1,121 new-project rows have no price.
+
+\textbf{D4: Egypt Houses Price}~\cite{ds_2022olx}. 27,361 listings from OLX Egypt collected in 2022 with 12 columns. \emph{Relevance:} a historical reference for how prices and property mix changed after the devaluations; for example, the median asking price per square metre of New Cairo apartments is about EGP~11,100 in D4 versus about EGP~55,800 in D1. \emph{Limitations:} it comes from a different portal with a different schema and no listing identifiers or dates, contains 1,591 duplicate rows and placeholder values (``Unknown'' in about 40\% of the compound and floor fields), and grants no clear reuse licence. It is therefore used for descriptive comparison only, not as a formal test set.
+
+\textbf{Common limitations and ethics.} All four datasets contain asking prices rather than transaction prices, and three of them were collected from Property Finder, whose terms prohibit automated collection~\cite{pf_terms}. We use them for non-commercial academic purposes only, remove every personal field before analysis, do not redistribute derived copies, and report error per time period so that inflation effects are visible rather than hidden.
+
+%% ------------------------------------------------------------------
+\section{Summary and Next Steps}
+Egypt's property market combines high economic importance, extreme price movement and an absence of official price data, which makes a transparent and regularly retrained valuation model both useful and novel. Prior work shows that tree ensembles outperform linear models, that location and text features add signal, and that listing data require careful de-duplication and time-aware evaluation. Four public Egyptian listing datasets with up to 64,106 instances are available. In Phase 2 we will clean and de-duplicate D1--D3, remove personal data, and engineer and justify the feature set described above.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

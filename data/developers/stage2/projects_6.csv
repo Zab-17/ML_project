@@ -1,0 +1,166 @@
+project_id,developer_id,project_name_en,city,district,project_category,land_area_acres,launch_year,first_delivery_year,delivery_status,unit_types,finishing_levels,facilities,avg_price_per_m2_egp,price_type,price_date,starting_price_egp,payment_plan,notes,source_ids
+DEV006-P01,DEV006,Uptown Cairo,Cairo,Mokattam,mixed-use,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV006-P02,DEV006,Mivida,New Cairo,,mixed-use,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV006-P03,DEV006,Mivida Gardens,Mostakbal City,East Cairo,residential,519.0,2025,,under construction,standalone villa|townhouse|apartment,,,,,,,,"500 feddans converted at 1.038 acres per feddan (2.1m sqm); investment EGP 100bn+; construction began Oct 2025; villas from 209 sqm, townhouses from 169 sqm, apartments from 93 sqm (new district from 80 sqm); EGP 12bn contracts awarded",S6-006|S6-007
+DEV006-P04,DEV006,Cairo Gate,Sheikh Zayed,Cairo-Alexandria Desert Road,mixed-use,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV006-P05,DEV006,Belle Vie,New Zayed,West Cairo,residential,519.0,,,partially delivered,standalone villa|townhouse|apartment,,schools|sports courts|clubhouse,,,,,,500 feddans converted at 1.038 acres per feddan; investment EGP 63bn; deliveries commenced and continue through end-2026; AIS West Cairo campus (2027) and social and sports club (end 2026); new launch Q1 2026,S6-006
+DEV006-P06,DEV006,Marassi,North Coast,Sidi Abdel Rahman,coastal/resort,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV006-P07,DEV006,Soul,North Coast,,coastal/resort,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV006-P08,DEV006,Marassi Red Sea,Red Sea,,coastal/resort,,,,unknown,,,,,,,,,Listed in Emaar Misr portfolio by press,S6-006
+DEV012-P01,DEV012,IL Monte Galala,Ain Sokhna,Galala,coastal/resort,565.7,,,unknown,chalet|townhouse|standalone villa|twin house|penthouse|apartment,,marina|lagoon|hotel|promenade|spa,,,,,,"545 feddans converted at 1.038 acres per feddan; official site shows completion 2030; includes IL Monte Galala Marina Towers phase (studios, lofts, chalets, 60-450 sqm)",S6-008|S6-009
+DEV012-P02,DEV012,Fouka Bay,North Coast,Ras El Hekma,coastal/resort,220,,,unknown,,,,,,,,,,S6-009
+DEV012-P03,DEV012,D-Bay,North Coast,,coastal/resort,207.6,,,unknown,,,,,,,,,200 feddans converted at 1.038 acres per feddan,S6-008|S6-009
+DEV012-P04,DEV012,Salt,North Coast,Ras El Hekma,coastal/resort,311.4,,,unknown,chalet|studio|townhouse,,marina,,,,,,300 feddans converted at 1.038 acres per feddan; Salt Marina phase units 50-145 sqm,S6-008|S6-009
+DEV012-P05,DEV012,Bloomfields,Mostakbal City,East Cairo,mixed-use,430.8,,,unknown,,,schools,,,,,,"415 feddans converted at 1.038 acres per feddan, including 90 acres educational zone",S6-008|S6-009
+DEV012-P06,DEV012,Rivers,New Zayed,West Cairo,residential,103.8,,,unknown,,,,,,,,,100 feddans converted at 1.038 acres per feddan,S6-008|S6-009
+DEV018-P01,DEV018,Azha Ain Sokhna,Ain Sokhna,Red Sea,coastal/resort,400,,,unknown,chalet|standalone villa|townhouse,,lagoon|beach|gym|landscape|hotel,,advertised_starting,2026-09-22,37000000,"5% down payment, 8 years","1,800+ units; 52-acre lagoon; 700 m private beach",S6-013|S6-014
+DEV018-P02,DEV018,Azha Ras El Hekma,North Coast,Ras El Hekma,coastal/resort,250,,,launched,,,lagoon|beach|hotel|commercial area,,advertised_starting,2026-09-22,34000000,"5% down payment, 10 years",Km 214 Alexandria-Matrouh road; investment EGP 20bn; 45 acres lagoons; phase 1 sold out in 48 hours,S6-013|S6-014
+DEV018-P03,DEV018,Kinz,New Zayed,Cairo-Alexandria Desert Road,residential,207.6,2025,,launched,apartment|twin house|townhouse|standalone villa|serviced apartment,,hotel|commercial area|sports courts|clubhouse|landscape,,advertised_starting,2026-09-22,9000000,"5% down payment, 10 years","Area conflict: Daily News Egypt June 2025 says 200 feddans (converted at 1.038 = 207.6 acres), Sept 2025 says 200 acres; ~1,500 units; investment EGP 30bn; 65-acre car-free park",S6-012|S6-013|S6-014
+DEV024-P01,DEV024,NEWGIZA,6th of October,Cairo-Alexandria Desert Road,mixed-use,1500,,,partially delivered,apartment|townhouse|twin house|standalone villa,,golf course|hotel|sports courts|clubhouse|commercial area|hospital|schools|landscape,,,,,,"Neighbourhoods: Carnell Park, District One, The Grove, Westridge, Jasperhill, Ivoryhill, Amberville, Kingsrange, Goldcliff, Sky Lakes, The Forty4; phases 1-3 completed",S6-015|S6-016|S6-017
+DEV030-P01,DEV030,Baymount,Ain Sokhna,Red Sea,coastal/resort,78.9,2020,,unknown,,,,,,,,,"76 feddans converted at 1.038 acres per feddan; 1,756 units; investment EGP 4bn",S6-018
+DEV030-P02,DEV030,Cali Coast,North Coast,Ras El Hekma,coastal/resort,238.7,2021,,unknown,,,,,,,,,"230 feddans converted at 1.038 acres per feddan; 2,500 units; investment EGP 15bn",S6-019
+DEV036-P01,DEV036,Talda,Mostakbal City,East Cairo,residential,,,,unknown,,,,,,,,,"Existence from broker page only; broker figures (30 acres, 2026 delivery) not used",S6-021
+DEV036-P02,DEV036,El Massaya,New Cairo,,residential,,,,unknown,apartment|standalone villa,,swimming pools|landscape,,,,,,"Government blog only, uncorroborated",S6-020
+DEV036-P03,DEV036,Royal Hills,6th of October,,residential,,,,unknown,standalone villa|apartment,,schools|commercial area,,,,,,"Government blog only, uncorroborated",S6-020
+DEV036-P04,DEV036,Business Park Plaza,Cairo,,administrative,,,,unknown,,,,,,,,,"Government blog only, uncorroborated",S6-020
+DEV036-P05,DEV036,Cairo Retail Center,Cairo,,commercial,,,,unknown,,,,,,,,,"Government blog only, uncorroborated",S6-020
+DEV036-P06,DEV036,Skyline City,Alexandria,,mixed-use,,,,unknown,,,,,,,,,"Government blog only, uncorroborated",S6-020
+DEV036-P07,DEV036,Green Valley,Cairo,,residential,,,,unknown,,,,,,,,,"Government blog only, uncorroborated",S6-020
+DEV042-P01,DEV042,Ons,New Zayed,near Sphinx Airport,residential,87.2,2025,2029,launched,apartment|townhouse|twin house|standalone villa|serviced apartment,,clubhouse|commercial area|sports courts|mosque|hotel,,,,,,"84 feddans converted at 1.038 acres per feddan; 1,012 units; investment EGP 13.5bn; apartments 60-200 sqm, villas 160-297 sqm; 4 phases",S6-022|S6-023
+DEV042-P02,DEV042,Koun,North Coast,"Ras El Hekma, Km 201",coastal/resort,114.2,,2027,under construction,chalet|townhouse|twin house|standalone villa,,,,,,,,"110 feddans converted at 1.038 acres per feddan; 1,500+ units; phase 1 30% complete (May 2025)",S6-022|S6-023
+DEV042-P03,DEV042,Asayla,,,residential,,,,unknown,,,,,,,,,Listed on website; press places Asayla in Upper Egypt (unverified),S6-022
+DEV042-P04,DEV042,Asayla Views,,,residential,,,,unknown,,,,,,,,,,S6-022
+DEV042-P05,DEV042,Asayla Medical Park,,,commercial,,,,unknown,,,,,,,,,Medical project,S6-022
+DEV042-P06,DEV042,Central Avenue,,,commercial,,,,unknown,,,,,,,,,,S6-022
+DEV042-P07,DEV042,Green 6,,,residential,,,,partially delivered,,,,,,,,,Website: phase 1 delivered,S6-022
+DEV042-P08,DEV042,Green 5,,,residential,,,,unknown,,,,,,,,,,S6-022
+DEV042-P09,DEV042,Green 4,,,residential,,,,unknown,,,,,,,,,,S6-022
+DEV042-P10,DEV042,The Block,,,mixed-use,,,,unknown,,,,,,,,,,S6-022
+DEV048-P01,DEV048,New Kairo,Al Shorouk City,East Cairo,mixed-use,,,,launched,,,sports courts|hotel|schools|golf course|clubhouse|hospital|commercial area,,,,,,"Official site: downtown, hotels, international schools, golf courses, medical hub; weak .co site advertises Neon Views villas fully finished from EGP 18.3M (not used)",S6-024|S6-025|S6-026
+DEV048-P02,DEV048,Seashell Ras El Hekma,North Coast,Ras El Hekma,coastal/resort,,,,launched,,,,,,,,,Weak .co site advertises lagoon and sea view units from EGP 14.5M (not used as sole source),S6-024|S6-026
+DEV048-P03,DEV048,Playa Ras El Hekma,North Coast,Ras El Hekma,coastal/resort,,,,unknown,,,,,,,,,,S6-024
+DEV048-P04,DEV048,Playa,North Coast,,coastal/resort,,,,unknown,,,,,,,,,,S6-024
+DEV048-P05,DEV048,Seashell,North Coast,,coastal/resort,,,,unknown,,,,,,,,,,S6-025
+DEV048-P06,DEV048,Art Life,6th of October,,residential,,,,unknown,,,,,,,,,Named only as the brand in The Board Consulting ranking 'G Developments (Art Life)',S6-001
+DEV054-P01,DEV054,Royal Meadows,Sheikh Zayed,,mixed-use,240,,,unknown,standalone villa|townhouse,,hotel|commercial area|landscape,,,,,,Government blog: 240+ acres,S6-027
+DEV054-P02,DEV054,La Fontaine,New Cairo,Golden Square,residential,,,,unknown,,,clubhouse|commercial area|landscape,,,,,,,S6-027
+DEV054-P03,DEV054,Lavande,6th of October,,residential,,,,unknown,townhouse|twin house,,clubhouse|landscape,,,,,,,S6-027
+DEV054-P04,DEV054,Lagoon Village,North Coast,,coastal/resort,,,,unknown,standalone villa|chalet,,lagoon,,,,,,,S6-027
+DEV054-P05,DEV054,CityStars Al Sahel,North Coast,,coastal/resort,,,,unknown,,,beach|lagoon,,,,,,Attribution to ARCO from government blog only; uncorroborated,S6-027
+DEV060-P01,DEV060,Keystone,New Cairo,"South 90th Street, opposite AUC",administrative,,,2026,under construction,,,,,,,,,"Area conflict: website 7,000 sqm, 4 buildings, 240 office units, delivery Oct 2026; Daily News Egypt 37,000 sqm mixed-use, EGP 20bn",S6-028|S6-029
+DEV060-P02,DEV060,N Residence,New Cairo,90 Avenue,residential,10,,2027,under construction,apartment|duplex,,,,,,,,379 units,S6-029
+DEV060-P03,DEV060,90 Avenue,New Cairo,90th Street,residential,50,,2027,under construction,,,,,,,,,"1,306 units",S6-029
+DEV060-P04,DEV060,Key of Greens,Sheikh Zayed,"Cairo-Alexandria Desert Road Km 47, opposite Sphinx Airport",residential,50,2025,2028,launched,standalone villa|apartment,,,,,,,,"Website 50 acres, 300 villas; Daily News Egypt 212,000 sqm (52.4 acres), 192 villas and 300 residential units, EGP 20bn",S6-028|S6-029
+DEV060-P05,DEV060,Heliopolis project (unnamed),Cairo,Heliopolis,mixed-use,9.3,2025,,launched,apartment|serviced apartment,,,,,,,,"9 feddans converted at 1.038 acres per feddan; 1,200 residential and serviced apartments, 560 admin units, 90 commercial; BUA 243,400 sqm; EGP 12bn",S6-028
+DEV066-P01,DEV066,Mera Bay Resort,North Coast,,coastal/resort,,,,unknown,,,,,,,,,,S6-030
+DEV066-P02,DEV066,Mera Bay Ras El-Hekma,North Coast,Ras El Hekma,coastal/resort,,,,unknown,,,,,,,,,,S6-030
+DEV066-P03,DEV066,Mera City Center,,,commercial,,,,unknown,,,,,,,,,,S6-030
+DEV066-P04,DEV066,Bota Park 1,Cairo,Heliopolis,residential,,,,unknown,,,,,,,,,10 buildings,S6-030
+DEV066-P05,DEV066,Bota Park,Al Shorouk City,,residential,,,,unknown,,,,,,,,,,S6-030
+DEV066-P06,DEV066,Miro Land Farms,North Coast,South El Alamein,residential,,,,unknown,,,,,,,,,Agricultural/recreational,S6-030
+DEV066-P07,DEV066,Miral City Compound,Badr City,,residential,,,,unknown,,,,,,,,,,S6-030
+DEV066-P08,DEV066,Plaza Compound,New Gesr El Suez City,,residential,,,,unknown,,,,,,,,,,S6-030
+DEV066-P09,DEV066,Shubra Towers,Cairo,Shubra,residential,,,,unknown,,,,,,,,,,S6-030
+DEV072-P01,DEV072,Beta Gardens,,,residential,,,,unknown,,,,,,,,,,S6-033
+DEV072-P02,DEV072,Beta Greens October,6th of October,,residential,,,,unknown,,,,,,,,,,S6-033
+DEV072-P03,DEV072,Beta Greens Mostakbal City,Mostakbal City,,residential,,,,unknown,,,,,,,,,,S6-033
+DEV072-P04,DEV072,Golf Residence,,,residential,,,,unknown,,,,,,,,,,S6-033
+DEV072-P05,DEV072,Beta Residence,,,residential,,,,unknown,,,,,,,,,,S6-033
+DEV072-P06,DEV072,Beta Sporting Club,,,commercial,,,,unknown,,,,,,,,,,S6-033
+DEV072-P07,DEV072,Golf Corner,,,commercial,,,,unknown,,,,,,,,,,S6-033
+DEV078-P01,DEV078,Park Lane,New Administrative Capital,,residential,,,,unknown,,,,,,,,,,S6-034
+DEV078-P02,DEV078,West Leaves,Sheikh Zayed,,mixed-use,,,,launched,,,,,,,,,"Zawya places it in 6th of October, rebrand press in Sheikh Zayed; investment EGP 7bn",S6-034|S6-035
+DEV078-P03,DEV078,The 101,Mostakbal City,,mixed-use,,,,unknown,,,,,,,,,,S6-034
+DEV078-P04,DEV078,Bayside,Ras Sedr,,coastal/resort,,,,unknown,,,,,,,,,,S6-034
+DEV090-P01,DEV090,Zizinia El Mostakbal,Mostakbal City,,residential,70,,2024,partially delivered,,,,,,,,,"2,400+ units; phase 1 30 acres delivered from Q3 2024; phase 2 38 acres",S6-036|S6-038
+DEV090-P02,DEV090,Zizinia New Cairo,New Cairo,,residential,,,,unknown,,,,,,,,,,S6-036|S6-038
+DEV090-P03,DEV090,Zizinia Rose,,,residential,,,,unknown,,,,,,,,,,S6-036|S6-038
+DEV090-P04,DEV090,Zizinia Gardens,,,residential,,,,unknown,,,,,,,,,,S6-036|S6-038
+DEV090-P05,DEV090,Zizinia Flowers,Al Shorouk City,,residential,,,,unknown,,,,,,,,,,S6-036|S6-038
+DEV090-P06,DEV090,Mazar Mall,Giza,El Haram,commercial,,,,unknown,,,,,,,,,,S6-036|S6-038
+DEV097-P01,DEV097,Three.14,New Cairo,,mixed-use,,,,unknown,,,,,,,,,,S6-040
+DEV097-P02,DEV097,Golden Tower 1,New Administrative Capital,,commercial,,,,delivered,,,,,,,,,Among first completed projects in New Capital,S6-039|S6-040
+DEV097-P03,DEV097,Golden Tower 2,New Administrative Capital,,commercial,,,,unknown,,,,,,,,,,S6-040
+DEV097-P04,DEV097,New Capital hotel mixed-use project (unnamed),New Administrative Capital,,mixed-use,,,,launched,,,hotel,,,,,,Radisson-managed hotel component; name not given,S6-039
+DEV107-P01,DEV107,REFAD,New Cairo,"Beit Al-Watan, District 8, Golden Square",residential,7,2026,2028,launched,studio|apartment,,,,,,,,Units 50-195 sqm; smart home; handover target Q4 2028,S6-041
+DEV107-P02,DEV107,New Mansoura Mall,New Mansoura,,commercial,,,,under construction,,,,,,,,,Completion expected Q1 2027,S6-041
+DEV107-P03,DEV107,LAVIDA New Mansoura,New Mansoura,,residential,,,2028,under construction,,,,,,,,,,S6-041
+DEV107-P04,DEV107,Mashreq Project,,,residential,,,,launched,,,,,,,,,Location undisclosed; construction to start 2026,S6-041
+DEV107-P05,DEV107,Arkania Business Hub,,,administrative,,,,unknown,,,,,,,,,Operations planned Q2 2026,S6-041
+DEV114-P01,DEV114,Lake House,Obour City,"Axis Line 10, opposite District 8 villas",residential,9.9,2025,,launched,apartment|duplex,,clubhouse|swimming pools|lagoon|landscape|kids area|security gates,,,,,"15% down payment, up to 6 years",9.5 feddans converted at 1.038 acres per feddan; units 136-350 sqm; phase 2 launched June 2026,S6-042
+DEV122-P01,DEV122,Obsidier Tower,New Administrative Capital,,mixed-use,,,2026,under construction,,,,,,,,,"3-storey mall and three 26-storey towers; 900 units (offices, stores, clinics, hotel rooms); EGP 5bn",S6-043
+DEV122-P02,DEV122,Capital Dubai Mall,New Administrative Capital,,commercial,,,,under construction,,,,,,,,,60% complete at time of Zawya article,S6-043
+DEV131-P01,DEV131,Montania Gate,Sheikh Zayed,"next to Cairo Gate, opposite Dandy Mall",mixed-use,14.8,2026,,launched,studio|apartment|duplex|penthouse,,commercial area|clubhouse|sports courts|mosque|landscape,,,,,,"60,000 sqm converted to acres; units 60-260 sqm; delivery target 3.5 years",S6-044|S6-045
+DEV131-P02,DEV131,Montania Gardens,Sheikh Zayed,,residential,,,,under construction,,,,,,,,,,S6-044|S6-045
+DEV131-P03,DEV131,Montania Compound,,,residential,,,,unknown,,,,,,,,,,S6-045
+DEV131-P04,DEV131,Montania Park,,,residential,,,,unknown,,,,,,,,,,S6-045
+DEV131-P05,DEV131,Montania Elite,,,residential,,,,unknown,,,,,,,,,,S6-045
+DEV131-P06,DEV131,Mecca Al-Mukarramah Tower,,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV131-P07,DEV131,Al-Madina Al-Munawwara Tower,,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV131-P08,DEV131,Amal Plaza Tower,,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV131-P09,DEV131,Rawdat Al-Imam Tower,,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV131-P10,DEV131,Eman Tower,,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV131-P11,DEV131,Tanta Towers,Tanta,,mixed-use,,,,unknown,,,,,,,,,,S6-045
+DEV137-P01,DEV137,Barah Residence,Hadayek October,West Cairo,residential,8.3,2026,,launched,apartment|serviced apartment,,commercial area|hotel|swimming pools|kids area|landscape,,,,,Up to 10 years,"8 feddans converted at 1.038 acres per feddan; 350 units in 16 buildings, 70-170 sqm; serviced units 35-45 sqm; EGP 3bn",S6-046
+DEV137-P02,DEV137,Centro Mall,,,commercial,,,,unknown,,,,,,,,,,S6-046
+DEV137-P03,DEV137,Parco Mall,,,commercial,,,,unknown,,,,,,,,,,S6-046
+DEV137-P04,DEV137,Casa Mall,,,commercial,,,,unknown,,,,,,,,,,S6-046
+DEV137-P05,DEV137,Strip Mall,,,commercial,,,,unknown,,,,,,,,,,S6-046
+DEV143-P01,DEV143,Illume Residence,New Cairo,Sixth Settlement,residential,18.2,2026,,launched,apartment,,landscape,,,,,,17.5 feddans converted at 1.038 acres per feddan; ground plus 7 floors; EGP 4.5bn; completion within 3 years,S6-047
+DEV149-P01,DEV149,Chapters,New Administrative Capital,R8,residential,34.3,2026,,launched,apartment|duplex,,clubhouse|sports courts|landscape|mosque|hotel,,,,,,33 feddans converted at 1.038 acres per feddan; units 71-316 sqm; EGP 10bn+; Hotel Indigo,S6-048|S6-049
+DEV149-P02,DEV149,Garnet Residence,New Cairo,,residential,,,,under construction,,,,,,,,,,S6-048|S6-049
+DEV149-P03,DEV149,A49,New Cairo,,residential,,,,unknown,,,,,,,,,,S6-049
+DEV149-P04,DEV149,Mini Compound Hailina,New Cairo,,residential,,,,unknown,,,,,,,,,,S6-049
+DEV149-P05,DEV149,Residential Buildings and Mini Compounds,New Cairo,,residential,,,,unknown,,,,,,,,,,S6-049
+DEV149-P06,DEV149,Red(G),New Cairo,,commercial,,,,under construction,,,,,,,,,,S6-048|S6-050
+DEV149-P07,DEV149,Code,New Administrative Capital,,commercial,,,,under construction,,,,,,,,,,S6-048|S6-050
+DEV149-P08,DEV149,Obex,New Administrative Capital,,administrative,,,,under construction,,,,,,,,,,S6-048|S6-050
+DEV155-P01,DEV155,ONE NINETY,New Cairo,90th Street at Ring Road,mixed-use,85.3,,2025,partially delivered,,,hotel|commercial area|landscape,,,,,,"345,000 sqm converted to acres; Business Quarter, W Cairo residences, Cairo Design District, Urban Park",S6-053
+DEV155-P02,DEV155,Being,New Zayed,opposite Sphinx International Airport,mixed-use,155.7,2025,,launched,,,,,,,,,Area conflict: May 2025 press says 150 feddans (converted at 1.038 = 155.7 acres); April 2025 press says 150 acres,S6-051|S6-052
+DEV155-P03,DEV155,Stei8ht,,,residential,,,,unknown,,,,,,,,,,S6-051|S6-052
+DEV155-P04,DEV155,3sixty,,,residential,,,,unknown,,,,,,,,,,S6-051
+DEV155-P05,DEV155,There,,,residential,,,,unknown,,,,,,,,,,S6-051
+DEV155-P06,DEV155,W The Residences Cairo,New Cairo,,residential,,,,unknown,,,,,,,,,Part of ONE NINETY,S6-051|S6-053
+DEV155-P07,DEV155,Eastside,,,residential,,,,unknown,,,,,,,,,,S6-052
+DEV155-P08,DEV155,Zoya,North Coast,,coastal/resort,,,,unknown,,,,,,,,,,S6-051|S6-052
+DEV162-P01,DEV162,Mostakbal City,Mostakbal City,New Cairo,mixed-use,,,,unknown,,,,,,,,,MIDAR is master developer,S6-054
+DEV162-P02,DEV162,Mada,New Cairo,,mixed-use,568.3,2026,,launched,,,,,,,,,"Area is the 2.3 sq km Majid Al Futtaim revenue-share community inside Mada, converted to acres; phase 1 840,000 sqm with about 6,000 units over 4 years",S6-054
+DEV168-P01,DEV168,Shababeek,New Cairo,Fifth Settlement,residential,15.6,2024,,launched,,,kids area|swimming pools|landscape|lagoon,,,,,,"15 feddans converted at 1.038 acres per feddan; EGP 6bn+; 82% green and water, 18% built",S6-055
+DEV175-P01,DEV175,La Reva Signature Residence,New Administrative Capital,R8,mixed-use,,,,launched,apartment|standalone villa,,hotel|commercial area,,,,,,"Apartments, sky villas, ground villas; new phase 2026",S6-057
+DEV175-P02,DEV175,East Cairo mixed-use project (unnamed),East Cairo,,mixed-use,,2025,,launched,,,hotel|commercial area,,,,,,EGP 60bn planned investment; name not given in article,S6-056
+DEV184-P01,DEV184,LAYAL Residence,New Administrative Capital,R8,residential,39.4,2026,,launched,apartment|duplex|townhouse|twin house,,landscape|lagoon|clubhouse|swimming pools|sports courts|security gates|commercial area,,,,,Up to 12 years,38 feddans converted at 1.038 acres per feddan; up to 8 floors; delivery within 4 years,S6-058|S6-059
+DEV184-P02,DEV184,Qamari,New Administrative Capital,R8,residential,,,,unknown,,,,,,,,,,S6-059
+DEV184-P03,DEV184,Trave Business Complex,New Administrative Capital,Downtown,administrative,,,,unknown,,,,,,,,,,S6-059
+DEV184-P04,DEV184,H Mall,New Administrative Capital,Downtown,commercial,,,,unknown,,,,,,,,,,S6-059
+DEV191-P01,DEV191,Ozel Villas,Sheikh Zayed,"Al Nozha Street, opposite Al Rabwa",residential,,2026,,launched,standalone villa,,,,,,,Up to 8 years,Villas up to 247 sqm; completion within 3 years,S6-060
+DEV191-P02,DEV191,Ozel Residences,Sheikh Zayed,"Al Nozha Street, opposite Al Rabwa",residential,,2026,,launched,apartment,,,,,,,Up to 8 years,Apartments from 132 sqm; completion within 3 years,S6-060
+DEV198-P01,DEV198,Ramatan Compound,New Administrative Capital,"R8, plot H1",residential,20,,2025,delivered,apartment|standalone villa,fully finished,,,,,,"Up to 10 years (NBE, 2026); up to 12 years (Feb 2025)",Apartments 60-190 sqm; website still says under development but NBE (July 2026) markets units ready for immediate delivery,S6-061|S6-062|S6-063
+DEV198-P02,DEV198,Capital Mark,New Administrative Capital,,commercial,,,,unknown,,,,,,,,,,S6-063
+DEV206-P01,DEV206,OC,New Cairo,"Plot 1, Suez Road",mixed-use,4.0,2025,,launched,,,,,,,,,"16,339 sqm converted to acres; BUA 57,000 sqm; five buildings; administrative, medical, commercial and entertainment",S6-064
+DEV212-P01,DEV212,Sage Lakes Residence,New Administrative Capital,R8,residential,34.3,2025,,launched,studio|duplex|standalone villa|apartment,,lagoon|commercial area|mosque,,,,,"2.5% down payment, 10 years",33 feddans converted at 1.038 acres per feddan; units up to 258 sqm; EGP 15bn; construction from Q1 2026,S6-065
+DEV212-P02,DEV212,Squares project 1 (name not found),New Administrative Capital,,residential,,,,unknown,,,,,,,,,Inferred from 'third project' wording,S6-065
+DEV212-P03,DEV212,Squares project 2 (name not found),New Administrative Capital,,residential,,,,unknown,,,,,,,,,Inferred from 'third project' wording,S6-065
+DEV219-P01,DEV219,Aster Residence,New Cairo,Golden Square,residential,35.3,,2026,under construction,apartment|duplex|penthouse,,commercial area|landscape,,,,,,"34 feddans converted at 1.038 acres per feddan; ~1,200 units 55-300 sqm; 16,000 sqm commercial/admin; 15% built-up",S6-066
+DEV219-P02,DEV219,Avelin,New Cairo,adjacent to Al Rehab City,mixed-use,21.8,,,under construction,,,commercial area,,,,,,21 feddans converted at 1.038 acres per feddan; Avelin Residence plus Mall T Hub; released units 60% built,S6-066
+DEV228-P01,DEV228,Aurevia Community,New Cairo,Sixth Settlement,mixed-use,19.7,2026,,launched,apartment|duplex|penthouse|serviced apartment,,mosque|clubhouse|swimming pools|sports courts|commercial area|hotel,,,,,,"19 feddans converted at 1.038 acres per feddan (about 80,000 sqm); 14 buildings G+8; EGP 5bn investment, EGP 8bn sales target",S6-067|S6-068
+DEV228-P02,DEV228,I Sheraton,Cairo,"Heliopolis, Sheraton",residential,1.1,,2026,under construction,apartment,,,,,,,,"4,650 sqm converted to acres; 188 units 87-207 sqm in 5 buildings; 80% built",S6-068
+DEV228-P03,DEV228,Capella Residence,Cairo,"Maadi, El Merag El Sofli",residential,2.3,2025,,launched,apartment,,,,,,,,"9,227 sqm converted to acres; ~280 units 85-187 sqm in 15 buildings; with IMS Developments and Nasr Housing and Development",S6-068
+DEV236-P01,DEV236,Finsquare Mall,New Administrative Capital,Financial District,commercial,,,,unknown,,,,,,,,,,S6-069
+DEV236-P02,DEV236,New Capital residential neighbourhoods (unnamed),New Administrative Capital,,residential,,,,unknown,,,,,,,,,,S6-069
+DEV236-P03,DEV236,El Galala development,Ain Sokhna,,mixed-use,,,,unknown,,,,,,,,,Since 2016; role (contractor vs developer) unclear,S6-069
+DEV259-P01,DEV259,Vienna Compound,,,residential,,,,unknown,,,,,,,,,,S6-070
+DEV259-P02,DEV259,Malaga Compound,,,residential,,,,unknown,,,,,,,,,,S6-070
+DEV259-P03,DEV259,Triumph Pyramids Hotel,Giza,,commercial,,,,launched,,,,,,,,,,S6-070
+DEV259-P04,DEV259,Civil Seven,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P05,DEV259,LVL Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P06,DEV259,Square One Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P07,DEV259,Sun Gate Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P08,DEV259,Arka Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P09,DEV259,Galaxy Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P10,DEV259,Hub Point Street Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV259-P11,DEV259,Station 9 Mall,,,commercial,,,,unknown,,,,,,,,,,S6-070
+DEV267-P01,DEV267,Radix B2,New Cairo,,residential,,,,unknown,,,,,,,,,,S6-071
+DEV267-P02,DEV267,Agile Business Complex,New Administrative Capital,,administrative,,,,unknown,,,,,,,,,,S6-071
+DEV267-P03,DEV267,Spinner Towers,New Administrative Capital,,residential,,,,unknown,,,,,,,,,,S6-071
+DEV267-P04,DEV267,Ray Residence,New Administrative Capital,,residential,,,,unknown,,,,,,,,,,S6-071
+DEV279-P01,DEV279,VERS Commercial Arena,New Cairo,Al Gezira Axis x Gamal Abdel Nasser Axis,commercial,,2026,,launched,,fully finished|core and shell,,,,,,Up to 8 years,"EGP 4bn; units from 30 sqm; admin and medical fully finished, retail core and shell; with Makyn Developments",S6-072

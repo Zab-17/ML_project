@@ -1,3 +1,12 @@
 .venv/
 __pycache__/
 properties_2017.csv
+# added by Zeyad
+.DS_Store
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+data/raw/
+data/processed/
