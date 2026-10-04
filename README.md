@@ -19,7 +19,7 @@ Zeyad Khaled and Mohamed Elsayed.
 | `src/figures.py` | The seven figures the report needs | Zeyad |
 | `data/processed/` | **The cleaned output** — see the next section | produced by `src/clean.py` |
 | `report/figures/` | `fig1` to `fig7`, ready to drop into the report | produced by `src/figures.py` |
-| `report/Phase1_Report*/` | The Phase 1 report that was rejected, kept for reference | both |
+| `report/phase1_report/` | The Phase 1 report that was rejected, kept for reference | both |
 | `REFERENCE.md` | **Every decision explained with its number.** Written to be read, then rewritten in our own words for the report. Not for submission | Zeyad |
 | `HANDOFF.md` | Project status, decisions already taken, what is left | Zeyad |
 | `archive/egypt-phase1/` | **Ignore this for the current project.** The Egyptian developer tables from the rejected first version | Zeyad |

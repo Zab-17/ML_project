@@ -72,8 +72,8 @@ REFERENCE.md              every decision explained, for writing the report
 changes.md, changes.txt   Mohamed's feature analysis
 test.py                   Mohamed's scratch analysis script
 report/figures/           fig1 missingness … fig7 category coverage
-report/Phase1_Report*/    the rejected Phase 1 report and its Overleaf copies
-data/developers/          the parked Egyptian developer tables and their build scripts
+report/phase1_report/     the rejected Phase 1 report (one copy; earlier duplicates are in git history)
+archive/egypt-phase1/     the parked Egyptian developer tables and their build scripts
 ```
 
 `data/raw/` and `data/processed/` are not in the repository: the raw file is 650 megabytes
