@@ -1,0 +1,53 @@
+{
+  "rows_in_raw_file": 2985217,
+  "rows_dropped_missing_label": 34266,
+  "rows_kept": 2950951,
+  "training_rows": 2360761,
+  "test_rows": 590190,
+  "final_feature_count": 201,
+  "values_imputed_per_numeric_feature": {
+    "bathroomcnt": 25,
+    "bedroomcnt": 13,
+    "yearbuilt": 43671,
+    "calculatedfinishedsquarefeet": 40306,
+    "lotsizesquarefeet": 238965,
+    "latitude": 0,
+    "longitude": 0
+  },
+  "medians_used": {
+    "bathroomcnt": 2.0,
+    "bedroomcnt": 3.0,
+    "yearbuilt": 1963.0,
+    "calculatedfinishedsquarefeet": 7.366445148327599,
+    "lotsizesquarefeet": 8.853808274977197,
+    "latitude": 34.00638,
+    "longitude": -118.170935
+  },
+  "categories_kept_per_feature": {
+    "buildingqualitytypeid": 12,
+    "fips": 3,
+    "heatingorsystemtypeid": 7,
+    "propertylandusetypeid": 13,
+    "propertycountylandusecode": 51,
+    "propertyzoningdesc": 100
+  },
+  "features_dropped_for_label_correlation": [],
+  "features_dropped_for_no_variation": [
+    "buildingqualitytypeid_Other",
+    "fips_Other",
+    "fips_Unknown",
+    "propertylandusetypeid_Unknown"
+  ],
+  "highest_label_correlations": {
+    "calculatedfinishedsquarefeet": 0.369,
+    "bathroomcnt": 0.3117,
+    "buildingqualitytypeid_10": 0.1561,
+    "buildingqualitytypeid_12": 0.1549,
+    "buildingqualitytypeid_11": 0.1436,
+    "bedroomcnt": 0.1406,
+    "propertyzoningdesc_BHR1*": 0.1377,
+    "yearbuilt": 0.1182,
+    "propertycountylandusecode_0101": 0.118,
+    "propertyzoningdesc_LARE20": 0.1093
+  }
+}
