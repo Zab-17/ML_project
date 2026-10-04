@@ -1,7 +1,8 @@
-"""Figures for the Phase 2 report: missingness, distributions and correlations.
+"""Draws the figures for the Phase 2 report and saves them to report/figures/.
 
-Every figure answers one question and is saved to report/figures/ as a PNG.
-Run after src/clean.py, because two of the figures read the processed training set.
+Covers missingness, the distributions, the log transformations and the two
+correlation views. Run this after src/clean.py: two of the figures read the
+cleaned training set.
 """
 # AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 from pathlib import Path
@@ -23,11 +24,11 @@ DROPPED_COLOUR = "#d4713b"
 SECOND_COLOUR = "#7a51b8"
 GRID_COLOUR = "#d9d9d6"
 SURFACE = "#fcfcfb"
-HIGH_MISSINGNESS_LIMIT = 70  # percent; the line above which a column was dropped
+HIGH_MISSINGNESS_LIMIT = 70  # percent missing; above this line a column was dropped
 LEAKAGE_LIMIT = 0.85
-SAMPLE_ROWS = 400_000  # histograms only; keeps every figure under a few seconds
+SAMPLE_ROWS = 400_000  # used for the histograms only, to keep the script quick
 RANDOM_SEED = 42
-UPPER_DISPLAY_QUANTILE = 0.99  # heavy tails would otherwise squeeze every histogram into one bar
+UPPER_DISPLAY_QUANTILE = 0.99  # without clipping, the long tail squashes the histogram into one bar
 COUNT_DISPLAY_QUANTILES = (0.001, 0.999)
 
 KEPT_RAW_FEATURES = COUNT_FEATURES + SKEWED_AREA_FEATURES + ["latitude", "longitude"] \
@@ -53,7 +54,7 @@ def save(figure: plt.Figure, name: str) -> None:
 
 
 def missingness_figure(raw_sample: pd.DataFrame) -> None:
-    """Why 44 of 57 candidate columns were dropped: most of them are mostly empty."""
+    """Shows how empty the dropped columns are compared with the ones we kept."""
     missing = (raw_sample.isna().mean() * 100).drop(LABEL).sort_values()
     colours = [KEPT_COLOUR if column in KEPT_RAW_FEATURES else DROPPED_COLOUR for column in missing.index]
     figure, axes = plt.subplots(figsize=(9, 12))
@@ -69,7 +70,7 @@ def missingness_figure(raw_sample: pd.DataFrame) -> None:
 
 
 def label_distribution_figure(label: pd.Series) -> None:
-    """Why the label is heavy-tailed, and what a logarithm does to it."""
+    """The label before and after a log, to show how skewed it is."""
     positive = label[label > 0]
     figure, (left, right) = plt.subplots(1, 2, figsize=(11, 4))
     left.hist(positive.clip(upper=positive.quantile(UPPER_DISPLAY_QUANTILE)), bins=80, color=KEPT_COLOUR)
@@ -87,7 +88,7 @@ def label_distribution_figure(label: pd.Series) -> None:
 
 
 def area_transformation_figure(raw_sample: pd.DataFrame) -> None:
-    """Why the two area features are log-transformed before scaling."""
+    """The two area columns before and after the log, with the skew printed on each panel."""
     figure, panels = plt.subplots(2, 2, figsize=(11, 7))
     for row, column in enumerate(SKEWED_AREA_FEATURES):
         values = raw_sample[column].dropna()
@@ -106,7 +107,7 @@ def area_transformation_figure(raw_sample: pd.DataFrame) -> None:
 
 
 def count_distribution_figure(raw_sample: pd.DataFrame) -> None:
-    """What the three count features look like, and why they are only median-imputed."""
+    """The three count columns, with their missingness and median."""
     figure, panels = plt.subplots(1, 3, figsize=(12, 3.6))
     for axes, column in zip(panels, COUNT_FEATURES):
         values = raw_sample[column].dropna()
@@ -122,7 +123,7 @@ def count_distribution_figure(raw_sample: pd.DataFrame) -> None:
 
 
 def label_correlation_figure(correlations: pd.Series) -> None:
-    """Evidence for the professor's 0.85 rule: nothing comes close to the limit."""
+    """The strongest correlations with the label, drawn against the 0.85 cut-off."""
     strongest = correlations.reindex(correlations.abs().sort_values(ascending=False).index).head(20)[::-1]
     figure, axes = plt.subplots(figsize=(9, 7))
     axes.barh(strongest.index, strongest.values,
@@ -138,7 +139,7 @@ def label_correlation_figure(correlations: pd.Series) -> None:
 
 
 def cross_correlation_figure(train: pd.DataFrame) -> None:
-    """Cross-correlation among the numeric features, to show none of them duplicates another."""
+    """How the numeric features correlate with each other and with the label."""
     numeric = COUNT_FEATURES + SKEWED_AREA_FEATURES + ["latitude", "longitude"]
     matrix = train[numeric + [LABEL]].corr()
     figure, axes = plt.subplots(figsize=(7.5, 6.5))
@@ -156,7 +157,7 @@ def cross_correlation_figure(train: pd.DataFrame) -> None:
 
 
 def category_coverage_figure(raw_sample: pd.DataFrame) -> None:
-    """Why rare categories go into an 'Other' bucket instead of their own columns."""
+    """How many categories it takes to cover most of the rows."""
     figure, axes = plt.subplots(figsize=(8, 4.5))
     for column, colour in [("propertycountylandusecode", KEPT_COLOUR),
                            ("buildingqualitytypeid", SECOND_COLOUR)]:

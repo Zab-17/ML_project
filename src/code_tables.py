@@ -1,11 +1,11 @@
-"""Decode tables that turn Zillow's numeric type codes into readable category names.
+"""Turns Zillow's numeric type codes into readable names.
 
-The professor asked for named columns rather than bare identifiers. Zillow ships a
-data dictionary whose extra sheets map seven of the identifier columns to names;
-this module reads the two we keep straight out of that workbook, so the names in
-the report come from the source rather than from memory.
+Zillow ships a data dictionary workbook whose extra sheets list the meaning of
+each code. We read the two sheets we need from it, plus the county codes, so the
+names come from the source instead of being typed in by hand.
 
-The workbook is read with the standard library, so no spreadsheet package is needed.
+An .xlsx file is a zip of XML files, so we open it with the standard library and
+avoid needing a spreadsheet package.
 """
 # AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 import xml.etree.ElementTree as ET
@@ -20,7 +20,7 @@ SHEET_PER_COLUMN = {
     "heatingorsystemtypeid": "HeatingOrSystemTypeID",
     "propertylandusetypeid": "PropertyLandUseTypeID",
 }
-# Federal Information Processing Standard county codes for the three counties in the file.
+# County codes (Federal Information Processing Standard) for the three counties in the file.
 COUNTY_NAMES = {"6037": "Los Angeles", "6059": "Orange", "6111": "Ventura"}
 
 
@@ -53,7 +53,7 @@ def _rows(workbook: zipfile.ZipFile, path: str, strings: list[str]) -> list[list
 
 
 def decode_tables() -> dict[str, dict[str, str]]:
-    """Map each decodable column to its {code: name} table, including the county codes."""
+    """Returns {column: {code: name}} for the columns we can decode."""
     tables = {"fips": dict(COUNTY_NAMES)}
     with zipfile.ZipFile(DICTIONARY_PATH) as workbook:
         strings = _shared_strings(workbook)

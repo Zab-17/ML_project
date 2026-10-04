@@ -1,12 +1,12 @@
-"""Phase 2 cleaning and pre-processing for the Zillow properties dataset.
+"""Phase 2: cleans the Zillow properties file and writes the training and test sets.
 
-Reads data/raw/properties_2017.csv, applies the feature decisions recorded in
-changes.md, and writes a model-ready training and test set plus the numbers the
-Phase 2 report has to quote.
+Input:  data/raw/properties_2017.csv
+Output: data/processed/train.parquet, test.parquet, cleaning_report.json,
+        label_correlations.csv
 
-Everything that learns from data — medians, category lists, frequencies, means
-and standard deviations — is fitted on the training rows only, so no test
-information reaches the training set.
+The feature decisions come from changes.md. Medians, category lists,
+frequencies, means and standard deviations are all computed on the training
+rows only, so that nothing from the test rows leaks into training.
 """
 # AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 import json
@@ -26,8 +26,8 @@ PROCESSED_DIR = PROJECT / "data" / "processed"
 LABEL = "taxvaluedollarcnt"
 TEST_FRACTION = 0.2
 RANDOM_SEED = 42
-LEAKAGE_CORRELATION_LIMIT = 0.85  # professor's rule: drop features at or above this
-SMALLEST_KEPT_CATEGORY_SHARE = 0.0001  # 0.01% of training rows, about 236 rows
+LEAKAGE_CORRELATION_LIMIT = 0.85  # drop a feature if it correlates this much with the label
+SMALLEST_KEPT_CATEGORY_SHARE = 0.0001  # 0.01% of the training rows, roughly 236 of them
 
 COUNT_FEATURES = ["bathroomcnt", "bedroomcnt", "yearbuilt"]
 SKEWED_AREA_FEATURES = ["calculatedfinishedsquarefeet", "lotsizesquarefeet"]
@@ -39,10 +39,10 @@ ONE_HOT_FEATURES = [
     "heatingorsystemtypeid",
     "propertylandusetypeid",
 ]
-# 234 county codes would add 234 columns, so this one is encoded as how common each code is.
+# 234 codes here, so one-hot would add 234 columns. We store how common each code is instead.
 FREQUENCY_FEATURES = ["propertycountylandusecode"]
-# propertyzoningdesc was considered and dropped: 33.59% of rows have no code, and the
-# location information it carries is already represented by latitude and longitude.
+# propertyzoningdesc is not used: 33.59% of rows have no code, and latitude and
+# longitude already cover the location it would add.
 UNKNOWN_CATEGORY = "Unknown"
 OTHER_CATEGORY = "Other"
 
@@ -53,7 +53,7 @@ TEXT_DTYPES = {column: "string" for column in ONE_HOT_FEATURES + FREQUENCY_FEATU
 
 @dataclass
 class FittedParameters:
-    """Everything learned from the training rows, reused unchanged on the test rows."""
+    """Values learned from the training rows and reused as-is on the test rows."""
     medians: dict[str, float] = field(default_factory=dict)
     categories: dict[str, list[str]] = field(default_factory=dict)
     frequencies: dict[str, dict[str, float]] = field(default_factory=dict)
@@ -84,10 +84,9 @@ def logged_areas(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def frequency_encoded(frame: pd.DataFrame, parameters: "FittedParameters") -> pd.DataFrame:
-    """Each category becomes how large a share of the training rows it holds.
+    """Replaces each code with the share of training rows that have it.
 
-    A code never seen in training, and a missing code, both become 0: no training
-    row supports them, so the honest encoded share is zero.
+    Codes that never appear in training, and missing codes, get 0.
     """
     columns = {f"{column}_frequency": frame[column].map(parameters.frequencies[column]).fillna(0.0)
                for column in FREQUENCY_FEATURES}
@@ -95,7 +94,7 @@ def frequency_encoded(frame: pd.DataFrame, parameters: "FittedParameters") -> pd
 
 
 def numeric_frame(frame: pd.DataFrame, parameters: "FittedParameters | None" = None) -> pd.DataFrame:
-    """The numeric features after unit conversion and the log transformation, before imputation."""
+    """Numeric features after the unit fix and the logs, still with gaps in them."""
     parts = [frame[COUNT_FEATURES], logged_areas(frame), scaled_coordinates(frame)]
     if parameters is not None:
         parts.append(frequency_encoded(frame, parameters))
@@ -110,12 +109,12 @@ def frequent_categories(values: pd.Series) -> list[str]:
 
 @lru_cache(maxsize=1)
 def code_names() -> dict:
-    """Code-to-name tables for the identifier columns the data dictionary documents."""
+    """The code-to-name tables from the Zillow data dictionary."""
     return decode_tables()
 
 
 def named_categories(values: pd.Series, column: str) -> pd.Series:
-    """Replace a numeric type code with its documented name, so the features read as words."""
+    """Swaps a type code for its name, so columns read as words instead of numbers."""
     table = code_names().get(column)
     if table is None:
         return values
@@ -144,7 +143,7 @@ def standardised_numeric(frame: pd.DataFrame, parameters: FittedParameters) -> p
 
 
 def one_hot(values: pd.Series, column: str, categories: list[str], add_other: bool) -> pd.DataFrame:
-    rare = values.notna() & ~values.isin(categories)  # missing must not be mistaken for rare
+    rare = values.notna() & ~values.isin(categories)  # careful: missing is not the same as rare
     known = values.mask(rare, OTHER_CATEGORY if add_other else UNKNOWN_CATEGORY).fillna(UNKNOWN_CATEGORY)
     wanted = categories + ([OTHER_CATEGORY] if add_other else []) + [UNKNOWN_CATEGORY]
     dummies = pd.get_dummies(known, prefix=column, dtype="uint8")
@@ -183,7 +182,7 @@ def leaking_features(correlations: pd.Series) -> list[str]:
 
 
 def constant_features(features: pd.DataFrame) -> list[str]:
-    """Columns that never vary teach a model nothing and break anything that divides by variance."""
+    """Columns with a single value. They teach nothing and break models that divide by variance."""
     return sorted(features.columns[features.nunique() == 1])
 
 
@@ -205,7 +204,7 @@ def save_datasets(train: pd.DataFrame, test: pd.DataFrame, report: dict) -> None
 def summarise(raw: pd.DataFrame, labelled: pd.DataFrame, train_rows: pd.DataFrame,
               test_rows: pd.DataFrame, features: pd.DataFrame, parameters: FittedParameters,
               correlations: pd.Series, dropped: dict[str, list[str]]) -> dict:
-    """The numbers the Phase 2 report quotes, gathered in one place."""
+    """Collects the numbers we quote in the report."""
     missing_per_numeric_feature = numeric_frame(labelled, parameters).isna().sum()
     strongest = correlations.abs().sort_values(ascending=False).head(10)
     return {
@@ -226,7 +225,7 @@ def summarise(raw: pd.DataFrame, labelled: pd.DataFrame, train_rows: pd.DataFram
 
 
 def unusable_features(features: pd.DataFrame, correlations: pd.Series) -> dict[str, list[str]]:
-    """Features a model must not see: those that leak the label, and those that never vary."""
+    """Features to throw away: ones that leak the label, and ones that never change."""
     leaking = leaking_features(correlations)
     return {"label_correlation": leaking, "no_variation": constant_features(features.drop(columns=leaking))}
 

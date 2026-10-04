@@ -70,8 +70,10 @@ training rows.
 - **Latitude and longitude divided by 1,000,000.** Zillow stores them multiplied by a
   million, so `34144442` is really 34.144442 degrees.
 - **Natural logarithm of finished square feet and lot size.** Both are extremely
-  right-skewed. Figure 3 shows skew falling from 7.2 to −1.4 for finished area and from 23.3
-  to 0.2 for lot size. **Why it matters:** models minimise squared error, so with a raw heavy
+  right-skewed. Measured on the full data, the logarithm takes the skew of finished area from
+  **156.3 to 0.46** and the skew of lot size from **1209.3 to 2.01**. (Figure 3 prints slightly
+  smaller raw figures, 68.5 and 33.9, because it is drawn from a 400,000-row sample that misses
+  the most extreme properties. Say which you are quoting.) **Why it matters:** models minimise squared error, so with a raw heavy
   tail a handful of mansions contribute as much error as hundreds of ordinary houses.
   `log1p` is used rather than `log` because it is defined at zero.
 
@@ -231,7 +233,7 @@ text throughout.
 |---|---|---|
 | `fig1_missingness.png` | Missingness of all 57 candidate columns, kept features in blue and dropped ones in orange, with the 70% line | "Most of the dataset is empty: the dropped columns are chosen by evidence, not taste." |
 | `fig2_label_distribution.png` | The label, raw and logged | "Assessed value is strongly right-skewed, so error should be judged in relative terms." |
-| `fig3_area_transformations.png` | The two area features before and after the logarithm, with the skew printed | "The logarithm moves skew from 7.2 to −1.4 and from 23.3 to 0.2." |
+| `fig3_area_transformations.png` | The two area features before and after the logarithm, with the skew printed | "The logarithm moves the skew of finished area from 156.3 to 0.46, and of lot size from 1209.3 to 2.01." |
 | `fig4_count_distributions.png` | Bathrooms, bedrooms and year built, with missingness and median | "These three are nearly complete, so a median fill touches almost nothing." |
 | `fig5_label_correlation.png` | The strongest correlations with the label, against the 0.85 line | "Rule 4 is satisfied with room to spare: the strongest feature is 0.369." |
 | `fig6_cross_correlation.png` | Correlation among the numeric features and the label | "Bathrooms and finished area correlate 0.69, so they share information but neither is redundant." |
