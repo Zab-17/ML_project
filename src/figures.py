@@ -3,6 +3,7 @@
 Every figure answers one question and is saved to report/figures/ as a PNG.
 Run after src/clean.py, because two of the figures read the processed training set.
 """
+# AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 from pathlib import Path
 
 import matplotlib
@@ -12,9 +13,9 @@ import pandas as pd
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402  (backend must be chosen first)
 
-from clean import (COUNT_FEATURES, LABEL, ONE_HOT_FEATURES, PROCESSED_DIR, RAW_PATH,  # noqa: E402
-                   SKEWED_AREA_FEATURES, SMALLEST_KEPT_CATEGORY_SHARE, ZONING_CATEGORIES_KEPT,
-                   ZONING_FEATURE, named_categories)
+from clean import (COUNT_FEATURES, FREQUENCY_FEATURES, LABEL, ONE_HOT_FEATURES,  # noqa: E402
+                   PROCESSED_DIR, RAW_PATH, SKEWED_AREA_FEATURES,
+                   SMALLEST_KEPT_CATEGORY_SHARE, named_categories)
 
 FIGURE_DIR = Path(__file__).resolve().parent.parent / "report" / "figures"
 KEPT_COLOUR = "#3b6fd4"
@@ -30,7 +31,7 @@ UPPER_DISPLAY_QUANTILE = 0.99  # heavy tails would otherwise squeeze every histo
 COUNT_DISPLAY_QUANTILES = (0.001, 0.999)
 
 KEPT_RAW_FEATURES = COUNT_FEATURES + SKEWED_AREA_FEATURES + ["latitude", "longitude"] \
-                    + ONE_HOT_FEATURES + [ZONING_FEATURE]
+                    + ONE_HOT_FEATURES + FREQUENCY_FEATURES
 
 
 def style_axes(axes: plt.Axes) -> None:
@@ -58,7 +59,8 @@ def missingness_figure(raw_sample: pd.DataFrame) -> None:
     figure, axes = plt.subplots(figsize=(9, 12))
     axes.barh(missing.index, missing.values, color=colours, height=0.72)
     axes.axvline(HIGH_MISSINGNESS_LIMIT, color="#6b6b68", linewidth=1.4, linestyle="--")
-    axes.text(HIGH_MISSINGNESS_LIMIT + 1, 0.5, f"{HIGH_MISSINGNESS_LIMIT}% missing", color="#6b6b68", fontsize=9)
+    axes.text(HIGH_MISSINGNESS_LIMIT + 1, 0.5, f"{HIGH_MISSINGNESS_LIMIT}% missing",
+              color="#6b6b68", fontsize=9)
     axes.set_xlabel("missing values (% of rows)")
     axes.set_title("Missingness per column, kept features in blue, dropped columns in orange", fontsize=11)
     axes.tick_params(labelsize=8)
@@ -79,7 +81,8 @@ def label_distribution_figure(label: pd.Series) -> None:
     for axes in (left, right):
         axes.set_ylabel("properties")
         style_axes(axes)
-    figure.suptitle("The label is strongly right-skewed; the logarithm makes it roughly symmetric", fontsize=11)
+    figure.suptitle("The label is strongly right-skewed; the logarithm makes it roughly symmetric",
+                    fontsize=11)
     save(figure, "fig2_label_distribution.png")
 
 
@@ -155,22 +158,21 @@ def cross_correlation_figure(train: pd.DataFrame) -> None:
 def category_coverage_figure(raw_sample: pd.DataFrame) -> None:
     """Why rare categories go into an 'Other' bucket instead of their own columns."""
     figure, axes = plt.subplots(figsize=(8, 4.5))
-    settings = [("propertycountylandusecode", KEPT_COLOUR, None),
-                (ZONING_FEATURE, SECOND_COLOUR, ZONING_CATEGORIES_KEPT)]
-    for column, colour, limit in settings:
+    for column, colour in [("propertycountylandusecode", KEPT_COLOUR),
+                           ("buildingqualitytypeid", SECOND_COLOUR)]:
         counts = named_categories(raw_sample[column].astype("string"), column).value_counts()
         coverage = counts.cumsum() / counts.sum() * 100
         axes.plot(range(1, len(coverage) + 1), coverage.values, color=colour, linewidth=2, label=column)
-        kept = (counts >= len(raw_sample) * SMALLEST_KEPT_CATEGORY_SHARE).sum()
-        kept = kept if limit is None else min(kept, limit)
-        axes.scatter([kept], [coverage.values[kept - 1]], color=colour, s=45, zorder=3)
-        axes.annotate(f"{kept} categories kept, {coverage.values[kept - 1]:.1f}% of rows",
-                      (kept, coverage.values[kept - 1]), textcoords="offset points",
-                      xytext=(12, -14), fontsize=9, color=colour)
+        common = (counts >= len(raw_sample) * SMALLEST_KEPT_CATEGORY_SHARE).sum()
+        axes.scatter([common], [coverage.values[common - 1]], color=colour, s=45, zorder=3)
+        axes.annotate(f"{common} categories hold 0.01% of rows or more "
+                      f"({coverage.values[common - 1]:.1f}% of rows)",
+                      (common, coverage.values[common - 1]), textcoords="offset points",
+                      xytext=(12, -16), fontsize=9, color=colour)
     axes.set_xscale("log")
     axes.set_xlabel("number of categories kept, ordered by frequency (log scale)")
     axes.set_ylabel("share of rows covered (%)")
-    axes.set_title("Category coverage for the two high-cardinality text features", fontsize=11)
+    axes.set_title("How few categories cover almost every row", fontsize=11)
     axes.legend(frameon=False, fontsize=9, loc="lower right")
     style_axes(axes)
     save(figure, "fig7_category_coverage.png")
@@ -178,7 +180,7 @@ def category_coverage_figure(raw_sample: pd.DataFrame) -> None:
 
 def main() -> None:
     raw_sample = pd.read_csv(RAW_PATH, dtype={"propertycountylandusecode": "string",
-                                              ZONING_FEATURE: "string"}).sample(
+                                              "propertyzoningdesc": "string"}).sample(
         SAMPLE_ROWS, random_state=RANDOM_SEED)
     missingness_figure(raw_sample)
     label_distribution_figure(raw_sample[LABEL].dropna())

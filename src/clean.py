@@ -8,6 +8,7 @@ Everything that learns from data — medians, category lists, frequencies, means
 and standard deviations — is fitted on the training rows only, so no test
 information reaches the training set.
 """
+# AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 import json
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -27,7 +28,6 @@ TEST_FRACTION = 0.2
 RANDOM_SEED = 42
 LEAKAGE_CORRELATION_LIMIT = 0.85  # professor's rule: drop features at or above this
 SMALLEST_KEPT_CATEGORY_SHARE = 0.0001  # 0.01% of training rows, about 236 rows
-ZONING_CATEGORIES_KEPT = 100
 
 COUNT_FEATURES = ["bathroomcnt", "bedroomcnt", "yearbuilt"]
 SKEWED_AREA_FEATURES = ["calculatedfinishedsquarefeet", "lotsizesquarefeet"]
@@ -38,15 +38,17 @@ ONE_HOT_FEATURES = [
     "fips",
     "heatingorsystemtypeid",
     "propertylandusetypeid",
-    "propertycountylandusecode",
 ]
-ZONING_FEATURE = "propertyzoningdesc"
+# 234 county codes would add 234 columns, so this one is encoded as how common each code is.
+FREQUENCY_FEATURES = ["propertycountylandusecode"]
+# propertyzoningdesc was considered and dropped: 33.59% of rows have no code, and the
+# location information it carries is already represented by latitude and longitude.
 UNKNOWN_CATEGORY = "Unknown"
 OTHER_CATEGORY = "Other"
 
 RAW_COLUMNS = (COUNT_FEATURES + SKEWED_AREA_FEATURES + COORDINATE_FEATURES
-               + ONE_HOT_FEATURES + [ZONING_FEATURE] + [LABEL])
-TEXT_DTYPES = {column: "string" for column in ONE_HOT_FEATURES + [ZONING_FEATURE]}
+               + ONE_HOT_FEATURES + FREQUENCY_FEATURES + [LABEL])
+TEXT_DTYPES = {column: "string" for column in ONE_HOT_FEATURES + FREQUENCY_FEATURES}
 
 
 @dataclass
@@ -54,6 +56,7 @@ class FittedParameters:
     """Everything learned from the training rows, reused unchanged on the test rows."""
     medians: dict[str, float] = field(default_factory=dict)
     categories: dict[str, list[str]] = field(default_factory=dict)
+    frequencies: dict[str, dict[str, float]] = field(default_factory=dict)
     means: dict[str, float] = field(default_factory=dict)
     standard_deviations: dict[str, float] = field(default_factory=dict)
 
@@ -80,16 +83,29 @@ def logged_areas(frame: pd.DataFrame) -> pd.DataFrame:
     return np.log1p(frame[SKEWED_AREA_FEATURES])
 
 
-def numeric_frame(frame: pd.DataFrame) -> pd.DataFrame:
+def frequency_encoded(frame: pd.DataFrame, parameters: "FittedParameters") -> pd.DataFrame:
+    """Each category becomes how large a share of the training rows it holds.
+
+    A code never seen in training, and a missing code, both become 0: no training
+    row supports them, so the honest encoded share is zero.
+    """
+    columns = {f"{column}_frequency": frame[column].map(parameters.frequencies[column]).fillna(0.0)
+               for column in FREQUENCY_FEATURES}
+    return pd.DataFrame(columns, index=frame.index)
+
+
+def numeric_frame(frame: pd.DataFrame, parameters: "FittedParameters | None" = None) -> pd.DataFrame:
     """The numeric features after unit conversion and the log transformation, before imputation."""
-    return pd.concat([frame[COUNT_FEATURES], logged_areas(frame), scaled_coordinates(frame)], axis=1)
+    parts = [frame[COUNT_FEATURES], logged_areas(frame), scaled_coordinates(frame)]
+    if parameters is not None:
+        parts.append(frequency_encoded(frame, parameters))
+    return pd.concat(parts, axis=1)
 
 
-def frequent_categories(values: pd.Series, limit: int | None = None) -> list[str]:
+def frequent_categories(values: pd.Series) -> list[str]:
     counts = values.value_counts()
     frequent = counts[counts >= len(values) * SMALLEST_KEPT_CATEGORY_SHARE]
-    kept = frequent if limit is None else frequent.head(limit)
-    return sorted(kept.index.astype(str))
+    return sorted(frequent.index.astype(str))
 
 
 @lru_cache(maxsize=1)
@@ -109,12 +125,12 @@ def named_categories(values: pd.Series, column: str) -> pd.Series:
 
 def fit(train: pd.DataFrame) -> FittedParameters:
     parameters = FittedParameters()
-    numeric = numeric_frame(train)
+    for column in FREQUENCY_FEATURES:
+        parameters.frequencies[column] = train[column].value_counts(normalize=True).to_dict()
+    numeric = numeric_frame(train, parameters)
     parameters.medians = numeric.median().to_dict()
     for column in ONE_HOT_FEATURES:
         parameters.categories[column] = frequent_categories(named_categories(train[column], column))
-    parameters.categories[ZONING_FEATURE] = frequent_categories(train[ZONING_FEATURE],
-                                                                ZONING_CATEGORIES_KEPT)
     standardised = numeric.fillna(parameters.medians)
     parameters.means = standardised.mean().to_dict()
     parameters.standard_deviations = standardised.std().replace(0, 1).to_dict()
@@ -122,7 +138,7 @@ def fit(train: pd.DataFrame) -> FittedParameters:
 
 
 def standardised_numeric(frame: pd.DataFrame, parameters: FittedParameters) -> pd.DataFrame:
-    numeric = numeric_frame(frame).fillna(parameters.medians)
+    numeric = numeric_frame(frame, parameters).fillna(parameters.medians)
     centred = numeric - pd.Series(parameters.means)
     return (centred / pd.Series(parameters.standard_deviations)).astype("float32")
 
@@ -140,8 +156,6 @@ def encoded_categories(frame: pd.DataFrame, parameters: FittedParameters) -> lis
     encoded = [one_hot(named_categories(frame[column], column), column,
                        parameters.categories[column], add_other=True)
                for column in ONE_HOT_FEATURES]
-    encoded.append(one_hot(frame[ZONING_FEATURE], ZONING_FEATURE,
-                           parameters.categories[ZONING_FEATURE], add_other=True))
     return encoded
 
 
@@ -159,7 +173,8 @@ def label_correlations(features: pd.DataFrame, label: pd.Series) -> pd.Series:
         values = features[column].to_numpy(dtype="float32")
         centred = values - values.mean()
         spread = np.sqrt(np.square(centred).sum())
-        correlations[column] = 0.0 if spread == 0 else float(centred @ centred_label / (spread * label_spread))
+        correlations[column] = (0.0 if spread == 0
+                                else float(centred @ centred_label / (spread * label_spread)))
     return pd.Series(correlations)
 
 
@@ -191,7 +206,7 @@ def summarise(raw: pd.DataFrame, labelled: pd.DataFrame, train_rows: pd.DataFram
               test_rows: pd.DataFrame, features: pd.DataFrame, parameters: FittedParameters,
               correlations: pd.Series, dropped: dict[str, list[str]]) -> dict:
     """The numbers the Phase 2 report quotes, gathered in one place."""
-    missing_per_numeric_feature = numeric_frame(labelled).isna().sum()
+    missing_per_numeric_feature = numeric_frame(labelled, parameters).isna().sum()
     strongest = correlations.abs().sort_values(ascending=False).head(10)
     return {
         "rows_in_raw_file": len(raw),
@@ -203,6 +218,7 @@ def summarise(raw: pd.DataFrame, labelled: pd.DataFrame, train_rows: pd.DataFram
         "values_imputed_per_numeric_feature": missing_per_numeric_feature.astype(int).to_dict(),
         "medians_used": {name: float(value) for name, value in parameters.medians.items()},
         "categories_kept_per_feature": {name: len(values) for name, values in parameters.categories.items()},
+        "categories_frequency_encoded": {name: len(table) for name, table in parameters.frequencies.items()},
         "features_dropped_for_label_correlation": dropped["label_correlation"],
         "features_dropped_for_no_variation": dropped["no_variation"],
         "highest_label_correlations": strongest.round(4).to_dict(),

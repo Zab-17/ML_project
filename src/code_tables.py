@@ -7,6 +7,7 @@ the report come from the source rather than from memory.
 
 The workbook is read with the standard library, so no spreadsheet package is needed.
 """
+# AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path

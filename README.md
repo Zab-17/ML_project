@@ -28,11 +28,11 @@ Zeyad Khaled and Mohamed Elsayed.
 
 | File | What it holds |
 |---|---|
-| `train.parquet` | 2,360,761 rows × 202 columns — 201 features plus the label |
-| `test.parquet` | 590,190 rows × 202 columns, the same columns in the same order |
+| `train.parquet` | 2,360,761 rows × 48 columns — 47 features plus the label |
+| `test.parquet` | 590,190 rows × 48 columns, the same columns in the same order |
 | `cleaned_sample_10k.csv` | The first 10,000 training rows as a spreadsheet, for looking at |
 | `cleaning_report.json` | Every number the report quotes: rows dropped, values imputed, medians, categories kept |
-| `label_correlations.csv` | All 201 features ranked by correlation with the label |
+| `label_correlations.csv` | Every feature ranked by correlation with the label |
 
 Reading the full table needs pandas:
 
@@ -46,14 +46,15 @@ train = pd.read_parquet("data/processed/train.parquet")
 | | Before | After |
 |---|---|---|
 | Rows | 2,985,217 | **2,950,951** (34,266 dropped for having no label) |
-| Columns | 58 | **202** (201 features + 1 label) |
-| Raw features used | — | **13**, which become 201 after encoding |
+| Columns | 58 | **48** (47 features + 1 label) |
+| Raw features used | — | **12**, which become 47 after encoding |
 | Missing values | millions | **zero** |
 
 In order: drop rows with no label → split 80/20 **before** fitting anything → convert the
 coordinates and take logarithms of the two area features → fill gaps with training medians →
-one-hot encode every category with separate `Other` and `Unknown` columns → z-score the
-numeric features using training statistics → drop anything correlating 0.85 or more with the
+one-hot encode the four small categorical columns with separate `Other` and `Unknown`
+columns, and frequency-encode the 234-category county land-use code → z-score every numeric
+feature using training statistics → drop anything correlating 0.85 or more with the
 label (nothing qualified; the highest is 0.369) and anything that never varies.
 
 `REFERENCE.md` explains why each of those steps exists.

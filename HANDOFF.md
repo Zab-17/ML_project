@@ -52,7 +52,7 @@ more with the label dropped.
 | Figures | built here | **seven figures in `report/figures/`** |
 | **The report document** | both | **not written — this is the deliverable** |
 
-**Result of the pipeline:** 2,950,951 rows kept, 13 raw features becoming **201 encoded
+**Result of the pipeline:** 2,950,951 rows kept, 12 raw features becoming **47 encoded
 columns**, no missing values anywhere, numeric features standardised on training statistics
 only, nothing correlating at or above 0.85 with the label (the highest is 0.369).
 
@@ -93,12 +93,12 @@ any other address. Remote: `https://github.com/Zab-17/ML_project.git`.
 - **Rows with no label are dropped**, 34,266 of them, rather than having a label invented.
 - **The split happens before anything is fitted**, 80/20 with seed 42, so medians, category
   lists, means and standard deviations are learned from training rows only.
-- **`propertyzoningdesc` is kept** (3 October, agreed with Mohamed), with its missing third
-  in an explicit `Unknown` column rather than filled in.
+- **`propertyzoningdesc` is dropped** (4 October): a third of the rows have no code, and its
+  location information is already carried by latitude and longitude.
 - **The three columns that are 98% or more missing are dropped** — `taxdelinquencyflag`,
   `fireplaceflag`, `hashottuborspa` — matching Mohamed's analysis.
-- **`propertycountylandusecode` is one-hot encoded**, not frequency encoded, because the
-  professor's rule allows only one-hot or an embedding.
+- **`propertycountylandusecode` is frequency encoded**, as Mohamed planned. The professor
+  approved frequency encoding, so rule 3 is satisfied by that approval; the report must say so.
 - **`fullbathcnt` is dropped**, following `changes.md`, whose counts add up to 58.
 - **Rare categories** (under 0.01% of training rows) go into an `Other` column, kept separate
   from `Unknown`, which means the value was missing.
