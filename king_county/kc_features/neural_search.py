@@ -52,8 +52,11 @@ SMOKE_SETTINGS = [Setting(256, 128, "adam", 0.1, 0.0), Setting(256, 128, "sgd", 
                   Setting(256, 128, "adam", 0.001, 0.0)]
 SIZES = [(256, 128), (128, 64), (512, 256)]
 DROPOUTS = [0.0, 0.2]
-# Learning rate 0.1 is Zeyad's choice; with Adam it diverged in the smoke test, with plain SGD it trained well.
-SEARCH_SETTINGS = [Setting(first, second, "sgd", 0.1, dropout) for first, second in SIZES for dropout in DROPOUTS]
+# Zeyad's choices: plain SGD at learning rate 0.1 (Adam at 0.1 diverged in the smoke test), then Adam at its
+# standard 0.001 (26 October 2026).
+OPTIMIZERS = [("sgd", 0.1), ("adam", 0.001)]
+SEARCH_SETTINGS = [Setting(first, second, optimizer, learning_rate, dropout)
+                   for optimizer, learning_rate in OPTIMIZERS for first, second in SIZES for dropout in DROPOUTS]
 
 
 def main():
@@ -149,9 +152,9 @@ def to_device(rows):
     return torch.from_numpy(rows.toarray().astype(np.float32)).to(DEVICE)
 
 
-def log(line):
+def log(line, path=OUT_DIR / "log.txt"):
     print(line, flush=True)
-    with open(OUT_DIR / "log.txt", "a") as file:
+    with open(path, "a") as file:
         file.write(line + "\n")
 
 
@@ -171,7 +174,7 @@ def linear_regression_folds(matrix, label, folds):
 def summarize(results_path):
     results = pd.read_csv(results_path)
     summary = (results.groupby("setting")
-               .agg(folds=("fold", "count"), mse_log=("MSE (log)", "mean"), mse_spread=("MSE (log)", "std"),
+               .agg(folds_scored=("MSE (log)", "count"), mse_log=("MSE (log)", "mean"), mse_spread=("MSE (log)", "std"),
                     r2_log=("R2 (log)", "mean"), median_percent_off=("median % off", "mean"),
                     within_10=("within 10%", "mean"), best_pass=("best pass", "median"), minutes=("seconds", "sum"))
                .sort_values("mse_log"))

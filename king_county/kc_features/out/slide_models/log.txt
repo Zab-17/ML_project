@@ -1,0 +1,179 @@
+decision tree | {"pruning": 0.0} | fold 0 | validation MSE (log) 0.0728 | 40 s
+decision tree | {"pruning": 1e-07} | fold 0 | validation MSE (log) 0.0699 | 376 s
+decision tree | {"pruning": 1e-06} | fold 0 | validation MSE (log) 0.0593 | 403 s
+decision tree | {"pruning": 3e-06} | fold 0 | validation MSE (log) 0.0595 | 407 s
+decision tree | {"pruning": 1e-05} | fold 0 | validation MSE (log) 0.0673 | 409 s
+decision tree | {"pruning": 3e-05} | fold 0 | validation MSE (log) 0.0768 | 409 s
+decision tree | {"pruning": 0.0001} | fold 0 | validation MSE (log) 0.0884 | 409 s
+decision tree | {"pruning": 0.0} | fold 1 | validation MSE (log) 0.0742 | 38 s
+decision tree | {"pruning": 1e-07} | fold 1 | validation MSE (log) 0.0715 | 375 s
+decision tree | {"pruning": 1e-06} | fold 1 | validation MSE (log) 0.0606 | 402 s
+decision tree | {"pruning": 3e-06} | fold 1 | validation MSE (log) 0.0602 | 405 s
+decision tree | {"pruning": 1e-05} | fold 1 | validation MSE (log) 0.0683 | 408 s
+decision tree | {"pruning": 3e-05} | fold 1 | validation MSE (log) 0.0779 | 408 s
+decision tree | {"pruning": 0.0001} | fold 1 | validation MSE (log) 0.0893 | 408 s
+decision tree | {"pruning": 0.0} | fold 2 | validation MSE (log) 0.0739 | 39 s
+decision tree | {"pruning": 1e-07} | fold 2 | validation MSE (log) 0.0710 | 374 s
+decision tree | {"pruning": 1e-06} | fold 2 | validation MSE (log) 0.0595 | 402 s
+decision tree | {"pruning": 3e-06} | fold 2 | validation MSE (log) 0.0593 | 406 s
+decision tree | {"pruning": 1e-05} | fold 2 | validation MSE (log) 0.0664 | 408 s
+decision tree | {"pruning": 3e-05} | fold 2 | validation MSE (log) 0.0761 | 408 s
+decision tree | {"pruning": 0.0001} | fold 2 | validation MSE (log) 0.0878 | 408 s
+decision tree | {"pruning": 0.0} | fold 3 | validation MSE (log) 0.0735 | 39 s
+decision tree | {"pruning": 1e-07} | fold 3 | validation MSE (log) 0.0705 | 375 s
+decision tree | {"pruning": 1e-06} | fold 3 | validation MSE (log) 0.0596 | 402 s
+decision tree | {"pruning": 3e-06} | fold 3 | validation MSE (log) 0.0585 | 407 s
+decision tree | {"pruning": 1e-05} | fold 3 | validation MSE (log) 0.0662 | 408 s
+decision tree | {"pruning": 3e-05} | fold 3 | validation MSE (log) 0.0751 | 407 s
+decision tree | {"pruning": 0.0001} | fold 3 | validation MSE (log) 0.0871 | 409 s
+decision tree | {"pruning": 0.0} | fold 4 | validation MSE (log) 0.0736 | 39 s
+decision tree | {"pruning": 1e-07} | fold 4 | validation MSE (log) 0.0708 | 374 s
+decision tree | {"pruning": 1e-06} | fold 4 | validation MSE (log) 0.0601 | 404 s
+decision tree | {"pruning": 3e-06} | fold 4 | validation MSE (log) 0.0601 | 407 s
+decision tree | {"pruning": 1e-05} | fold 4 | validation MSE (log) 0.0679 | 408 s
+decision tree | {"pruning": 3e-05} | fold 4 | validation MSE (log) 0.0777 | 409 s
+decision tree | {"pruning": 0.0001} | fold 4 | validation MSE (log) 0.0889 | 408 s
+decision tree winner: {"pruning": 3e-06}, average validation MSE (log) 0.0595
+decision tree | {"pruning": 3e-06} | trained on 426,135 sales in 629 s | test MSE (log) 0.0582, median % off 13.93
+random forest | {"column_share": "sqrt"} | fold 0 | validation MSE (log) 0.0531 | 27 s
+random forest | {"column_share": 0.1} | fold 0 | validation MSE (log) 0.0401 | 44 s
+random forest | {"column_share": 0.33} | fold 0 | validation MSE (log) 0.0381 | 101 s
+random forest | {"column_share": "sqrt"} | fold 1 | validation MSE (log) 0.0517 | 27 s
+random forest | {"column_share": 0.1} | fold 1 | validation MSE (log) 0.0406 | 45 s
+random forest | {"column_share": 0.33} | fold 1 | validation MSE (log) 0.0385 | 101 s
+random forest | {"column_share": "sqrt"} | fold 2 | validation MSE (log) 0.0531 | 27 s
+random forest | {"column_share": 0.1} | fold 2 | validation MSE (log) 0.0397 | 44 s
+random forest | {"column_share": 0.33} | fold 2 | validation MSE (log) 0.0377 | 100 s
+random forest | {"column_share": "sqrt"} | fold 3 | validation MSE (log) 0.0529 | 27 s
+random forest | {"column_share": 0.1} | fold 3 | validation MSE (log) 0.0394 | 44 s
+random forest | {"column_share": 0.33} | fold 3 | validation MSE (log) 0.0374 | 101 s
+random forest | {"column_share": "sqrt"} | fold 4 | validation MSE (log) 0.0537 | 27 s
+random forest | {"column_share": 0.1} | fold 4 | validation MSE (log) 0.0407 | 44 s
+random forest | {"column_share": 0.33} | fold 4 | validation MSE (log) 0.0386 | 101 s
+random forest winner: {"column_share": 0.33}, average validation MSE (log) 0.0381
+random forest | {"column_share": 0.33} | trained on 426,135 sales in 133 s | test MSE (log) 0.0363, median % off 9.65
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 0 | validation MSE (log) 0.1399 | 665 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 0 | validation MSE (log) 0.0982 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 0 | validation MSE (log) 0.0901 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 0 | validation MSE (log) 0.0860 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 0 | validation MSE (log) 0.0860 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 0 | validation MSE (log) 0.0867 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 0 | validation MSE (log) 0.0882 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 0 | validation MSE (log) 0.0914 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 0 | validation MSE (log) 0.1444 | 854 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 0 | validation MSE (log) 0.0995 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 0 | validation MSE (log) 0.0894 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 0 | validation MSE (log) 0.0836 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 0 | validation MSE (log) 0.0829 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 0 | validation MSE (log) 0.0831 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 0 | validation MSE (log) 0.0841 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 0 | validation MSE (log) 0.0864 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 1 | validation MSE (log) 0.1393 | 784 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 1 | validation MSE (log) 0.0976 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 1 | validation MSE (log) 0.0898 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 1 | validation MSE (log) 0.0852 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 1 | validation MSE (log) 0.0851 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 1 | validation MSE (log) 0.0858 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 1 | validation MSE (log) 0.0875 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 1 | validation MSE (log) 0.0908 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 1 | validation MSE (log) 0.1453 | 1091 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 1 | validation MSE (log) 0.0985 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 1 | validation MSE (log) 0.0891 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 1 | validation MSE (log) 0.0832 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 1 | validation MSE (log) 0.0823 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 1 | validation MSE (log) 0.0824 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 1 | validation MSE (log) 0.0835 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 1 | validation MSE (log) 0.0859 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 2 | validation MSE (log) 0.1370 | 1134 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 2 | validation MSE (log) 0.0966 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 2 | validation MSE (log) 0.0885 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 2 | validation MSE (log) 0.0844 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 2 | validation MSE (log) 0.0844 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 2 | validation MSE (log) 0.0852 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 2 | validation MSE (log) 0.0869 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 2 | validation MSE (log) 0.0902 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 2 | validation MSE (log) 0.1437 | 969 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 2 | validation MSE (log) 0.0977 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 2 | validation MSE (log) 0.0883 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 2 | validation MSE (log) 0.0827 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 2 | validation MSE (log) 0.0818 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 2 | validation MSE (log) 0.0820 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 2 | validation MSE (log) 0.0831 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 2 | validation MSE (log) 0.0859 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 3 | validation MSE (log) 0.1385 | 765 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 3 | validation MSE (log) 0.0965 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 3 | validation MSE (log) 0.0883 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 3 | validation MSE (log) 0.0844 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 3 | validation MSE (log) 0.0843 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 3 | validation MSE (log) 0.0848 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 3 | validation MSE (log) 0.0867 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 3 | validation MSE (log) 0.0901 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 3 | validation MSE (log) 0.1455 | 863 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 3 | validation MSE (log) 0.0974 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 3 | validation MSE (log) 0.0875 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 3 | validation MSE (log) 0.0815 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 3 | validation MSE (log) 0.0807 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 3 | validation MSE (log) 0.0809 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 3 | validation MSE (log) 0.0822 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 3 | validation MSE (log) 0.0848 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 4 | validation MSE (log) 0.1388 | 545 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 4 | validation MSE (log) 0.0976 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 4 | validation MSE (log) 0.0897 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 4 | validation MSE (log) 0.0853 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 4 | validation MSE (log) 0.0850 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 4 | validation MSE (log) 0.0856 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 4 | validation MSE (log) 0.0874 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 4 | validation MSE (log) 0.0907 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 4 | validation MSE (log) 0.1453 | 772 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 4 | validation MSE (log) 0.0983 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 4 | validation MSE (log) 0.0888 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 4 | validation MSE (log) 0.0828 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 4 | validation MSE (log) 0.0821 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 4 | validation MSE (log) 0.0824 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 4 | validation MSE (log) 0.0832 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 4 | validation MSE (log) 0.0855 | 0 s
+k-nearest neighbours winner: {"distance": "cosine", "k": 15}, average validation MSE (log) 0.0820
+k-nearest neighbours | {"distance": "cosine", "k": 15} | trained on 426,135 sales in 1646 s | test MSE (log) 0.0798, median % off 16.83
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 0 | validation MSE (log) 0.0421 | 14 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 0 | validation MSE (log) 0.0420 | 13 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 0 | validation MSE (log) 0.0419 | 150 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 0 | validation MSE (log) 0.0419 | 152 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 1 | validation MSE (log) 0.0418 | 12 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 1 | validation MSE (log) 0.0416 | 12 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 1 | validation MSE (log) 0.0416 | 151 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 1 | validation MSE (log) 0.0415 | 151 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 2 | validation MSE (log) 0.0418 | 11 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 2 | validation MSE (log) 0.0417 | 10 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 2 | validation MSE (log) 0.0417 | 150 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 2 | validation MSE (log) 0.0415 | 151 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 3 | validation MSE (log) 0.0417 | 13 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 3 | validation MSE (log) 0.0416 | 13 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 3 | validation MSE (log) 0.0418 | 151 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 3 | validation MSE (log) 0.0414 | 159 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 4 | validation MSE (log) 0.0419 | 15 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 4 | validation MSE (log) 0.0418 | 13 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 4 | validation MSE (log) 0.0417 | 151 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 4 | validation MSE (log) 0.0416 | 151 s
+support vector machine winner: {"margin_penalty": 1.0, "margin_width": 0.05}, average validation MSE (log) 0.0416
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | trained on 426,135 sales in 200 s | test MSE (log) 0.0414, median % off 12.70
+bagging | {} | fold 0 | validation MSE (log) 0.0397 | 249 s
+bagging | {} | fold 1 | validation MSE (log) 0.0402 | 244 s
+bagging | {} | fold 2 | validation MSE (log) 0.0393 | 246 s
+bagging | {} | fold 3 | validation MSE (log) 0.0391 | 247 s
+bagging | {} | fold 4 | validation MSE (log) 0.0403 | 246 s
+bagging winner: {}, average validation MSE (log) 0.0397
+bagging | {} | trained on 426,135 sales in 326 s | test MSE (log) 0.0374, median % off 9.55
+model         neural network  random forest      bagging  linear regression  support vector machine  decision tree  k-nearest neighbours  median baseline  average baseline
+R2 (log)              0.9467         0.9124       0.9097             0.9008                  0.9003         0.8596                0.8076          -0.0056           -0.1237
+MSE (log)             0.0221         0.0363       0.0374             0.0411                  0.0414         0.0582                0.0798           0.4171            0.4661
+RMSE (log)            0.1487         0.1906       0.1935             0.2028                  0.2034         0.2413                0.2825           0.6458            0.6827
+MAE (log)             0.1084         0.1356       0.1363             0.1575                  0.1568         0.1801                0.2139           0.5146            0.5555
+R2 ($)                0.9236         0.8696       0.8716             0.8855                  0.8825         0.7946                0.7150          -0.0767           -0.0000
+RMSE ($)         161546.2079    211017.3551  209398.9745        197716.3542             200265.9462    264791.1405           311895.8318      606267.1825       584289.7458
+MAE ($)           76883.9969     98837.1124   98950.1413        106962.3087             107293.3846    129201.5996           154430.2110      334966.1906       359861.2653
+median $ off      40511.4760     46872.1655   46499.9959         65423.2899              64725.1338     66875.9141            79785.5848      206050.0000       285035.6291
+MAPE (%)             11.3970        13.8084      13.8985            16.1882                 16.1681        18.4864               22.1506          53.2179           74.5066
+median % off          8.4514         9.6538       9.5461            12.9218                 12.7030        13.9257               16.8265          41.8539           51.0480
+within 5%            31.3943        29.5996      30.2215            20.6435                 21.4632        19.3602               16.1248           5.6400            5.5801
+within 10%           57.2011        51.2454      51.6697            40.0187                 40.7972        37.1599               31.3634          11.4655           11.1995
+within 20%           85.3300        77.6320      77.4249            70.0089                 70.2478        65.9257               57.6001          23.1605           22.2406

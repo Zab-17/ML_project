@@ -25,9 +25,7 @@ def main():
     matrix = sparse.load_npz(TABLE_DIR / "train_matrix.npz").tocsr()
     label = np.load(TABLE_DIR / "train_label.npy")
     validation = np.load(TABLE_DIR / "validation_homes.npy")
-    average_price = np.exp(label[~validation]).mean()
-    models = {"average baseline": DummyRegressor(strategy="constant", constant=np.log(average_price)),
-              "median baseline": DummyRegressor(strategy="median"), "linear regression": LinearRegression()}
+    models = comparison_models(label[~validation])
     results = []
     for name, model in models.items():
         model.fit(matrix[~validation], label[~validation])
@@ -37,6 +35,14 @@ def main():
     table.to_csv(RESULTS, index=False)
     print(f"fitted on {(~validation).sum():,} sales, validated on {validation.sum():,} sales of homes never seen in fitting")
     print(table.set_index(["model", "scored on"]).T.round(4).to_string())
+
+
+def comparison_models(training_log_price):
+    """The two baselines and linear regression, not yet fitted. The average baseline predicts the average
+    training price in dollars, so its constant is the log of that average, not the average log."""
+    average_price = np.exp(training_log_price).mean()
+    return {"average baseline": DummyRegressor(strategy="constant", constant=np.log(average_price)),
+            "median baseline": DummyRegressor(strategy="median"), "linear regression": LinearRegression()}
 
 
 def scores(log_price, predicted_log_price):

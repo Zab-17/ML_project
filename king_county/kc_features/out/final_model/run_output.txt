@@ -1,0 +1,72 @@
+winner: 256-128 sgd lr 0.1 dropout 0.2, trained for 56 passes (median best pass of its 5 runs)
+256-128 sgd lr 0.1 dropout 0.2 | pass 1 of 56 | training MSE (log) 0.0763 | 3 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 2 of 56 | training MSE (log) 0.0582 | 6 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 3 of 56 | training MSE (log) 0.0541 | 9 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 4 of 56 | training MSE (log) 0.0497 | 12 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 5 of 56 | training MSE (log) 0.0525 | 15 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 6 of 56 | training MSE (log) 0.0376 | 18 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 7 of 56 | training MSE (log) 0.0359 | 21 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 8 of 56 | training MSE (log) 0.0351 | 24 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 9 of 56 | training MSE (log) 0.0321 | 27 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 10 of 56 | training MSE (log) 0.0338 | 30 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 11 of 56 | training MSE (log) 0.0291 | 33 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 12 of 56 | training MSE (log) 0.0341 | 36 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 13 of 56 | training MSE (log) 0.0304 | 39 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 14 of 56 | training MSE (log) 0.0283 | 42 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 15 of 56 | training MSE (log) 0.0270 | 44 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 16 of 56 | training MSE (log) 0.0262 | 47 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 17 of 56 | training MSE (log) 0.0263 | 50 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 18 of 56 | training MSE (log) 0.0256 | 53 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 19 of 56 | training MSE (log) 0.0260 | 56 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 20 of 56 | training MSE (log) 0.0265 | 59 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 21 of 56 | training MSE (log) 0.0261 | 62 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 22 of 56 | training MSE (log) 0.0262 | 65 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 23 of 56 | training MSE (log) 0.0260 | 68 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 24 of 56 | training MSE (log) 0.0309 | 71 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 25 of 56 | training MSE (log) 0.0232 | 74 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 26 of 56 | training MSE (log) 0.0247 | 77 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 27 of 56 | training MSE (log) 0.0258 | 80 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 28 of 56 | training MSE (log) 0.0241 | 83 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 29 of 56 | training MSE (log) 0.0273 | 85 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 30 of 56 | training MSE (log) 0.0246 | 88 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 31 of 56 | training MSE (log) 0.0217 | 91 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 32 of 56 | training MSE (log) 0.0224 | 94 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 33 of 56 | training MSE (log) 0.0265 | 97 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 34 of 56 | training MSE (log) 0.0215 | 100 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 35 of 56 | training MSE (log) 0.0218 | 103 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 36 of 56 | training MSE (log) 0.0228 | 106 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 37 of 56 | training MSE (log) 0.0221 | 109 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 38 of 56 | training MSE (log) 0.0233 | 112 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 39 of 56 | training MSE (log) 0.0213 | 115 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 40 of 56 | training MSE (log) 0.0209 | 118 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 41 of 56 | training MSE (log) 0.0206 | 121 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 42 of 56 | training MSE (log) 0.0211 | 124 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 43 of 56 | training MSE (log) 0.0206 | 127 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 44 of 56 | training MSE (log) 0.0203 | 130 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 45 of 56 | training MSE (log) 0.0221 | 133 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 46 of 56 | training MSE (log) 0.0203 | 136 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 47 of 56 | training MSE (log) 0.0206 | 139 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 48 of 56 | training MSE (log) 0.0215 | 142 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 49 of 56 | training MSE (log) 0.0214 | 145 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 50 of 56 | training MSE (log) 0.0203 | 148 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 51 of 56 | training MSE (log) 0.0193 | 151 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 52 of 56 | training MSE (log) 0.0202 | 154 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 53 of 56 | training MSE (log) 0.0193 | 156 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 54 of 56 | training MSE (log) 0.0188 | 159 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 55 of 56 | training MSE (log) 0.0212 | 162 s
+256-128 sgd lr 0.1 dropout 0.2 | pass 56 of 56 | training MSE (log) 0.0213 | 165 s
+trained in 166 s on 426,135 sales; scored once on 106,755 test sales:
+model         neural network  average baseline  median baseline  linear regression
+R2 (log)              0.9467           -0.1237          -0.0056             0.9008
+MSE (log)             0.0221            0.4661           0.4171             0.0411
+RMSE (log)            0.1487            0.6827           0.6458             0.2028
+MAE (log)             0.1084            0.5555           0.5146             0.1575
+R2 ($)                0.9236           -0.0000          -0.0767             0.8855
+RMSE ($)         161546.2079       584289.7458      606267.1825        197716.3542
+MAE ($)           76883.9969       359861.2653      334966.1906        106962.3087
+median $ off      40511.4760       285035.6291      206050.0000         65423.2899
+MAPE (%)             11.3970           74.5066          53.2179            16.1882
+median % off          8.4514           51.0480          41.8539            12.9218
+within 5%            31.3943            5.5801           5.6400            20.6435
+within 10%           57.2011           11.1995          11.4655            40.0187
+within 20%           85.3300           22.2406          23.1605            70.0089

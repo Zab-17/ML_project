@@ -1,0 +1,12 @@
+{
+  "setting": "256-128 sgd lr 0.1 dropout 0.2",
+  "first_layer": 256,
+  "second_layer": 128,
+  "optimizer": "sgd",
+  "learning_rate": 0.1,
+  "dropout": 0.2,
+  "passes": 56,
+  "training sales": 426135,
+  "training seconds": 166.0,
+  "test sales": 106755
+}
