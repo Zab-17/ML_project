@@ -1,0 +1,52 @@
+original columns: 151 | never change in training: 27: Volume, Page, PlatNbr, PlatType, PlatLot, PlatBlock, PrincipalUse, SaleReason, PropertyClass, SaleWarning, BldgNbr, SpecArea, SpecSubArea, Unbuildable, TranspConcurrency, HundredYrFloodPlain, SeismicHazard, LandslideHazard, SteepSlopeHazard, ErosionHazard, CoalMineHazard, CriticalDrainage, LandfillBuffer, Stream, Wetland, SpeciesOfConcern, SensitiveAreaTract
+columns at 0.85 or more with the label (sale price itself left out): none
+===== dropped columns, strongest with the label first
+         dropped column  with label         closest chosen feature  closest chosen feature value  second look
+                  Major       0.662                    miles north                         0.998        False
+           PropertyType       0.534               years since 2000                         0.754        False
+                ZipCode       0.531                    miles north                         0.927        False
+               LevyCode       0.520                           city                         1.000        False
+         SaleInstrument       0.497               years since 2000                         0.666         True
+          CurrentZoning       0.473                           city                         0.835        False
+           SqFt2ndFloor       0.381 above-ground living area (log)                         0.789        False
+           SqFt1stFloor       0.339 above-ground living area (log)                         0.624         True
+             SellerName       0.275                     year built                         0.424         True
+        DirectionSuffix       0.228                area + sub-area                         0.672         True
+        DirectionPrefix       0.192                area + sub-area                         0.578         True
+        ViewUtilization       0.131                area + sub-area                         0.319        False
+         SqFtUpperFloor       0.108                        stories                         0.393        False
+       DaylightBasement       0.098              finished basement                         0.593        False
+              AddnlCost       0.089                 appraisal area                         0.162        False
+PlatBlock (parcel file)       0.086                     miles east                         0.519        False
+               PropName       0.084                    present use                         0.348        False
+  PlatLot (parcel file)       0.078                 lot area (log)                         0.438        False
+          SqFtHalfFloor       0.060                     year built                        -0.336        False
+             BrickStone       0.057                area + sub-area                         0.308        False
+           RecordingNbr       0.051               years since 2000                         0.085        False
+   WfntRestrictedAccess       0.041        tidelands or shorelands                         0.457        False
+         LotDepthFactor       0.036                     waterfront                         0.421        False
+     RestrictiveSzShape       0.035                area + sub-area                         0.176        False
+          HBUAsIfVacant       0.029                    present use                         0.261        False
+                Address       0.028                    subdivision                         0.620        False
+           BldgGradeVar       0.020                     open porch                         0.028        False
+               Fraction       0.019                 lot area (log)                         0.422        False
+       WfntAccessRights       0.018                    subdivision                         0.590        False
+          HBUAsImproved       0.018                    subdivision                         0.161        False
+===== chosen features: pairs at 0.7 or more
+  +0.718  above-ground living area (log) | building grade
+  +0.836  finished basement | finished basement grade
+  +0.883  miles east | city
+  +0.989  miles east | appraisal area
+  +0.996  miles east | area + sub-area
+  +0.881  miles north | city
+  +0.994  miles north | appraisal area
+  +0.998  miles north | area + sub-area
+  +0.719  waterfront length | waterfront
+  +0.749  lot area (log) | area + sub-area
+  +0.717  view: small lake, river or creek | waterfront
+  +0.986  tidelands or shorelands | waterfront
+  +0.845  airport noise | area + sub-area
+  +0.740  private sewer | area + sub-area
+  +0.738  city | appraisal area
+  +0.868  city | area + sub-area
+  +1.000  appraisal area | area + sub-area

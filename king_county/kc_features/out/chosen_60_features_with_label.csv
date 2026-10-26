@@ -1,0 +1,61 @@
+feature,measure kind,with label,strongest partner,strongest partner value
+years since 2000,number,0.6408055079751591,heating system,0.22324722626538396
+building grade,category,0.5972607486607823,above-ground living area (log),0.7176658805925729
+area + sub-area,category,0.5941993992998738,appraisal area,0.999753517362131
+appraisal area,category,0.562064515391727,area + sub-area,0.999753517362131
+above-ground living area (log),number,0.4778337273606842,building grade,0.7176658805925729
+city,category,0.459282449564529,miles east,0.882615187043211
+subdivision,category,0.36273752232105405,miles east,0.6330082900862478
+finished basement grade,category,0.3453885108291191,finished basement,0.8361643926180952
+miles north,number,0.3376072444494633,area + sub-area,0.997980245764065
+full bathrooms,number,0.30815259754489693,above-ground living area (log),0.5516888027107166
+bedrooms,number,0.30460254597288994,above-ground living area (log),0.5480825601535773
+stories,number,0.2969046245337913,above-ground living area (log),0.5381245143232997
+fireplaces,number,0.28361597302586233,area + sub-area,0.46695810226744683
+heating system,category,0.2806961635816939,heating fuel,0.2809681782768704
+open porch,number,0.270888779939842,above-ground living area (log),0.39370089836025857
+finished basement,number,0.23661013669474643,finished basement grade,0.8361643926180952
+three-quarter bathrooms,number,0.2355250879023378,full bathrooms,-0.35984857087419775
+total garage,number,0.22938243738450295,area + sub-area,0.6044068671242381
+view: territorial,number,0.22458213549151745,view: Cascade Mountains,0.43580968782511476
+street name,category,0.21460453005701602,miles east,0.49952454296567134
+view: Lake Washington,number,0.19743362590640703,area + sub-area,0.55327504072579
+half bathrooms,number,0.19219131576667417,stories,0.46556234122284224
+deck,number,0.18195912699239924,area + sub-area,0.3056155291000234
+year built,number,0.1661753768602294,area + sub-area,0.5568059438948341
+waterfront,category,0.15067120279945245,tidelands or shorelands,0.9858717579428125
+view: Olympic Mountains,number,0.13423303661733715,view: Puget Sound,0.551892338099389
+hilly lot,number,0.13274241466481962,area + sub-area,0.38724188805749565
+renovated,category,0.13145741760161106,year built,0.2573699534997423
+tidelands or shorelands,number,0.12286751738639437,waterfront,0.9858717579428125
+waterfront bank,category,0.11709704116675222,waterfront length,0.6866627074063478
+airport noise,number,-0.11386494464366974,area + sub-area,0.8449864010020524
+view: Puget Sound,number,0.11331607163252946,area + sub-area,0.5734946133391996
+view: Seattle skyline,number,0.11184031149004603,area + sub-area,0.2875494503852409
+heating fuel,category,0.10772953931803057,above-ground living area (log),0.3112968312449113
+lot area (log),number,0.10227349826321383,area + sub-area,0.7493944971573046
+view: Cascade Mountains,number,0.1003395912264814,view: territorial,0.43580968782511476
+street type,category,0.09974510141014117,view: Lake Sammamish,0.4022129921245512
+view: Lake Sammamish,number,0.09859517825388343,area + sub-area,0.5194262802785005
+waterfront length,number,0.07979564090717749,waterfront,0.719131807804712
+next to a green belt,number,0.0684262696205969,area + sub-area,0.37212874896675946
+road access,category,0.06744070299937449,subdivision,0.2958510847233378
+view: other,number,0.06251598922061703,area + sub-area,0.277690449903123
+present use,category,0.05672270369553607,lot area (log),0.5780905917659869
+miles east,number,0.05327121896413991,area + sub-area,0.9959810902834444
+easement,number,0.051301292977650695,area + sub-area,0.34692077324429504
+view: Mount Rainier,number,0.04342127124938231,area + sub-area,0.2951692135212519
+"view: small lake, river or creek",number,0.04240809508602015,waterfront,0.7165518490441991
+next to a golf course,number,0.04107035551730198,subdivision,0.541663271631666
+protected native-plants strip,number,0.03374722558225139,area + sub-area,0.13842368136163524
+parking,category,0.030274066694064353,area + sub-area,0.5930254778352725
+street surface,category,0.02812921203781667,private water supply,0.3460486077264006
+other legal designation,number,0.02747352902456407,area + sub-area,0.5919398493574145
+private water supply,number,0.025611243833947153,area + sub-area,0.6198350391247686
+land leased from the state,number,0.01439213565876014,area + sub-area,0.6336950684353704
+private sewer,number,-0.012925697446292489,area + sub-area,0.7400899732595416
+other unfinished basement,number,0.010939248343128368,year built,-0.3697070540736747
+power lines nearby,number,-0.010587775686342522,subdivision,0.20794042889257328
+water problems,number,0.006470514074990309,area + sub-area,0.11031124392014034
+traffic noise,number,-0.0049115917119952526,street name,0.3433677219814679
+deed restrictions,number,0.0009414702841381975,subdivision,0.31386629373832997

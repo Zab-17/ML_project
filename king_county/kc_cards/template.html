@@ -1,0 +1,524 @@
+<title>King County Feature Cards</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a drawer index of the 151 columns on the left, one assessor-style record card on the right (same system as the Zillow cards page). */
+:root {
+  --paper: #F2F5F4; --card: #FFFFFF; --ink: #15201B; --muted: #56655E; --rule: #D3DCD8;
+  --accent: #1D6883; --accent-soft: #DCEBF1; --track: #E8EEEC;
+  --keep: #2E7650; --keep-soft: #DDEFE4; --transform: #1D6883; --transform-soft: #DCEBF1;
+  --remove: #A2462E; --remove-soft: #F6E3DC; --label: #6B4FA0; --label-soft: #ECE5F6;
+  --warn: #8E5600; --focus: #1D6883;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111614; --card: #19201D; --ink: #E2E8E5; --muted: #98A6A0; --rule: #2C3632;
+    --accent: #6CB9D5; --accent-soft: #1E3540; --track: #232C29;
+    --keep: #6CC495; --keep-soft: #1C3527; --transform: #6CB9D5; --transform-soft: #1E3540;
+    --remove: #E58C72; --remove-soft: #3B2219; --label: #B9A2E6; --label-soft: #2C2340;
+    --warn: #E0A54A; --focus: #6CB9D5; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111614; --card: #19201D; --ink: #E2E8E5; --muted: #98A6A0; --rule: #2C3632;
+  --accent: #6CB9D5; --accent-soft: #1E3540; --track: #232C29;
+  --keep: #6CC495; --keep-soft: #1C3527; --transform: #6CB9D5; --transform-soft: #1E3540;
+  --remove: #E58C72; --remove-soft: #3B2219; --label: #B9A2E6; --label-soft: #2C2340;
+  --warn: #E0A54A; --focus: #6CB9D5; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1240px; margin: 0 auto; padding-block: 24px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+button, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+
+.top { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+.top p { margin: 4px 0 0; color: var(--muted); max-width: 70ch; }
+.progress { display: grid; gap: 6px; min-width: 260px; }
+.progress-line { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); }
+.progress-line strong { color: var(--ink); font-weight: 600; }
+.progress-track { height: 6px; border-radius: 3px; background: var(--track); overflow: hidden; }
+.progress-fill { height: 100%; width: 0; background: var(--keep); border-radius: 3px; transition: width .3s; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { border: 1px solid var(--rule); background: var(--card); border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; }
+.btn:hover { border-color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: default; }
+.status { font-size: 13px; color: var(--muted); }
+.status.problem { color: var(--warn); }
+
+.tally { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.filter { border: 1px solid var(--rule); background: var(--card); border-radius: 999px; padding: 4px 12px; font-size: 13px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.filter[aria-pressed="true"] { border-color: var(--ink); background: var(--track); font-weight: 600; }
+.filter b { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.guide { margin: 14px 0 0; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); }
+.guide summary { cursor: pointer; padding: 10px 14px; font-weight: 600; }
+.guide dl { margin: 0; padding: 0 14px 14px; display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 1fr); gap: 6px 18px; font-size: 14px; }
+.guide dt { font-weight: 600; }
+.guide dd { margin: 0; color: var(--muted); max-width: 72ch; }
+
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 28px; margin-top: 22px; align-items: start; }
+.index { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); max-height: calc(100vh - 24px); overflow-y: auto; padding-right: 4px; }
+.index h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin: 16px 0 4px; font-family: var(--font-body); }
+.index h2:first-child { margin-top: 0; }
+.index ul { list-style: none; margin: 0; padding: 0; }
+.index button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 0; background: none; text-align: left;
+  padding: 4px 8px; border-radius: 5px; cursor: pointer; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); }
+.index button:hover { background: var(--track); }
+.index button[aria-current="true"] { background: var(--accent-soft); font-weight: 500; }
+.index .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.marks { display: inline-flex; gap: 4px; flex: none; align-items: center; }
+.tag { font-family: var(--font-body); font-size: 10.5px; font-weight: 600; border-radius: 3px; padding: 0 5px; line-height: 16px; }
+.tag.keep { background: var(--keep-soft); color: var(--keep); }
+.tag.transform { background: var(--transform-soft); color: var(--transform); }
+.tag.remove { background: var(--remove-soft); color: var(--remove); }
+.tag.label { background: var(--label-soft); color: var(--label); }
+.decided { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--rule); }
+.decided.keep { background: var(--keep); border-color: var(--keep); }
+.decided.transform { background: var(--transform); border-color: var(--transform); }
+.decided.remove { background: var(--remove); border-color: var(--remove); }
+.decided.unsure { background: var(--warn); border-color: var(--warn); }
+.picker { display: none; }
+
+.record { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; min-width: 0; }
+.record-head { padding: 20px 22px 16px; border-bottom: 1px solid var(--rule); display: grid; gap: 8px; }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.chip { font-size: 12px; letter-spacing: .02em; text-transform: none; border: 1px solid var(--rule); border-radius: 999px; padding: 1px 9px; color: var(--ink); }
+.chip.keep { border-color: var(--keep); color: var(--keep); }
+.chip.transform { border-color: var(--transform); color: var(--transform); }
+.chip.remove { border-color: var(--remove); color: var(--remove); }
+.chip.label { border-color: var(--label); color: var(--label); }
+.record-head h2 { font-family: var(--font-mono); font-weight: 500; font-size: 24px; overflow-wrap: anywhere; }
+.quote { margin: 0; color: var(--muted); max-width: 72ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 6px; }
+.fact { border-left: 2px solid var(--rule); padding-left: 10px; }
+.fact b { display: block; font-size: 12px; font-weight: 500; color: var(--muted); }
+.fact span { font-size: 17px; font-variant-numeric: tabular-nums; }
+
+.q { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px 26px; padding: 20px 22px; border-bottom: 1px solid var(--rule); }
+.q-title { grid-column: 1 / -1; display: flex; gap: 12px; align-items: baseline; }
+.q-num { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--accent); min-width: 1.4em; }
+.q-title h3 { font-family: var(--font-body); font-size: 15.5px; font-weight: 600; }
+.evidence { min-width: 0; display: grid; gap: 12px; align-content: start; font-size: 14px; }
+.evidence p { margin: 0; }
+.answer { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.answer > b { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 500; }
+.answer p { margin: 0; background: var(--paper); border-radius: 8px; padding: 10px 12px; line-height: 1.5; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 8px; }
+.stat { background: var(--paper); border-radius: 6px; padding: 7px 10px; }
+.stat b { display: block; font-size: 11.5px; font-weight: 500; color: var(--muted); }
+.stat span { font-size: 15px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips code { font-family: var(--font-mono); font-size: 12.5px; background: var(--paper); border-radius: 4px; padding: 2px 7px; }
+.scroll { overflow-x: auto; max-height: 240px; overflow-y: auto; border: 1px solid var(--rule); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 12px; position: sticky; top: 0; background: var(--card); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+
+.chart { display: grid; gap: 4px; }
+.chart h4 { font-family: var(--font-body); font-size: 13px; font-weight: 600; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart svg text { fill: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.chart .grid-line { stroke: var(--rule); stroke-width: 1; }
+.chart .zero-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.chart .mark { fill: var(--accent); }
+.chart .mark.neg { fill: var(--remove); }
+.chart .line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.chart .dot { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
+.chart [data-tip] { cursor: crosshair; }
+.chart [data-tip]:hover { opacity: .75; }
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 8px 12px; border-radius: 0 6px 6px 0; }
+
+.decision { grid-column: 1 / -1; display: grid; gap: 12px; }
+.suggest { display: grid; gap: 4px; border-radius: 8px; padding: 12px 14px; border: 1px solid var(--rule); }
+.suggest.keep { background: var(--keep-soft); border-color: var(--keep); }
+.suggest.transform { background: var(--transform-soft); border-color: var(--transform); }
+.suggest.remove { background: var(--remove-soft); border-color: var(--remove); }
+.suggest.label { background: var(--label-soft); border-color: var(--label); }
+.suggest strong { font-family: var(--font-display); font-size: 16px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { border: 1.5px solid var(--rule); background: var(--card); border-radius: 8px; padding: 8px 16px; cursor: pointer; font-weight: 600; }
+.choice:hover:not(:disabled) { border-color: var(--ink); }
+.choice[aria-pressed="true"].keep { background: var(--keep); border-color: var(--keep); color: var(--card); }
+.choice[aria-pressed="true"].transform { background: var(--transform); border-color: var(--transform); color: var(--card); }
+.choice[aria-pressed="true"].remove { background: var(--remove); border-color: var(--remove); color: var(--card); }
+.choice[aria-pressed="true"].unsure { background: var(--warn); border-color: var(--warn); color: var(--card); }
+.choice:disabled { opacity: .5; cursor: default; }
+.decision textarea { width: 100%; min-height: 84px; resize: vertical; border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; background: var(--paper); line-height: 1.45; }
+.decision textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+
+.nav-row { display: flex; justify-content: space-between; gap: 12px; padding: 16px 22px; border-top: 1px solid var(--rule); }
+#tip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--card); font-size: 12.5px; font-family: var(--font-mono);
+  padding: 5px 8px; border-radius: 5px; max-width: 300px; }
+.export { margin-top: 12px; display: grid; gap: 8px; }
+.export textarea { width: 100%; min-height: 220px; font-family: var(--font-mono); font-size: 12.5px; border: 1px solid var(--rule); border-radius: 8px; padding: 10px; background: var(--card); }
+.empty-state { padding: 28px 22px; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .index { display: none; }
+  .picker { display: grid; gap: 4px; }
+  .picker select { width: 100%; padding: 8px 10px; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); font-family: var(--font-mono); font-size: 14px; }
+  .q { grid-template-columns: minmax(0, 1fr); padding: 18px 16px; }
+  .record-head { padding: 18px 16px 14px; }
+  .nav-row { padding: 14px 16px; }
+  .guide dl { grid-template-columns: minmax(0, 1fr); }
+  .guide dd { margin-bottom: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .progress-fill { transition: none; } }
+</style>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <h1>King County Feature Cards</h1>
+      <p id="dataset-line"></p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <div class="progress-line"><span><strong id="done-count">0</strong> of <span id="total-count">0</span> columns decided</span><span id="mine-line"></span></div>
+      <p class="small muted" style="margin:0">Decisions made in chat on 24 October are recorded here with a note saying so.</p>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="toolbar">
+        <button class="btn" id="copy-all" type="button">Copy decisions as text</button>
+        <span class="status" id="save-status">Loading saved decisions…</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="export" id="export-panel" hidden>
+    <label for="export-text" class="small muted">Copying was blocked here. The text is selected below: press Command+C (or Ctrl+C).</label>
+    <textarea id="export-text" readonly></textarea>
+    <div><button class="btn" id="export-close" type="button">Close</button></div>
+  </div>
+
+  <div class="tally" id="filters" role="group" aria-label="Show columns"></div>
+
+  <details class="guide" id="guide">
+    <summary>How to read the evidence</summary>
+    <dl id="guide-list"></dl>
+  </details>
+
+  <div class="layout">
+    <nav class="index" id="index" aria-label="Columns"></nav>
+    <div class="picker">
+      <label for="column-picker" class="small muted">Column</label>
+      <select id="column-picker"></select>
+    </div>
+    <main class="record" id="record" aria-live="polite"></main>
+  </div>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const DATA = /*DATA*/null;
+</script>
+<script>
+(() => {
+  const VERDICT = { keep: "Keep", transform: "Transform", remove: "Remove", label: "Label" };
+  const CHOICES = [["keep", "Keep"], ["transform", "Transform"], ["remove", "Remove"], ["unsure", "Not sure"]];
+  const QUESTIONS = [
+    "What does the column measure, and in what unit?",
+    "What type is it?",
+    "How much is missing, and why?",
+    "Are there impossible or placeholder values?",
+    "What does the distribution look like?",
+    "How does it relate to the sale price?",
+    "Does it repeat another column or leak the answer?",
+  ];
+  const cards = DATA.cards;
+  const byName = new Map(cards.map((c) => [c.name, c]));
+  const order = DATA.families.flatMap((f) => f.columns);
+  const state = { current: order[0], filter: "kept", decisions: {}, canWrite: true, db: null, uid: null, saving: {} };
+  const labelOf = (name) => byName.get(name)?.label || name;
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  const num = (v, digits = 0) => (v === null || v === undefined || Number.isNaN(v)) ? "–" : Number(v).toLocaleString("en-US", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
+  const pct = (v) => (v === null || v === undefined) ? "–" : `${num(v, v < 1 && v > 0 ? 2 : 1)}%`;
+  const signed = (v) => (v === null || v === undefined) ? "–" : `${v > 0 ? "+" : ""}${num(v, 1)}%`;
+  const docId = (name) => name.replace(/[^A-Za-z0-9_\-.~:@+]/g, "_");
+  const money = (v) => `$${num(v)}`;
+
+  function datasetLine() {
+    const s = DATA.summary;
+    $("dataset-line").textContent = `${num(s.usable_sales)} clean home sales from ${s.first_date.slice(0, 4)} to ${s.last_date.slice(0, 4)}, on ${num(s.homes)} homes (the year window is not decided yet). Every number below comes from the ${num(s.train_sales)} sales on the training homes; the other 20% of homes are locked away as the test set.`;
+    $("total-count").textContent = order.length;
+  }
+
+  function guide() {
+    const items = [
+      ["Time-adjusted price", "Prices rose a lot between 2000 and 2026, so a raw comparison mixes up \"better house\" with \"sold later\". Each sale is compared with the typical (median) King County sale in the same month. +20% means the home sold for 20% more than the typical home that month."],
+      ["Share explained", "How much of the variation in time-adjusted price this column explains on its own. Group averages are learned on one half of the training homes and tested on the other half, so an identifier scores about 0% instead of a fake 100%."],
+      ["Rank correlation", "Spearman correlation between the column and the time-adjusted price, from −1 to +1. It catches any steady rise or fall, curved or straight."],
+      ["Empty and zero", "King County writes 0 for \"has none\" (no deck, no view) and leaves text fields blank. Both are counted separately."],
+      ["Code names", "Codes such as grade, condition and heating were decoded from the county's lookup file, matched to each column by content. The county's record-format document could not be fetched to confirm the matching."],
+      ["Expected relationship", "From the research done for this project: peer-reviewed studies from California and the United States. No King County-specific study has been researched yet."],
+      ["Suggestions", "Claude's suggestion and its reason sit at the bottom of each card. Your decision is what counts: click Keep, Transform, Remove or Not sure. Decisions are saved for everyone who opens this page."],
+    ];
+    $("guide-list").innerHTML = items.map(([t, d]) => `<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join("");
+  }
+
+  const decisionOf = (name) => state.decisions[docId(name)]?.decision || "";
+  function visible(name) {
+    const decision = decisionOf(name);
+    if (state.filter === "all") return true;
+    if (state.filter === "removed") return decision === "remove";
+    if (state.filter === "open") return !decision;
+    return decision !== "remove";
+  }
+  const visibleOrder = () => order.filter(visible);
+
+  function filters() {
+    const removed = order.filter((n) => decisionOf(n) === "remove").length;
+    const counts = { kept: order.length - removed, removed, open: order.filter((n) => !decisionOf(n)).length, all: order.length };
+    const list = [["kept", "Kept columns"], ["removed", "Removed"], ["open", "Still to decide"], ["all", "All 151 columns"]];
+    $("filters").innerHTML = list.map(([key, label]) => `<button type="button" class="filter" data-filter="${key}" aria-pressed="${state.filter === key}">${esc(label)} <b>${counts[key]}</b></button>`).join("");
+  }
+
+  function index() {
+    $("index").innerHTML = DATA.families.map((family) => {
+      const items = family.columns.filter(visible);
+      if (!items.length) return "";
+      return `<h2>${esc(family.name)}</h2><ul>${items.map((name) => {
+        const card = byName.get(name);
+        const decision = state.decisions[docId(name)]?.decision;
+        return `<li><button type="button" data-col="${esc(name)}" aria-current="${name === state.current}" title="${esc(name)}"><span class="name">${esc(card.label)}</span><span class="marks"><span class="tag ${card.suggestion.verdict}" title="Suggested: ${VERDICT[card.suggestion.verdict]}">${VERDICT[card.suggestion.verdict][0]}</span><span class="decided ${decision || ""}" title="${decision ? "Your decision: " + decision : "Not decided"}"></span></span></button></li>`;
+      }).join("")}</ul>`;
+    }).join("") || `<p class="small muted">No columns match this filter.</p>`;
+    $("column-picker").innerHTML = visibleOrder().map((n) => `<option value="${esc(n)}" ${n === state.current ? "selected" : ""}>${esc(labelOf(n))}</option>`).join("");
+  }
+
+  function progress() {
+    const done = order.filter((n) => decisionOf(n)).length;
+    const removed = order.filter((n) => decisionOf(n) === "remove").length;
+    $("done-count").textContent = done;
+    $("progress-fill").style.width = `${(done / order.length) * 100}%`;
+    $("mine-line").textContent = `${order.length - removed} kept · ${removed} removed`;
+  }
+
+  function stat(label, value) { return `<div class="stat"><b>${esc(label)}</b><span>${value}</span></div>`; }
+
+  function histogramSvg(hist, title, formatter) {
+    if (!hist) return "";
+    const W = 520, H = 150, pad = 26, n = hist.counts.length, max = Math.max(...hist.counts, 1);
+    const bw = (W - pad * 2) / n;
+    const bars = hist.counts.map((c, i) => {
+      const h = (c / max) * (H - 44);
+      const lo = hist.lo + (hist.hi - hist.lo) * (i / n), hi = hist.lo + (hist.hi - hist.lo) * ((i + 1) / n);
+      return `<rect class="mark" x="${(pad + i * bw + 1).toFixed(1)}" y="${(H - 22 - h).toFixed(1)}" width="${Math.max(bw - 2, 1).toFixed(1)}" height="${Math.max(h, 0.5).toFixed(1)}" rx="1.5" data-tip="${esc(formatter(lo))} to ${esc(formatter(hi))}: ${num(c)} sales"/>`;
+    }).join("");
+    return `<div class="chart"><h4>${esc(title)} <span class="muted small">skew ${hist.skew}</span></h4><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}"><line class="grid-line" x1="${pad}" x2="${W - pad}" y1="${H - 22}" y2="${H - 22}"/>${bars}<text x="${pad}" y="${H - 6}">${esc(formatter(hist.lo))}</text><text x="${W - pad}" y="${H - 6}" text-anchor="end">${esc(formatter(hist.hi))}</text><text x="${pad}" y="12">${num(max)} sales</text></svg></div>`;
+  }
+
+  function relationSvg(points, title) {
+    if (!points || points.length < 2) return "";
+    const W = 520, H = 170, padL = 48, padR = 14, top = 14, bottom = 28;
+    const ys = points.map((p) => p[1]);
+    const yMin = Math.min(0, ...ys), yMax = Math.max(0, ...ys);
+    const span = (yMax - yMin) || 1;
+    const x = (i) => padL + (i * (W - padL - padR)) / (points.length - 1);
+    const y = (v) => top + ((yMax - v) / span) * (H - top - bottom);
+    const path = points.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" ");
+    const dots = points.map((p, i) => `<circle class="dot" cx="${x(i).toFixed(1)}" cy="${y(p[1]).toFixed(1)}" r="4.5" data-tip="${num(p[0], 2)} → ${signed(p[1])} vs typical (${num(p[2])} sales)"/>`).join("");
+    return `<div class="chart"><h4>${esc(title)}</h4><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}"><line class="zero-line" x1="${padL}" x2="${W - padR}" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}"/><path class="line" d="${path}"/>${dots}<text x="${padL - 6}" y="${(y(yMax) + 4).toFixed(1)}" text-anchor="end">${signed(yMax)}</text><text x="${padL - 6}" y="${(y(yMin) + 4).toFixed(1)}" text-anchor="end">${signed(yMin)}</text><text x="${padL}" y="${H - 8}">${num(points[0][0], 2)}</text><text x="${W - padR}" y="${H - 8}" text-anchor="end">${num(points[points.length - 1][0], 2)}</text></svg><p class="small muted">Each dot is a tenth of the sales (or one exact value), placed at its median. Height = time-adjusted price vs the typical sale.</p></div>`;
+  }
+
+  function barsTable(card) {
+    const bars = card.bars;
+    if (!bars || !bars.items.length) return "";
+    const max = Math.max(...bars.items.map((b) => b[3]), 1);
+    const rows = bars.items.map(([code, name, count, share, median]) => `<tr><td><code>${esc(code)}</code>${name ? " " + esc(name) : ""}</td><td class="n">${num(count)}</td><td class="n">${pct(share)}</td><td style="min-width:90px"><svg viewBox="0 0 100 10" width="100%" height="10" aria-hidden="true"><rect class="mark" x="0" y="1" width="${Math.max((share / max) * 100, 0.5).toFixed(1)}" height="8" rx="1.5"/></svg></td><td class="n">${signed(median)}</td></tr>`).join("");
+    const rest = bars.rest_distinct ? `<tr><td class="muted">${num(bars.rest_distinct)} other values</td><td class="n">${num(bars.rest_rows)}</td><td colspan="3"></td></tr>` : "";
+    return `<div class="scroll chart"><table><thead><tr><th>Value</th><th class="n">Sales</th><th class="n">Share</th><th></th><th class="n">Price vs typical</th></tr></thead><tbody>${rows}${rest}</tbody></table></div>`;
+  }
+
+  function decodeTable(card) {
+    if (!card.decode) return "";
+    const entries = Object.entries(card.decode).sort((a, b) => Number(a[0]) - Number(b[0])).slice(0, 30);
+    return `<div class="scroll"><table><thead><tr><th>Code</th><th>Meaning (county lookup)</th></tr></thead><tbody>${entries.map(([k, v]) => `<tr><td><code>${esc(k)}</code></td><td>${esc(v)}</td></tr>`).join("")}</tbody></table></div>`;
+  }
+
+  function evidence(card, q) {
+    const n = card.numeric;
+    const rel = card.relation || {};
+    switch (q) {
+      case 0: return `<p class="small muted">Source: ${esc(card.meaning_source)}</p>${decodeTable(card)}`;
+      case 1: return `<div class="stats">${stat("Kind", esc(card.kind))}${stat("Stored as", n ? "number" : "text")}${stat("Distinct values", num(card.distinct))}</div>${card.examples.length ? `<div class="chips">${card.examples.map((e) => `<code>${esc(e)}</code>`).join("")}</div>` : `<p class="small muted">Examples hidden: identifiers, names and addresses are not shown on this page.</p>`}`;
+      case 2: return `<div class="stats">${stat("Empty", pct(card.empty_pct))}${stat("Zero", pct(card.zero_pct))}${card.median_when_absent !== undefined ? stat("Price when empty or zero", signed(card.median_when_absent)) + stat("Price when filled", signed(card.median_when_present)) : ""}</div>`;
+      case 3: return n ? `<div class="stats">${stat("Smallest", num(n.min, 2))}${stat("Largest", num(n.max, 2))}${stat("Zeros", num(n.zeros))}${stat("Negatives", num(n.negatives))}${stat("Below lower fence", num(n.below_fence))}${stat("Above upper fence", num(n.above_fence))}</div><p class="small muted">Fences sit 1.5 interquartile ranges beyond the middle half of the values.</p>` : `<div class="stats">${stat("Distinct values", num(card.distinct))}${card.bars ? stat("Sales in values with under 30 sales", pct(card.bars.rare_share)) : ""}</div>`;
+      case 4: return n ? `<div class="stats">${stat("1st percentile", num(n.p1, 2))}${stat("Median", num(n.p50, 2))}${stat("99th percentile", num(n.p99, 2))}${stat("Mean", num(n.mean, 2))}${stat("Skew", n.skew)}${stat("Skew after log", n.log_skew ?? "–")}</div>${histogramSvg(n.hist, "Values, middle 98%", (v) => num(v, 1))}${histogramSvg(n.log_hist, "After log(1 + value)", (v) => num(v, 2))}${card.bars ? barsTable(card) : ""}` : barsTable(card);
+      case 5: return `<div class="stats">${stat("Share explained", rel.explained === undefined ? "–" : pct(rel.explained * 100))}${n && n.spearman !== null ? stat("Rank correlation", n.spearman) : ""}</div>${rel.points ? relationSvg(rel.points, "Time-adjusted price across the column's values") : ""}${!rel.points && card.bars ? `<p class="small muted">The "Price vs typical" column in question 5 shows how each value's sales compare.</p>` : ""}${card.expected ? `<div class="callout small"><b>Expected from research:</b> ${esc(card.expected)}</div>` : ""}`;
+      case 6: {
+        const similar = (card.similar || []).map(([name, r]) => `<tr><td>${esc(labelOf(name))} <code class="small muted">${esc(name)}</code></td><td class="n">${r}</td></tr>`).join("");
+        const nested = (card.nested_in || []).map(([name, both]) => `<li>${esc(labelOf(name))} ${both ? "matches it one-to-one" : "contains it (each value of this column sits inside one value of that column)"}</li>`).join("");
+        return `${similar ? `<div class="scroll"><table><thead><tr><th>Most similar numeric columns</th><th class="n">Rank correlation</th></tr></thead><tbody>${similar}</tbody></table></div>` : ""}${nested ? `<ul class="small">${nested}</ul>` : ""}${!similar && !nested ? `<p class="muted">No other column repeats this one.</p>` : ""}`;
+      }
+      default: return "";
+    }
+  }
+
+  function decisionBlock(card) {
+    const id = docId(card.name);
+    const saved = state.decisions[id] || {};
+    const s = card.suggestion;
+    const buttons = CHOICES.map(([key, label]) => `<button type="button" class="choice ${key}" data-choice="${key}" aria-pressed="${saved.decision === key}" ${state.canWrite && state.db ? "" : "disabled"}>${label}</button>`).join("");
+    return `<section class="q"><div class="q-title"><span class="q-num">8</span><h3>Decision: keep, transform or remove?</h3></div><div class="decision"><div class="suggest ${s.verdict}"><span class="small muted">Claude suggests</span><strong>${VERDICT[s.verdict]}</strong><span>${esc(s.reason)}</span></div><div><span class="small muted">Your decision</span><div class="choices">${buttons}</div></div><label for="note-input" class="small muted">Your note (optional, saved after you pause typing)</label><textarea id="note-input" ${state.canWrite && state.db ? "" : "disabled"} placeholder="Why you decided this, or what to transform it into">${esc(saved.note || "")}</textarea><span class="status" id="card-status">${saved.at ? "Saved " + new Date(saved.at).toLocaleString() : ""}</span></div></section>`;
+  }
+
+  function record() {
+    const card = byName.get(state.current);
+    if (!card) { $("record").innerHTML = `<div class="empty-state">Pick a column on the left.</div>`; return; }
+    const s = card.suggestion;
+    const saved = state.decisions[docId(card.name)]?.decision;
+    const n = card.numeric;
+    const facts = [["Empty", pct(card.empty_pct)], ["Zero", pct(card.zero_pct)], ["Distinct", num(card.distinct)], ["Share explained", card.relation ? pct(card.relation.explained * 100) : "–"], ["Rank correlation", n && n.spearman !== null ? n.spearman : "–"]];
+    const list = visibleOrder().includes(card.name) ? visibleOrder() : order;
+    const position = list.indexOf(card.name);
+    const prev = list[position - 1], next = list[position + 1];
+    $("record").innerHTML = `
+      <div class="record-head">
+        <div class="eyebrow"><span>${esc(card.family)}</span><span>${esc(card.file)} file</span><span class="chip ${s.verdict}">Suggested: ${VERDICT[s.verdict]}</span>${saved ? `<span class="chip ${saved === "unsure" ? "" : saved}">You: ${esc(CHOICES.find((c) => c[0] === saved)[1])}</span>` : ""}</div>
+        <h2>${esc(card.label)}</h2>
+        <p class="small muted">Column name in the file: <code>${esc(card.name)}</code></p>
+        <p class="quote">${esc(card.meaning)}</p>
+        <div class="facts">${facts.map(([b, v]) => `<div class="fact"><b>${esc(b)}</b><span>${v}</span></div>`).join("")}</div>
+      </div>
+      ${QUESTIONS.map((title, q) => `<section class="q"><div class="q-title"><span class="q-num">${q + 1}</span><h3>${esc(title)}</h3></div><div class="evidence">${evidence(card, q)}</div><div class="answer"><b>Card answer (drafted by Claude)</b><p>${esc(card.answers[q])}</p></div></section>`).join("")}
+      ${decisionBlock(card)}
+      <div class="nav-row"><button class="btn" type="button" data-col="${esc(prev || "")}" ${prev ? "" : "disabled"}>← ${esc(prev ? labelOf(prev) : "")}</button><button class="btn" type="button" data-col="${esc(next || "")}" ${next ? "" : "disabled"}>${esc(next ? labelOf(next) : "")} →</button></div>`;
+  }
+
+  function renderAll() { filters(); index(); progress(); record(); }
+
+  function go(name) {
+    if (!byName.has(name)) return;
+    state.current = name;
+    index(); record();
+    $("record").scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+
+  async function save(name, patch) {
+    if (!state.db) return;
+    const id = docId(name);
+    const body = { ...(state.decisions[id] || {}), ...patch, column: name, by: state.uid, at: new Date().toISOString() };
+    state.decisions[id] = body;
+    progress(); index(); filters();
+    const status = $("card-status");
+    if (status) status.textContent = "Saving…";
+    while (state.saving[id]) await state.saving[id];
+    state.saving[id] = state.db.collection("decisions").doc(id).set(body)
+      .then(() => { const el = $("card-status"); if (el && state.current === name) el.textContent = "Saved"; $("save-status").textContent = "Decisions save automatically"; $("save-status").classList.remove("problem"); })
+      .catch((e) => {
+        if (e && e.code === "invalid_argument") { state.canWrite = false; record(); }
+        $("save-status").textContent = "Could not save the last decision. Try again in a moment.";
+        $("save-status").classList.add("problem");
+      })
+      .finally(() => { state.saving[id] = null; });
+  }
+
+  let noteTimer = null;
+  document.addEventListener("click", (event) => {
+    const col = event.target.closest("[data-col]");
+    if (col && col.dataset.col) { go(col.dataset.col); return; }
+    const filter = event.target.closest("[data-filter]");
+    if (filter) {
+      state.filter = filter.dataset.filter;
+      const shown = visibleOrder();
+      if (shown.length && !shown.includes(state.current)) state.current = shown[0];
+      filters(); index(); record(); return;
+    }
+    const choice = event.target.closest("[data-choice]");
+    if (choice && !choice.disabled) {
+      const current = state.decisions[docId(state.current)]?.decision;
+      const decision = current === choice.dataset.choice ? "" : choice.dataset.choice;
+      save(state.current, { decision, note: $("note-input")?.value || "" }).then(record);
+      record();
+    }
+  });
+  document.addEventListener("input", (event) => {
+    if (event.target.id !== "note-input") return;
+    const name = state.current, value = event.target.value;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => save(name, { note: value }), 900);
+  });
+  $("column-picker").addEventListener("change", (event) => go(event.target.value));
+  document.addEventListener("keydown", (event) => {
+    if (event.target.closest("textarea, input, select")) return;
+    const shown = visibleOrder();
+    const position = shown.indexOf(state.current);
+    if (event.key === "ArrowRight" && shown[position + 1]) go(shown[position + 1]);
+    if (event.key === "ArrowLeft" && shown[position - 1]) go(shown[position - 1]);
+  });
+
+  const tip = $("tip");
+  document.addEventListener("mousemove", (event) => {
+    const target = event.target.closest("[data-tip]");
+    if (!target) { tip.hidden = true; return; }
+    tip.textContent = target.dataset.tip;
+    tip.hidden = false;
+    tip.style.left = `${Math.min(event.clientX + 12, innerWidth - 310)}px`;
+    tip.style.top = `${event.clientY + 14}px`;
+  });
+
+  function exportText() {
+    return order.map((name) => {
+      const card = byName.get(name);
+      const saved = state.decisions[docId(name)] || {};
+      const mine = saved.decision ? CHOICES.find((c) => c[0] === saved.decision)[1] : "not decided";
+      return `${card.label} (${name}) | you: ${mine} | Claude suggested: ${VERDICT[card.suggestion.verdict]}${saved.note ? " | note: " + saved.note.replace(/\s+/g, " ") : ""}`;
+    }).join("\n");
+  }
+  $("copy-all").addEventListener("click", () => {
+    const text = exportText();
+    const fallback = () => { $("export-panel").hidden = false; $("export-text").value = text; $("export-text").select(); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { $("save-status").textContent = "Copied all decisions"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  $("export-close").addEventListener("click", () => { $("export-panel").hidden = true; });
+
+  const hash = decodeURIComponent(location.hash.slice(1));
+  if (byName.has(hash)) state.current = hash;
+  datasetLine(); guide(); renderAll();
+
+  (async () => {
+    const db = await window.claude?.use?.("db");
+    const user = await window.claude?.use?.("user");
+    if (!db) {
+      state.canWrite = false; record();
+      $("save-status").textContent = "Decisions can't be saved in this view. Open the page signed in to claude.ai.";
+      $("save-status").classList.add("problem");
+      return;
+    }
+    state.db = db;
+    state.uid = user ? await user.id() : null;
+    const may = user ? await user.can("data.write") : null;
+    if (may === false) state.canWrite = false;
+    db.collection("decisions").onSnapshot((snap) => {
+      const next = {};
+      snap.docs.forEach((d) => { if (d.exists) next[d.id] = d.data(); });
+      state.decisions = next;
+      $("save-status").textContent = state.canWrite ? "Decisions save automatically" : "Read-only: you can see decisions but not change them";
+      filters(); index(); progress();
+      if (document.activeElement?.id !== "note-input") record();
+    }, () => {
+      $("save-status").textContent = "Lost the connection to saved decisions. Reload the page.";
+      $("save-status").classList.add("problem");
+    });
+  })();
+})();
+</script>

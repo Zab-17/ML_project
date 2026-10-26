@@ -9,3 +9,7 @@ properties_2017.csv
 *.bbl
 *.blg
 data/raw/
+
+# King County model matrices: rebuilt by king_county/kc_features/pipeline.py
+king_county/**/*.npy
+king_county/**/*.npz

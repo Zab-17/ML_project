@@ -1,0 +1,85 @@
+dropped column,with label,closest chosen feature,closest chosen feature value,second look
+Major,0.661934254890139,miles north,0.9984810794417577,False
+PropertyType,0.5338780085153297,years since 2000,0.7543154694536558,False
+ZipCode,0.531335911710995,miles north,0.9273263264990733,False
+LevyCode,0.5199558471365816,city,0.9996197307932191,False
+SaleInstrument,0.49664627757844454,years since 2000,0.6664340659492067,True
+CurrentZoning,0.4732192940665246,city,0.8352216374137995,False
+SqFt2ndFloor,0.38080534798098997,above-ground living area (log),0.7891905887410627,False
+SqFt1stFloor,0.33919912281731684,above-ground living area (log),0.6243893388632801,True
+SellerName,0.27548383405430427,year built,0.42422021924582065,True
+DirectionSuffix,0.2282825179564413,area + sub-area,0.6718176117361926,True
+DirectionPrefix,0.19170501650788954,area + sub-area,0.5778539742455109,True
+ViewUtilization,0.1309619702452546,area + sub-area,0.3192752376215749,False
+SqFtUpperFloor,0.10766249820649702,stories,0.392911579201694,False
+DaylightBasement,0.09834937681440295,finished basement,0.5929508545033193,False
+AddnlCost,0.08910929988576402,appraisal area,0.1618129647782501,False
+PlatBlock (parcel file),0.08593645546424426,miles east,0.5194394894977218,False
+PropName,0.08354456087932251,present use,0.3477686521505048,False
+PlatLot (parcel file),0.07770803096663002,lot area (log),0.4384116203240972,False
+SqFtHalfFloor,0.060452387900104224,year built,-0.3360049722254339,False
+BrickStone,0.0574715332158437,area + sub-area,0.30788801436498003,False
+RecordingNbr,0.0514342364451795,years since 2000,0.0847356086537763,False
+WfntRestrictedAccess,0.0406685646764732,tidelands or shorelands,0.45680166503657016,False
+LotDepthFactor,0.036451371830066706,waterfront,0.42074343878702175,False
+RestrictiveSzShape,0.03506541053289959,area + sub-area,0.1756625885690561,False
+HBUAsIfVacant,0.02897192289929473,present use,0.2608569498631174,False
+Address,0.027764618214716343,subdivision,0.6199981212738018,False
+BldgGradeVar,0.01992662244930474,open porch,0.027999916470159515,False
+Fraction,0.018834820216138793,lot area (log),0.4218230302498767,False
+WfntAccessRights,0.018229638323658835,subdivision,0.5904309871303306,False
+HBUAsImproved,0.0177497191400533,subdivision,0.16114253454993457,False
+CurrentUseDesignation,0.017451832739540013,private water supply,0.1233913804787305,False
+HistoricSite,0.01726844232072945,area + sub-area,0.14645336913166593,False
+AFForestLand,0.01625750464372833,years since 2000,0.08677363301518469,False
+AFHistoricProperty,0.01616630058159923,years since 2000,0.08659030830893956,False
+AFNonProfitUse,0.01598770580729998,years since 2000,0.0866803855928168,False
+WfntProximityInfluence,0.015818653910736308,area + sub-area,0.3630390011666533,False
+AFCurrentUseLand,0.01521458748614559,years since 2000,0.08660865540117868,False
+SqFtEnclosedPorch,0.012709756677815454,year built,-0.07285528031959612,False
+PcntComplete,0.011612455784737123,street name,0.03785216451234607,False
+WfntPoorQuality,0.011186409622422653,waterfront,0.28449803089391096,False
+NbrLivingUnits,0.009717497898573275,present use,0.7723681547921953,False
+PcntUnusable,0.009716865422165677,area + sub-area,0.1812155603306726,False
+PcntNetCondition,0.007975942155750175,city,0.04521877487773405,False
+NbrBldgSites,0.007313082613103577,subdivision,0.19409030237824912,False
+SqFtUnfinFull,0.0067839819481467145,lot area (log),0.02791409697380128,False
+Condition,-0.005414218536462412,year built,-0.42302984642701,False
+SqFtUnfinHalf,0.0009634850379780383,year built,-0.023492296974452497,False
+Obsolescence,0.0002947504504813815,other unfinished basement,0.021508285755560526,False
+OtherNuisances,0.0,subdivision,0.3024824050574556,False
+DevelopmentRightsPurch,0.0,area + sub-area,0.08930850917546146,False
+OtherProblems,0.0,area + sub-area,0.2847073078774695,False
+ExciseTaxNbr,0.0,years since 2000,0.0,False
+PropType,0.0,area + sub-area,0.039832342913067594,False
+BuildingNumber,0.0,waterfront bank,0.37470323538413014,False
+BuyerName,0.0,miles north,0.15400357993584557,False
+Minor,0.0,lot area (log),0.47123897637442286,False
+Contamination,0.0,city,0.05755158800874926,False
+Volume,,,,False
+Page,,,,False
+PlatNbr,,,,False
+PlatType,,,,False
+PlatLot,,,,False
+PlatBlock,,,,False
+PrincipalUse,,,,False
+SaleReason,,,,False
+PropertyClass,,,,False
+SaleWarning,,,,False
+BldgNbr,,,,False
+SpecArea,,,,False
+SpecSubArea,,,,False
+Unbuildable,,,,False
+TranspConcurrency,,,,False
+HundredYrFloodPlain,,,,False
+SeismicHazard,,,,False
+LandslideHazard,,,,False
+SteepSlopeHazard,,,,False
+ErosionHazard,,,,False
+CoalMineHazard,,,,False
+CriticalDrainage,,,,False
+LandfillBuffer,,,,False
+Stream,,,,False
+Wetland,,,,False
+SpeciesOfConcern,,,,False
+SensitiveAreaTract,,,,False

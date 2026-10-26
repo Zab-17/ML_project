@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-24T09:58:00Z",
+  "by": "chat",
+  "column": "Minor",
+  "decision": "remove",
+  "note": "Decided in chat on 24 Oct: removed as a model input, but kept in the data as the key that joins the files and splits train and test by home."
+}

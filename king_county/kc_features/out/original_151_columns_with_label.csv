@@ -1,0 +1,152 @@
+column,plain name,file,kind,measure kind,decision,with label,strongest partner,strongest partner value
+SalePrice,Sale price,sales,label: money (US dollars),number,label,0.8494085923017786,Major,0.6186573950948633
+Major,Parcel number (first half),sales,identifier,category,dropped,0.661934254890139,PlatName,0.9989401198823049
+DocumentDate,Sale date,sales,date,number,used by a chosen feature,0.6408055079751591,PropertyType,0.7543154694536558
+PlatName,Subdivision name,parcel,location code (text),category,used by a chosen feature,0.6342363379591888,Major,0.9989401198823049
+BldgGrade,Building grade (1 cabin to 13 mansion),building,ordered grade (1 to 13),number,used by a chosen feature,0.5978941841117519,Major,0.7934121439947336
+SqFtTotLiving,Total living area,building,area (square feet),number,used by a chosen feature,0.584236958968323,BldgGrade,0.7440679691629113
+Area,Appraisal area,parcel,location code,category,used by a chosen feature,0.562064515391727,Major,0.9711767275899906
+PropertyType,Property type on the sale form,sales,category code,category,dropped,0.5338780085153297,DocumentDate,0.7543154694536558
+ZipCode,ZIP code,parcel,location code,category,dropped,0.531335911710995,Township,0.7933255802303908
+LevyCode,Tax district code,parcel,location code,category,dropped,0.5199558471365816,DistrictName,0.9996197307932191
+SaleInstrument,Deed type,sales,category code (used in the filter),category,dropped,0.49664627757844454,PropertyType,0.7532017101309537
+CurrentZoning,Zoning code,parcel,category code (text),category,dropped,0.4732192940665246,DistrictName,0.8352216374137995
+DistrictName,City,parcel,location code,category,used by a chosen feature,0.459282449564529,LevyCode,0.9996197307932191
+Township,Survey grid: township,parcel,location grid,category,used by a chosen feature,0.4288529112152949,Major,0.9848023494668001
+SqFt2ndFloor,Second-floor area,building,area (square feet),number,dropped,0.38080534798098997,Stories,0.7584035086781341
+StreetName,Street name,parcel,address part,category,used by a chosen feature,0.3408504711261549,StreetType,0.7482293364100416
+SqFt1stFloor,First-floor area,building,area (square feet),number,dropped,0.33919912281731684,Major,0.7168411317436275
+BathFullCount,Full bathrooms,building,count,number,used by a chosen feature,0.30815259754489693,SqFtTotLiving,0.5601261791020231
+Bedrooms,Bedrooms,building,count,number,used by a chosen feature,0.30460254597288994,SqFtTotLiving,0.6224442638781815
+Stories,Number of stories,building,count,number,used by a chosen feature,0.2969046245337913,SqFt2ndFloor,0.7584035086781341
+HeatSystem,Heating system,building,category code,category,used by a chosen feature,0.28095151330151125,Address,0.6174869713614034
+SellerName,Seller's name,sales,personal name,category,dropped,0.27548383405430427,Contamination,0.4374798327093279
+SqFtOpenPorch,Open porch area,building,area (square feet),number,used by a chosen feature,0.270888779939842,Major,0.40624978717310545
+Territorial,View: open land,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.23972252713536948,Major,0.6248453068744738
+SqFtFinBasement,Finished basement area,building,area (square feet),number,used by a chosen feature,0.23661013669474643,SqFtTotBasement,0.8846676486582113
+Bath3qtrCount,Three-quarter bathrooms,building,count,number,used by a chosen feature,0.2355250879023378,Major,0.3942758066826259
+DirectionSuffix,Direction after the street name,parcel,address part,category,dropped,0.2282825179564413,Major,0.7694904554385936
+SqFtTotBasement,Total basement area,building,area (square feet),number,used by a chosen feature,0.21407223741137582,SqFtFinBasement,0.8846676486582113
+FinBasementGrade,Finished basement grade,building,ordered grade (same scale as BldgGrade),number,used by a chosen feature,0.20868686240684595,SqFtTotBasement,0.827280982105018
+SubArea,Appraisal sub-area,parcel,location code,category,used by a chosen feature,0.20109750254966513,Major,0.959787043601537
+LakeWashington,View: Lake Washington,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.198096176120314,Major,0.7056194218619306
+BathHalfCount,Half bathrooms,building,count,number,used by a chosen feature,0.19219131576667417,SqFt2ndFloor,0.47754563160504654
+DirectionPrefix,Direction before the street name,parcel,address part,category,dropped,0.19170501650788954,Major,0.7139414656816799
+SqFtDeck,Deck area,building,area (square feet),number,used by a chosen feature,0.18195912699239924,Major,0.36264379791328355
+SqFtGarageAttached,Attached garage area,building,area (square feet),number,used by a chosen feature,0.1784608108394403,Major,0.7190407244333203
+FpSingleStory,Single-story fireplaces,building,count,number,used by a chosen feature,0.16669942792568054,FpMultiStory,-0.4640032945550483
+YrBuilt,Year built,building,year,number,used by a chosen feature,0.1661753768602294,Major,0.7199897697044959
+FpMultiStory,Multi-story fireplaces,building,count,number,used by a chosen feature,0.15748869075589414,FpAdditional,0.5206234621554038
+WfntLocation,Waterfront: which water,parcel,category code,category,used by a chosen feature,0.15083441434251102,SmallLakeRiverCreek,0.747748428488372
+Olympics,View: Olympic Mountains,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.13861705191556445,Major,0.6487976618510776
+Topography,Hilly or uneven lot,parcel,flag (0/1),number,used by a chosen feature,0.13274241466481962,Major,0.5499369845826894
+YrRenovated,Year renovated,building,year (0 = never),category,used by a chosen feature,0.13219610904611748,Address,0.6194322777849163
+ViewUtilization,House designed for its view,parcel,flag (Y/N),category,dropped,0.1309619702452546,Address,0.6192707244473071
+TidelandShoreland,Tidelands ownership,parcel,category code,category,used by a chosen feature,0.11837921503002227,Address,0.6042893813950041
+WfntBank,Waterfront bank height,parcel,category code,category,used by a chosen feature,0.1172397551985302,WfntFootage,0.6866488249949187
+PugetSound,View: Puget Sound,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.11658191772857542,Major,0.7205867411506316
+SeattleSkyline,View: Seattle skyline,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.11485691865500815,Major,0.5989969540052658
+AirportNoise,Airport noise,parcel,number,number,used by a chosen feature,-0.11386494464366974,Major,0.9701326235346024
+Section,Survey grid: section,parcel,location grid,category,used by a chosen feature,0.11145105017298274,Major,0.961040954664925
+HeatSource,Heating fuel,building,category code,category,used by a chosen feature,0.10859030574907509,Address,0.6166517116241724
+SqFtUpperFloor,Upper-floor area,building,area (square feet),number,dropped,0.10766249820649702,Major,0.42217197724134337
+StreetType,Street type,parcel,address part,category,used by a chosen feature,0.10755440342439555,StreetName,0.7482293364100416
+Cascades,View: Cascade Mountains,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.10562239603430468,Major,0.5722453020457373
+LakeSammamish,View: Lake Sammamish,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.10121438395516555,Major,0.7284120881165598
+FpAdditional,Additional fireplace openings,building,count,number,used by a chosen feature,0.10040516192034596,FpMultiStory,0.5206234621554038
+SqFtLot,Lot area,parcel,area (square feet),number,used by a chosen feature,0.09959675860007158,Major,0.6748714361879966
+DaylightBasement,Basement with windows,building,flag (Y/N),category,dropped,0.09834937681440295,FinBasementGrade,0.6832378300742616
+Range,Survey grid: range,parcel,location grid,category,used by a chosen feature,0.09524137601524386,Major,0.9793660191358152
+AddnlCost,Additional cost,building,money (US dollars),number,dropped,0.08910929988576402,Area,0.1618129647782501
+PlatBlock (parcel file),Block number (parcel record),parcel,identifier,category,dropped,0.08593645546424426,Address,0.6198556236937165
+PropName,Property name,parcel,text,category,dropped,0.08354456087932251,Contamination,0.7282846966312697
+WfntFootage,Waterfront length,parcel,length (feet),number,used by a chosen feature,0.07979564090717749,WfntLocation,0.7204560992178782
+PlatLot (parcel file),Lot number (parcel record),parcel,identifier,category,dropped,0.07770803096663002,Address,0.6146315920081588
+AdjacentGreenbelt,Next to a green belt,parcel,flag (Y/N),category,used by a chosen feature,0.07030552437745909,Major,0.6201572857021262
+Access,Road access,parcel,category code,category,used by a chosen feature,0.06846393813708863,Address,0.619408248023172
+SqFtGarageBasement,Basement garage area,building,area (square feet),number,used by a chosen feature,0.0648454846814126,SqFtTotBasement,0.5314609155837172
+OtherView,View: other,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.06366289736284599,Major,0.5765567074977683
+SqFtHalfFloor,Half-floor area,building,area (square feet),number,dropped,0.060452387900104224,YrBuilt,-0.3360049722254339
+BrickStone,Percent brick or stone outside,building,percent,number,dropped,0.0574715332158437,Major,0.3816255295361984
+PresentUse,Present use (the property type),parcel,category code,category,used by a chosen feature,0.05640973776624801,NbrLivingUnits,0.8374678237261324
+FpFreestanding,Freestanding fireplaces or stoves,building,count,number,used by a chosen feature,-0.05581964528193899,Major,0.20146743202532882
+RecordingNbr,Deed recording number,sales,identifier,category,dropped,0.0514342364451795,Contamination,0.16273396193569895
+MtRainier,View: Mount Rainier,parcel,ordered rating (0 to 4),number,used by a chosen feature,0.04531297489841881,Major,0.5274083730926732
+Easements,Easement on the land,parcel,flag (Y/N),category,used by a chosen feature,0.04428530687387554,Address,0.619364335810281
+SmallLakeRiverCreek,"View: small lake, river or creek",parcel,ordered rating (0 to 4),number,used by a chosen feature,0.04273875462214396,WfntLocation,0.747748428488372
+AdjacentGolfFairway,Next to a golf course,parcel,flag (Y/N),category,used by a chosen feature,0.041953440141169314,PlatName,0.6858965283993147
+WfntRestrictedAccess,Restricted waterfront access,parcel,category code,category,dropped,0.0406685646764732,Address,0.6177279789993654
+LotDepthFactor,Lot depth factor,parcel,percent,number,dropped,0.036451371830066706,StreetName,0.7096448935359008
+RestrictiveSzShape,Lot too small or oddly shaped,parcel,flag (0/1),number,dropped,0.03506541053289959,OtherNuisances,0.18858856804723703
+NativeGrowthProtEsmt,Protected native-plants strip,parcel,flag (Y/N),category,used by a chosen feature,0.03216744290833184,Address,0.619421527344698
+InadequateParking,Parking adequate or not,parcel,category code,category,used by a chosen feature,0.030274066694064353,Major,0.679451653793019
+HBUAsIfVacant,Best use if the land were empty,parcel,category code,category,dropped,0.02897192289929473,Address,0.6194250039524752
+StreetSurface,Street surface,parcel,category code,category,used by a chosen feature,0.028159053225112512,Address,0.6192170498081879
+Address,Full address,parcel,address (text),category,dropped,0.027764618214716343,BuildingNumber,0.6422240687615243
+WaterSystem,Water supply,parcel,category code,category,used by a chosen feature,0.02742943700148344,Major,0.6803728878652978
+QuarterSection,Survey grid: quarter section,parcel,location grid,category,used by a chosen feature,0.025727456899766413,Major,0.8774164735271396
+OtherDesignation,Other legal designation,parcel,flag (Y/N),category,used by a chosen feature,0.02544878657229604,Major,0.8639430771457614
+BldgGradeVar,Grade adjustment,building,number,number,dropped,0.01992662244930474,SalePrice,0.06849423835845748
+Fraction,Fraction in the house number,parcel,address part,category,dropped,0.018834820216138793,Address,0.6194535087425171
+WfntAccessRights,Rights to someone else's waterfront,parcel,flag (Y/N),category,dropped,0.018229638323658835,Major,0.911361715336561
+HBUAsImproved,Best use as it stands now,parcel,category code,category,dropped,0.0177497191400533,Address,0.6194237077371975
+CurrentUseDesignation,Farm or open-space tax programme,parcel,category code,category,dropped,0.017451832739540013,PropType,0.8878522112391024
+HistoricSite,Historic site,parcel,category code,category,dropped,0.01726844232072945,Address,0.6194222541396395
+AFForestLand,Sale form: forest land?,sales,flag (Y/N),category,dropped,0.01625750464372833,AFCurrentUseLand,0.8166366165825593
+AFHistoricProperty,Sale form: historic property?,sales,flag (Y/N),category,dropped,0.01616630058159923,AFCurrentUseLand,0.8164507112690029
+AFNonProfitUse,Sale form: non-profit use?,sales,flag (Y/N),category,dropped,0.01598770580729998,AFCurrentUseLand,0.816694442191707
+WfntProximityInfluence,Near water but not on it,parcel,flag (Y/N),category,dropped,0.015818653910736308,Address,0.6194215273446981
+AFCurrentUseLand,Sale form: farm or open-space programme?,sales,flag (Y/N),category,dropped,0.01521458748614559,AFNonProfitUse,0.816694442191707
+SqFtEnclosedPorch,Enclosed porch area,building,area (square feet),number,dropped,0.012709756677815454,YrBuilt,-0.07285528031959612
+PcntComplete,Percent complete,building,percent,number,dropped,0.011612455784737123,LevyCode,0.08004094532788454
+WfntPoorQuality,Poor-quality waterfront,parcel,flag (0/1),number,dropped,0.011186409622422653,Major,0.3096550759814399
+SewerSystem,Sewer type,parcel,category code,category,used by a chosen feature,0.010795285164497063,Address,0.6194237077371976
+PowerLines,Power lines nearby,parcel,flag (Y/N),category,used by a chosen feature,0.010443777446070108,Address,0.6193021230763806
+NbrLivingUnits,Number of living units,building,count,number,dropped,0.009717497898573275,PresentUse,0.8374678237261324
+PcntUnusable,Percent of lot unusable,parcel,percent,number,dropped,0.009716865422165677,PlatName,0.2728067899158796
+DNRLease,Land leased from the state,parcel,flag (Y/N),category,used by a chosen feature,0.009492751501904977,Major,0.796550344488471
+PcntNetCondition,Percent net condition,building,percent,number,dropped,0.007975942155750175,ZipCode,0.04541300264333341
+NbrBldgSites,Number of building sites,parcel,count,number,dropped,0.007313082613103577,ZipCode,0.042112267437012116
+WaterProblems,Water problems,parcel,flag (Y/N),category,used by a chosen feature,0.0070687627131732385,Address,0.6194215273446981
+SqFtUnfinFull,Unfinished full-floor area,building,area (square feet),number,dropped,0.0067839819481467145,SqFt1stFloor,0.035576819989599946
+Condition,House condition (poor to very good),building,ordered grade (1 to 5),number,dropped,-0.005414218536462412,YrBuilt,-0.4230298464270103
+TrafficNoise,Traffic noise,parcel,ordered rating (0 to 3),number,used by a chosen feature,-0.0049115917119952526,Major,0.47628006083889296
+SqFtUnfinHalf,Unfinished half-floor area,building,area (square feet),number,dropped,0.0009634850379780383,SqFtHalfFloor,0.09439290175412603
+Obsolescence,Obsolescence,building,percent,number,dropped,0.0002947504504813815,OtherProblems,0.018112456389868067
+Minor,Parcel number (second half),sales,identifier,category,dropped,0.0,Address,0.6230261311694274
+DevelopmentRightsPurch,Development rights sold,parcel,flag (Y/N),category,dropped,0.0,Address,0.6194215273446981
+OtherProblems,Other problems,parcel,flag (Y/N),category,dropped,0.0,Address,0.6194215273446981
+BuildingNumber,House number,parcel,address part,category,dropped,0.0,Address,0.6422240687615243
+PropType,Parcel property type,parcel,category code,category,dropped,0.0,CurrentUseDesignation,0.8878522112391024
+DeedRestrictions,Deed restrictions,parcel,flag (Y/N),category,used by a chosen feature,0.0,Address,0.6194215273446981
+OtherNuisances,Other nuisances,parcel,flag (Y/N),category,dropped,0.0,Address,0.6190000790855361
+ExciseTaxNbr,Sale form number,sales,identifier,category,dropped,0.0,SalePrice,0.0
+BuyerName,Buyer's name,sales,personal name,category,dropped,0.0,Contamination,0.20999740019195962
+Contamination,Contaminated land,parcel,category code,category,dropped,0.0,PropName,0.7282846966312697
+Volume,Old record book volume,sales,identifier,category,dropped,,,
+Page,Old record book page,sales,identifier,category,dropped,,,
+PlatNbr,Subdivision map number (sale record),sales,identifier,category,dropped,,,
+PlatType,Subdivision map type (sale record),sales,category code,category,dropped,,,
+PlatLot,Lot number (sale record),sales,identifier,category,dropped,,,
+PlatBlock,Block number (sale record),sales,identifier,category,dropped,,,
+PrincipalUse,Principal use (sale filter),sales,category code (used in the filter),category,dropped,,,
+SaleReason,Sale reason (sale filter),sales,category code (used in the filter),category,dropped,,,
+PropertyClass,Property class (sale filter),sales,category code (used in the filter),category,dropped,,,
+SaleWarning,Sale warnings (sale filter),sales,category code (used in the filter),category,dropped,,,
+BldgNbr,Building number on the lot,building,identifier,category,dropped,,,
+SpecArea,Special appraisal area,parcel,location code,category,dropped,,,
+SpecSubArea,Special appraisal sub-area,parcel,location code,category,dropped,,,
+Unbuildable,Lot can't be built on,parcel,flag (True/False),category,dropped,,,
+TranspConcurrency,Road capacity problems,parcel,flag (Y/N),category,dropped,,,
+HundredYrFloodPlain,Flood zone,parcel,flag (Y/N),category,dropped,,,
+SeismicHazard,Earthquake zone,parcel,flag (Y/N),category,dropped,,,
+LandslideHazard,Landslide zone,parcel,flag (Y/N),category,dropped,,,
+SteepSlopeHazard,Steep slope,parcel,flag (Y/N),category,dropped,,,
+ErosionHazard,Erosion zone,parcel,flag (Y/N),category,dropped,,,
+CoalMineHazard,Old coal mine area,parcel,flag (Y/N),category,dropped,,,
+CriticalDrainage,Critical drainage area,parcel,flag (Y/N),category,dropped,,,
+LandfillBuffer,Near a landfill,parcel,flag (Y/N),category,dropped,,,
+Stream,Stream,parcel,flag (Y/N),category,dropped,,,
+Wetland,Wetland,parcel,flag (Y/N),category,dropped,,,
+SpeciesOfConcern,Protected species habitat,parcel,flag (Y/N),category,dropped,,,
+SensitiveAreaTract,Sensitive area,parcel,flag (Y/N),category,dropped,,,
