@@ -1,0 +1,314 @@
+decision tree | {"smallest_leaf": 1} | fold 0 | validation MSE (log) 0.7242 | 178 s
+decision tree | {"smallest_leaf": 5} | fold 0 | validation MSE (log) 0.5312 | 165 s
+decision tree | {"smallest_leaf": 20} | fold 0 | validation MSE (log) 0.4320 | 153 s
+decision tree | {"smallest_leaf": 50} | fold 0 | validation MSE (log) 0.4127 | 142 s
+decision tree | {"smallest_leaf": 200} | fold 0 | validation MSE (log) 0.4134 | 121 s
+decision tree | {"smallest_leaf": 1} | fold 1 | validation MSE (log) 0.7213 | 181 s
+decision tree | {"smallest_leaf": 5} | fold 1 | validation MSE (log) 0.5309 | 169 s
+decision tree | {"smallest_leaf": 20} | fold 1 | validation MSE (log) 0.4328 | 156 s
+decision tree | {"smallest_leaf": 50} | fold 1 | validation MSE (log) 0.4139 | 144 s
+decision tree | {"smallest_leaf": 200} | fold 1 | validation MSE (log) 0.4130 | 123 s
+decision tree | {"smallest_leaf": 1} | fold 2 | validation MSE (log) 0.7263 | 179 s
+decision tree | {"smallest_leaf": 5} | fold 2 | validation MSE (log) 0.5323 | 167 s
+decision tree | {"smallest_leaf": 20} | fold 2 | validation MSE (log) 0.4358 | 154 s
+decision tree | {"smallest_leaf": 50} | fold 2 | validation MSE (log) 0.4148 | 144 s
+decision tree | {"smallest_leaf": 200} | fold 2 | validation MSE (log) 0.4148 | 122 s
+decision tree | {"smallest_leaf": 1} | fold 3 | validation MSE (log) 0.7246 | 173 s
+decision tree | {"smallest_leaf": 5} | fold 3 | validation MSE (log) 0.5292 | 161 s
+decision tree | {"smallest_leaf": 20} | fold 3 | validation MSE (log) 0.4307 | 150 s
+decision tree | {"smallest_leaf": 50} | fold 3 | validation MSE (log) 0.4121 | 140 s
+decision tree | {"smallest_leaf": 200} | fold 3 | validation MSE (log) 0.4115 | 121 s
+decision tree | {"smallest_leaf": 1} | fold 4 | validation MSE (log) 0.7249 | 180 s
+decision tree | {"smallest_leaf": 5} | fold 4 | validation MSE (log) 0.5314 | 166 s
+decision tree | {"smallest_leaf": 20} | fold 4 | validation MSE (log) 0.4349 | 155 s
+decision tree | {"smallest_leaf": 50} | fold 4 | validation MSE (log) 0.4149 | 148 s
+decision tree | {"smallest_leaf": 200} | fold 4 | validation MSE (log) 0.4152 | 139 s
+decision tree winner: {"smallest_leaf": 200}, average validation MSE (log) 0.4136
+decision tree | {"smallest_leaf": 200} | trained on 2,287,442 sales in 937 s | test MSE (log) 0.4109, median % off 34.74
+model         neural network  linear regression  decision tree  median baseline  average baseline
+R2 (log)              0.4673             0.4361         0.4124          -0.0039           -0.1836
+MSE (log)             0.3725             0.3944         0.4109           0.7021            0.8278
+RMSE (log)            0.6104             0.6280         0.6410           0.8379            0.9098
+MAE (log)             0.4653             0.4813         0.4906           0.6386            0.6909
+R2 ($)                0.5694             0.4902         0.4541          -0.0359           -0.0000
+RMSE ($)         405642.6014        441384.8124    456739.8550      629191.6444       618191.7764
+MAE ($)          172804.5054        181366.6534    186468.9012      255151.7007       276016.5005
+median $ off     109816.5581        115415.2411    116206.5628      152042.0000       202976.8452
+MAPE (%)             59.2182            62.0116        62.2164          91.1003          129.5607
+median % off         32.4789            33.8152        34.7420          45.3729           53.8172
+within 5%             7.9436             7.4621         7.4212           5.5104            5.5162
+within 10%           15.8285            14.9372        14.8961          11.1620           10.7556
+within 20%           31.6280            30.0273        29.5870          22.3021           20.8855
+random forest | {"column_share": "sqrt"} | fold 0 | validation MSE (log) 0.3827 | 126 s
+random forest | {"column_share": 0.1} | fold 0 | validation MSE (log) 0.3794 | 171 s
+random forest | {"column_share": 0.33} | fold 0 | validation MSE (log) 0.3854 | 415 s
+random forest | {"column_share": "sqrt"} | fold 1 | validation MSE (log) 0.3828 | 111 s
+random forest | {"column_share": 0.1} | fold 1 | validation MSE (log) 0.3797 | 151 s
+random forest | {"column_share": 0.33} | fold 1 | validation MSE (log) 0.3856 | 402 s
+random forest | {"column_share": "sqrt"} | fold 2 | validation MSE (log) 0.3842 | 99 s
+random forest | {"column_share": 0.1} | fold 2 | validation MSE (log) 0.3809 | 155 s
+random forest | {"column_share": 0.33} | fold 2 | validation MSE (log) 0.3872 | 388 s
+random forest | {"column_share": "sqrt"} | fold 3 | validation MSE (log) 0.3817 | 98 s
+random forest | {"column_share": 0.1} | fold 3 | validation MSE (log) 0.3784 | 151 s
+random forest | {"column_share": 0.33} | fold 3 | validation MSE (log) 0.3847 | 399 s
+random forest | {"column_share": "sqrt"} | fold 4 | validation MSE (log) 0.3843 | 99 s
+random forest | {"column_share": 0.1} | fold 4 | validation MSE (log) 0.3811 | 152 s
+random forest | {"column_share": 0.33} | fold 4 | validation MSE (log) 0.3876 | 396 s
+random forest winner: {"column_share": 0.1}, average validation MSE (log) 0.3799
+random forest winner: {"column_share": 0.1}, average validation MSE (log) 0.3799
+random forest | {"column_share": 0.1} | trained on 2,287,442 sales in 1283 s | test MSE (log) 0.3788, median % off 32.62
+model         neural network  random forest  linear regression  decision tree  median baseline  average baseline
+R2 (log)              0.4673         0.4584             0.4361         0.4124          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788             0.3944         0.4109           0.7021            0.8278
+RMSE (log)            0.6104         0.6155             0.6280         0.6410           0.8379            0.9098
+MAE (log)             0.4653         0.4677             0.4813         0.4906           0.6386            0.6909
+R2 ($)                0.5694         0.4949             0.4902         0.4541          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128        441384.8124    456739.8550      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718        181366.6534    186468.9012      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277        115415.2411    116206.5628      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554            62.0116        62.2164          91.1003          129.5607
+median % off         32.4789        32.6248            33.8152        34.7420          45.3729           53.8172
+within 5%             7.9436         8.1273             7.4621         7.4212           5.5104            5.5162
+within 10%           15.8285        16.1641            14.9372        14.8961          11.1620           10.7556
+within 20%           31.6280        31.6675            30.0273        29.5870          22.3021           20.8855
+bagging | {} | fold 0 | validation MSE (log) 0.3954 | 6096 s
+AdaBoost | {"tree_depth": 4} | fold 0 | validation MSE (log) 0.4953 | 282 s
+AdaBoost | {"tree_depth": 8} | fold 0 | validation MSE (log) 0.4857 | 881 s
+AdaBoost | {"tree_depth": 4} | fold 1 | validation MSE (log) 0.4925 | 1143 s
+AdaBoost | {"tree_depth": 8} | fold 1 | validation MSE (log) 0.4870 | 1650 s
+AdaBoost | {"tree_depth": 4} | fold 2 | validation MSE (log) 0.4993 | 896 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 0 | validation MSE (log) 0.7310 | 4627 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 0 | validation MSE (log) 0.4870 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 0 | validation MSE (log) 0.4396 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 0 | validation MSE (log) 0.4062 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 0 | validation MSE (log) 0.3955 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 0 | validation MSE (log) 0.3909 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 0 | validation MSE (log) 0.3868 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 0 | validation MSE (log) 0.3849 | 0 s
+AdaBoost | {"tree_depth": 8} | fold 2 | validation MSE (log) 0.4839 | 2084 s
+AdaBoost | {"tree_depth": 4} | fold 3 | validation MSE (log) 0.5119 | 727 s
+AdaBoost | {"tree_depth": 8} | fold 3 | validation MSE (log) 0.4885 | 2158 s
+AdaBoost | {"tree_depth": 4} | fold 4 | validation MSE (log) 0.5092 | 779 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 0 | validation MSE (log) 0.7309 | 6241 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 0 | validation MSE (log) 0.4882 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 0 | validation MSE (log) 0.4404 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 0 | validation MSE (log) 0.4064 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 0 | validation MSE (log) 0.3958 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 0 | validation MSE (log) 0.3911 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 0 | validation MSE (log) 0.3872 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 0 | validation MSE (log) 0.3855 | 0 s
+AdaBoost | {"tree_depth": 8} | fold 4 | validation MSE (log) 0.4763 | 1926 s
+AdaBoost winner: {"tree_depth": 8}, average validation MSE (log) 0.4843
+bagging | {} | fold 1 | validation MSE (log) 0.3956 | 13795 s
+AdaBoost | {"tree_depth": 8} | trained on 2,287,442 sales in 1821 s | test MSE (log) 0.4903, median % off 42.45
+model         neural network  random forest  linear regression  decision tree     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584             0.4361         0.4124       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788             0.3944         0.4109       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155             0.6280         0.6410       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677             0.4813         0.4906       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949             0.4902         0.4541       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128        441384.8124    456739.8550  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718        181366.6534    186468.9012  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277        115415.2411    116206.5628  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554            62.0116        62.2164      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248            33.8152        34.7420      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273             7.4621         7.4212       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641            14.9372        14.8961      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675            30.0273        29.5870      22.2707          22.3021           20.8855
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 0 | validation MSE (log) 0.4107 | 36 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 0 | validation MSE (log) 0.4108 | 35 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 0 | validation MSE (log) 0.4113 | 1947 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 1 | validation MSE (log) 0.7281 | 6216 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 1 | validation MSE (log) 0.4892 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 1 | validation MSE (log) 0.4416 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 1 | validation MSE (log) 0.4068 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 1 | validation MSE (log) 0.3961 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 1 | validation MSE (log) 0.3913 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 1 | validation MSE (log) 0.3871 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 1 | validation MSE (log) 0.3853 | 0 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 0 | validation MSE (log) 0.4105 | 904 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 1 | validation MSE (log) 0.4127 | 16 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 1 | validation MSE (log) 0.4123 | 16 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 1 | validation MSE (log) 0.4130 | 790 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 1 | validation MSE (log) 0.7282 | 36565 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 1 | validation MSE (log) 0.4897 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 1 | validation MSE (log) 0.4419 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 1 | validation MSE (log) 0.4073 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 1 | validation MSE (log) 0.3967 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 1 | validation MSE (log) 0.3917 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 1 | validation MSE (log) 0.3876 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 1 | validation MSE (log) 0.3860 | 0 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 1 | validation MSE (log) 0.4129 | 796 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 2 | validation MSE (log) 0.4132 | 18 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 2 | validation MSE (log) 0.4131 | 15 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 2 | validation MSE (log) 0.4134 | 870 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 2 | validation MSE (log) 0.7328 | 1791 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 2 | validation MSE (log) 0.4896 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 2 | validation MSE (log) 0.4418 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 2 | validation MSE (log) 0.4078 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 2 | validation MSE (log) 0.3970 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 2 | validation MSE (log) 0.3926 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 2 | validation MSE (log) 0.3883 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 2 | validation MSE (log) 0.3864 | 0 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 2 | validation MSE (log) 0.4135 | 853 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 3 | validation MSE (log) 0.4105 | 13 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 3 | validation MSE (log) 0.4107 | 11 s
+bagging | {} | fold 2 | validation MSE (log) 0.3977 | 43128 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 3 | validation MSE (log) 0.4110 | 739 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 2 | validation MSE (log) 0.7322 | 1751 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 2 | validation MSE (log) 0.4902 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 2 | validation MSE (log) 0.4423 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 2 | validation MSE (log) 0.4081 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 2 | validation MSE (log) 0.3975 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 2 | validation MSE (log) 0.3929 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 2 | validation MSE (log) 0.3889 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 2 | validation MSE (log) 0.3868 | 0 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 3 | validation MSE (log) 0.4107 | 1524 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.0} | fold 4 | validation MSE (log) 0.4133 | 24 s
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | fold 4 | validation MSE (log) 0.4132 | 23 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.0} | fold 4 | validation MSE (log) 0.4138 | 1584 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 3 | validation MSE (log) 0.7289 | 4223 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 3 | validation MSE (log) 0.4887 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 3 | validation MSE (log) 0.4407 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 3 | validation MSE (log) 0.4059 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 3 | validation MSE (log) 0.3950 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 3 | validation MSE (log) 0.3900 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 3 | validation MSE (log) 0.3855 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 3 | validation MSE (log) 0.3833 | 0 s
+support vector machine | {"margin_penalty": 1.0, "margin_width": 0.05} | fold 4 | validation MSE (log) 0.4131 | 1325 s
+support vector machine winner: {"margin_penalty": 0.01, "margin_width": 0.05}, average validation MSE (log) 0.4120
+support vector machine | {"margin_penalty": 0.01, "margin_width": 0.05} | trained on 2,287,442 sales in 37 s | test MSE (log) 0.4120, median % off 31.61
+model         neural network  random forest  linear regression  decision tree  support vector machine     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584             0.4361         0.4124                  0.4109       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788             0.3944         0.4109                  0.4120       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155             0.6280         0.6410                  0.6419       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677             0.4813         0.4906                  0.4693       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949             0.4902         0.4541                  0.4956       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128        441384.8124    456739.8550             439039.1982  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718        181366.6534    186468.9012             178052.6238  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277        115415.2411    116206.5628             113796.2334  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554            62.0116        62.2164                 69.8003      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248            33.8152        34.7420                 31.6133      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273             7.4621         7.4212                  8.1746       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641            14.9372        14.8961                 16.2881      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675            30.0273        29.5870                 32.2053      22.2707          22.3021           20.8855
+k-means clustering | {"clusters": 50} | fold 0 | validation MSE (log) 0.5053 | 10 s
+k-means clustering | {"clusters": 200} | fold 0 | validation MSE (log) 0.4788 | 18 s
+k-means clustering | {"clusters": 1000} | fold 0 | validation MSE (log) 0.4542 | 79 s
+k-means clustering | {"clusters": 50} | fold 1 | validation MSE (log) 0.5104 | 36 s
+k-means clustering | {"clusters": 200} | fold 1 | validation MSE (log) 0.4774 | 41 s
+k-means clustering | {"clusters": 1000} | fold 1 | validation MSE (log) 0.4537 | 129 s
+k-means clustering | {"clusters": 50} | fold 2 | validation MSE (log) 0.5123 | 33 s
+k-means clustering | {"clusters": 200} | fold 2 | validation MSE (log) 0.4813 | 5459 s
+k-means clustering | {"clusters": 1000} | fold 2 | validation MSE (log) 0.4554 | 86 s
+k-means clustering | {"clusters": 50} | fold 3 | validation MSE (log) 0.5053 | 12 s
+k-means clustering | {"clusters": 200} | fold 3 | validation MSE (log) 0.4733 | 12 s
+k-means clustering | {"clusters": 1000} | fold 3 | validation MSE (log) 0.4510 | 45 s
+k-means clustering | {"clusters": 50} | fold 4 | validation MSE (log) 0.5039 | 8 s
+k-means clustering | {"clusters": 200} | fold 4 | validation MSE (log) 0.4785 | 15 s
+k-means clustering | {"clusters": 1000} | fold 4 | validation MSE (log) 0.4561 | 63 s
+k-means clustering winner: {"clusters": 1000}, average validation MSE (log) 0.4541
+k-means clustering | {"clusters": 1000} | trained on 2,287,442 sales in 96 s | test MSE (log) 0.4532, median % off 34.58
+model         neural network  random forest  linear regression  decision tree  support vector machine  k-means clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584             0.4361         0.4124                  0.4109              0.3520       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788             0.3944         0.4109                  0.4120              0.4532       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155             0.6280         0.6410                  0.6419              0.6732       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677             0.4813         0.4906                  0.4693              0.5012       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949             0.4902         0.4541                  0.4956              0.3545       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128        441384.8124    456739.8550             439039.1982         496684.7559  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718        181366.6534    186468.9012             178052.6238         195298.6495  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277        115415.2411    116206.5628             113796.2334         121170.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554            62.0116        62.2164                 69.8003             71.8378      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248            33.8152        34.7420                 31.6133             34.5845      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273             7.4621         7.4212                  8.1746              7.5868       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641            14.9372        14.8961                 16.2881             15.0736      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675            30.0273        29.5870                 32.2053             29.7896      22.2707          22.3021           20.8855
+hierarchical clustering | {"clusters": 50} | fold 0 | validation MSE (log) 0.5103 | 39 s
+hierarchical clustering | {"clusters": 200} | fold 0 | validation MSE (log) 0.4769 | 37 s
+hierarchical clustering | {"clusters": 1000} | fold 0 | validation MSE (log) 0.4555 | 47 s
+hierarchical clustering | {"clusters": 50} | fold 1 | validation MSE (log) 0.5066 | 40 s
+hierarchical clustering | {"clusters": 200} | fold 1 | validation MSE (log) 0.4776 | 39 s
+hierarchical clustering | {"clusters": 1000} | fold 1 | validation MSE (log) 0.4565 | 48 s
+hierarchical clustering | {"clusters": 50} | fold 2 | validation MSE (log) 0.5058 | 36 s
+hierarchical clustering | {"clusters": 200} | fold 2 | validation MSE (log) 0.4798 | 38 s
+hierarchical clustering | {"clusters": 1000} | fold 2 | validation MSE (log) 0.4577 | 46 s
+hierarchical clustering | {"clusters": 50} | fold 3 | validation MSE (log) 0.5028 | 37 s
+hierarchical clustering | {"clusters": 200} | fold 3 | validation MSE (log) 0.4780 | 38 s
+hierarchical clustering | {"clusters": 1000} | fold 3 | validation MSE (log) 0.4540 | 50 s
+hierarchical clustering | {"clusters": 50} | fold 4 | validation MSE (log) 0.5100 | 38 s
+hierarchical clustering | {"clusters": 200} | fold 4 | validation MSE (log) 0.4788 | 38 s
+hierarchical clustering | {"clusters": 1000} | fold 4 | validation MSE (log) 0.4560 | 49 s
+hierarchical clustering winner: {"clusters": 1000}, average validation MSE (log) 0.4559
+hierarchical clustering | {"clusters": 1000} | trained on 2,287,442 sales in 48 s | test MSE (log) 0.4556, median % off 34.74
+model         neural network  random forest  linear regression  decision tree  support vector machine  k-means clustering  hierarchical clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584             0.4361         0.4124                  0.4109              0.3520                   0.3486       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788             0.3944         0.4109                  0.4120              0.4532                   0.4556       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155             0.6280         0.6410                  0.6419              0.6732                   0.6750       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677             0.4813         0.4906                  0.4693              0.5012                   0.5025       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949             0.4902         0.4541                  0.4956              0.3545                   0.3499       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128        441384.8124    456739.8550             439039.1982         496684.7559              498450.8402  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718        181366.6534    186468.9012             178052.6238         195298.6495              195811.5929  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277        115415.2411    116206.5628             113796.2334         121170.0000              121387.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554            62.0116        62.2164                 69.8003             71.8378                  72.1263      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248            33.8152        34.7420                 31.6133             34.5845                  34.7374      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273             7.4621         7.4212                  8.1746              7.5868                   7.6472       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641            14.9372        14.8961                 16.2881             15.0736                  15.0913      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675            30.0273        29.5870                 32.2053             29.7896                  29.7664      22.2707          22.3021           20.8855
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 3 | validation MSE (log) 0.7284 | 7604 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 3 | validation MSE (log) 0.4888 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 3 | validation MSE (log) 0.4409 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 3 | validation MSE (log) 0.4061 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 3 | validation MSE (log) 0.3956 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 3 | validation MSE (log) 0.3907 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 3 | validation MSE (log) 0.3862 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 3 | validation MSE (log) 0.3841 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 4 | validation MSE (log) 0.7325 | 2500 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 4 | validation MSE (log) 0.4910 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 4 | validation MSE (log) 0.4440 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 4 | validation MSE (log) 0.4092 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 4 | validation MSE (log) 0.3982 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 4 | validation MSE (log) 0.3928 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 4 | validation MSE (log) 0.3883 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 4 | validation MSE (log) 0.3864 | 0 s
+bagging | {} | fold 3 | validation MSE (log) 0.3944 | 15027 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 4 | validation MSE (log) 0.7322 | 9823 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 4 | validation MSE (log) 0.4907 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 4 | validation MSE (log) 0.4442 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 4 | validation MSE (log) 0.4095 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 4 | validation MSE (log) 0.3985 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 4 | validation MSE (log) 0.3934 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 4 | validation MSE (log) 0.3889 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 4 | validation MSE (log) 0.3870 | 0 s
+k-nearest neighbours winner: {"distance": "euclidean", "k": 50}, average validation MSE (log) 0.3853
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | trained on 2,287,442 sales in 2715 s | test MSE (log) 0.3839, median % off 33.21
+model         neural network  random forest  k-nearest neighbours  linear regression  decision tree  support vector machine  k-means clustering  hierarchical clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584                0.4510             0.4361         0.4124                  0.4109              0.3520                   0.3486       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788                0.3839             0.3944         0.4109                  0.4120              0.4532                   0.4556       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155                0.6196             0.6280         0.6410                  0.6419              0.6732                   0.6750       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677                0.4733             0.4813         0.4906                  0.4693              0.5012                   0.5025       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949                0.5085             0.4902         0.4541                  0.4956              0.3545                   0.3499       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128           433415.9647        441384.8124    456739.8550             439039.1982         496684.7559              498450.8402  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718           176767.8268        181366.6534    186468.9012             178052.6238         195298.6495              195811.5929  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277           110531.0737        115415.2411    116206.5628             113796.2334         121170.0000              121387.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554               59.6218            62.0116        62.2164                 69.8003             71.8378                  72.1263      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248               33.2089            33.8152        34.7420                 31.6133             34.5845                  34.7374      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273                7.9072             7.4621         7.4212                  8.1746              7.5868                   7.6472       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641               15.6708            14.9372        14.8961                 16.2881             15.0736                  15.0913      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675               30.9170            30.0273        29.5870                 32.2053             29.7896                  29.7664      22.2707          22.3021           20.8855
+bagging | {} | fold 4 | validation MSE (log) 0.3980 | 13201 s
+bagging winner: {}, average validation MSE (log) 0.3962
+bagging | {} | trained on 2,287,442 sales in 6662 s | test MSE (log) 0.3953, median % off 33.20
+model         neural network  random forest  k-nearest neighbours  linear regression      bagging  decision tree  support vector machine  k-means clustering  hierarchical clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584                0.4510             0.4361       0.4348         0.4124                  0.4109              0.3520                   0.3486       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788                0.3839             0.3944       0.3953         0.4109                  0.4120              0.4532                   0.4556       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155                0.6196             0.6280       0.6287         0.6410                  0.6419              0.6732                   0.6750       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677                0.4733             0.4813       0.4762         0.4906                  0.4693              0.5012                   0.5025       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949                0.5085             0.4902       0.5428         0.4541                  0.4956              0.3545                   0.3499       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128           433415.9647        441384.8124  417992.7893    456739.8550             439039.1982         496684.7559              498450.8402  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718           176767.8268        181366.6534  176327.6371    186468.9012             178052.6238         195298.6495              195811.5929  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277           110531.0737        115415.2411  109641.5818    116206.5628             113796.2334         121170.0000              121387.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554               59.6218            62.0116      60.5025        62.2164                 69.8003             71.8378                  72.1263      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248               33.2089            33.8152      33.1955        34.7420                 31.6133             34.5845                  34.7374      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273                7.9072             7.4621       8.4232         7.4212                  8.1746              7.5868                   7.6472       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641               15.6708            14.9372      16.3253        14.8961                 16.2881             15.0736                  15.0913      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675               30.9170            30.0273      31.4577        29.5870                 32.2053             29.7896                  29.7664      22.2707          22.3021           20.8855

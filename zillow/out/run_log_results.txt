@@ -1,0 +1,46 @@
+===== all_test_results
+                                                                  model  R2 (log)  MSE (log)  RMSE (log)  MAE (log)  R2 ($)    RMSE ($)     MAE ($)  median $ off  MAPE (%)  median % off  within 5%  within 10%  within 20%
+                                                         neural network    0.4673     0.3725      0.6104     0.4653  0.5694 405642.6014 172804.5054   109816.5581   59.2182       32.4789     7.9436     15.8285     31.6280
+voting (average of neural network, random forest, k-nearest neighbours)    0.4665     0.3731      0.6108     0.4651  0.5265 425367.6187 173229.2638   109168.9431   58.9326       32.4582     8.0320     16.0961     31.7625
+                                                          random forest    0.4584     0.3788      0.6155     0.4677  0.4949 439367.4128 175025.3718   109589.0277   59.4554       32.6248     8.1273     16.1641     31.6675
+                                                   k-nearest neighbours    0.4510     0.3839      0.6196     0.4733  0.5085 433415.9647 176767.8268   110531.0737   59.6218       33.2089     7.9072     15.6708     30.9170
+                                                      linear regression    0.4361     0.3944      0.6280     0.4813  0.4902 441384.8124 181366.6534   115415.2411   62.0116       33.8152     7.4621     14.9372     30.0273
+                                                                bagging    0.4348     0.3953      0.6287     0.4762  0.5428 417992.7893 176327.6371   109641.5818   60.5025       33.1955     8.4232     16.3253     31.4577
+                                                          decision tree    0.4124     0.4109      0.6410     0.4906  0.4541 456739.8550 186468.9012   116206.5628   62.2164       34.7420     7.4212     14.8961     29.5870
+                                                 support vector machine    0.4109     0.4120      0.6419     0.4693  0.4956 439039.1982 178052.6238   113796.2334   69.8003       31.6133     8.1746     16.2881     32.2053
+                                                     k-means clustering    0.3520     0.4532      0.6732     0.5012  0.3545 496684.7559 195298.6495   121170.0000   71.8378       34.5845     7.5868     15.0736     29.7896
+                                                hierarchical clustering    0.3486     0.4556      0.6750     0.5025  0.3499 498450.8402 195811.5929   121387.0000   72.1263       34.7374     7.6472     15.0913     29.7664
+                                                               AdaBoost    0.2989     0.4903      0.7002     0.5715  0.3871 483984.3897 212253.5982   127382.0309   59.2743       42.4468     5.3917     10.9387     22.2707
+                                                        median baseline   -0.0039     0.7021      0.8379     0.6386 -0.0359 629191.6444 255151.7007   152042.0000   91.1003       45.3729     5.5104     11.1620     22.3021
+                                                       average baseline   -0.1836     0.8278      0.9098     0.6909 -0.0000 618191.7764 276016.5005   202976.8452  129.5607       53.8172     5.5162     10.7556     20.8855
+===== top_one_percent
+                                                                  model  top 1% homes  median miss on the top 1% (%, minus = too low)  share of squared dollar error from the top 1% (%)  RMSE ($), top 1%  RMSE ($), other 99%
+voting (average of neural network, random forest, k-nearest neighbours)          5719                                        -46.7155                                            71.1341      3587468.8879          229688.6684
+                                                         neural network          5719                                        -44.8339                                            68.1222      3347902.8892          230181.2628
+                                                          random forest          5719                                        -48.3167                                            72.2380      3734182.7404          232667.4490
+                                                 support vector machine          5719                                        -47.8807                                            71.7247      3718112.3020          234633.1661
+                                                   k-nearest neighbours          5719                                        -47.2207                                            70.6834      3643748.1237          235854.6605
+                                                      linear regression          5719                                        -50.4517                                            70.8941      3716270.4210          239326.2303
+                                                                bagging          5719                                        -44.3067                                            67.4654      3433161.1492          239620.5184
+                                                          decision tree          5719                                        -53.4874                                            70.1339      3824878.3268          250865.4997
+                                                     k-means clustering          5719                                        -61.8306                                            73.1988      4249303.1822          258428.4048
+                                                hierarchical clustering          5719                                        -61.3616                                            73.1930      4264243.4756          259375.4034
+                                                               AdaBoost          5719                                        -61.5543                                            66.7836      3955043.1763          280343.1119
+===== band_results
+                                                                  model                         kind  accuracy (%)  macro F1  within one band (%)
+                                                    logistic regression                   band model       41.2423    0.3980              75.3342
+                                                         neural network number model, cut into bands       38.7869    0.3941              81.7999
+voting (average of neural network, random forest, k-nearest neighbours) number model, cut into bands       38.7742    0.3940              81.7835
+                                                                bagging number model, cut into bands       38.7205    0.3950              80.6430
+                                                          random forest number model, cut into bands       38.6782    0.3930              81.5647
+                                                 support vector machine number model, cut into bands       38.6766    0.3835              82.4095
+                                                            naive Bayes                   band model       38.4818    0.3623              70.5591
+                                                   k-nearest neighbours number model, cut into bands       38.2795    0.3900              81.0660
+                                                      linear regression number model, cut into bands       37.2936    0.3790              80.6725
+                                                          decision tree number model, cut into bands       36.6516    0.3708              79.9778
+                                                             perceptron                   band model       34.8799    0.3394              71.6934
+                                                     k-means clustering number model, cut into bands       34.7912    0.3349              79.7183
+                                                hierarchical clustering number model, cut into bands       34.6935    0.3335              79.8048
+                                                               AdaBoost number model, cut into bands       30.6185    0.3004              70.7657
+                                                       average baseline number model, cut into bands       20.0885    0.0669              60.1317
+                                                        median baseline number model, cut into bands       20.0306    0.0668              60.0257

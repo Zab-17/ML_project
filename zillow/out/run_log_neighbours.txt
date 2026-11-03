@@ -1,0 +1,104 @@
+=== 2026-11-02 00:07 lane neighbours started with a 6144 MB memory cap per step
+=== 2026-11-02 00:07 k-nearest neighbours
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 0 | validation MSE (log) 0.7310 | 4627 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 0 | validation MSE (log) 0.4870 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 0 | validation MSE (log) 0.4396 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 0 | validation MSE (log) 0.4062 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 0 | validation MSE (log) 0.3955 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 0 | validation MSE (log) 0.3909 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 0 | validation MSE (log) 0.3868 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 0 | validation MSE (log) 0.3849 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 0 | validation MSE (log) 0.7309 | 6241 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 0 | validation MSE (log) 0.4882 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 0 | validation MSE (log) 0.4404 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 0 | validation MSE (log) 0.4064 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 0 | validation MSE (log) 0.3958 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 0 | validation MSE (log) 0.3911 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 0 | validation MSE (log) 0.3872 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 0 | validation MSE (log) 0.3855 | 0 s
+=== 2026-11-02 04:27 lane neighbours started with a 6144 MB memory cap per step
+=== 2026-11-02 04:27 k-nearest neighbours, still running as process 43825 after its first runner died
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 1 | validation MSE (log) 0.7281 | 6216 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 1 | validation MSE (log) 0.4892 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 1 | validation MSE (log) 0.4416 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 1 | validation MSE (log) 0.4068 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 1 | validation MSE (log) 0.3961 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 1 | validation MSE (log) 0.3913 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 1 | validation MSE (log) 0.3871 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 1 | validation MSE (log) 0.3853 | 0 s
+=== 2026-11-02 21:20 lane neighbours started with a 6144 MB memory cap per step
+=== 2026-11-02 21:20 k-nearest neighbours, still running as process 43825 after its first runner died
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 1 | validation MSE (log) 0.7282 | 36565 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 1 | validation MSE (log) 0.4897 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 1 | validation MSE (log) 0.4419 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 1 | validation MSE (log) 0.4073 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 1 | validation MSE (log) 0.3967 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 1 | validation MSE (log) 0.3917 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 1 | validation MSE (log) 0.3876 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 1 | validation MSE (log) 0.3860 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 2 | validation MSE (log) 0.7328 | 1791 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 2 | validation MSE (log) 0.4896 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 2 | validation MSE (log) 0.4418 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 2 | validation MSE (log) 0.4078 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 2 | validation MSE (log) 0.3970 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 2 | validation MSE (log) 0.3926 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 2 | validation MSE (log) 0.3883 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 2 | validation MSE (log) 0.3864 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 2 | validation MSE (log) 0.7322 | 1751 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 2 | validation MSE (log) 0.4902 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 2 | validation MSE (log) 0.4423 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 2 | validation MSE (log) 0.4081 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 2 | validation MSE (log) 0.3975 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 2 | validation MSE (log) 0.3929 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 2 | validation MSE (log) 0.3889 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 2 | validation MSE (log) 0.3868 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 3 | validation MSE (log) 0.7289 | 4223 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 3 | validation MSE (log) 0.4887 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 3 | validation MSE (log) 0.4407 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 3 | validation MSE (log) 0.4059 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 3 | validation MSE (log) 0.3950 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 3 | validation MSE (log) 0.3900 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 3 | validation MSE (log) 0.3855 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 3 | validation MSE (log) 0.3833 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 3 | validation MSE (log) 0.7284 | 7604 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 3 | validation MSE (log) 0.4888 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 3 | validation MSE (log) 0.4409 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 3 | validation MSE (log) 0.4061 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 3 | validation MSE (log) 0.3956 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 3 | validation MSE (log) 0.3907 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 3 | validation MSE (log) 0.3862 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 3 | validation MSE (log) 0.3841 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 1} | fold 4 | validation MSE (log) 0.7325 | 2500 s
+k-nearest neighbours | {"distance": "euclidean", "k": 3} | fold 4 | validation MSE (log) 0.4910 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 5} | fold 4 | validation MSE (log) 0.4440 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 10} | fold 4 | validation MSE (log) 0.4092 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 15} | fold 4 | validation MSE (log) 0.3982 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 20} | fold 4 | validation MSE (log) 0.3928 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 30} | fold 4 | validation MSE (log) 0.3883 | 0 s
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | fold 4 | validation MSE (log) 0.3864 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 1} | fold 4 | validation MSE (log) 0.7322 | 9823 s
+k-nearest neighbours | {"distance": "cosine", "k": 3} | fold 4 | validation MSE (log) 0.4907 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 5} | fold 4 | validation MSE (log) 0.4442 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 10} | fold 4 | validation MSE (log) 0.4095 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 15} | fold 4 | validation MSE (log) 0.3985 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 20} | fold 4 | validation MSE (log) 0.3934 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 30} | fold 4 | validation MSE (log) 0.3889 | 0 s
+k-nearest neighbours | {"distance": "cosine", "k": 50} | fold 4 | validation MSE (log) 0.3870 | 0 s
+k-nearest neighbours winner: {"distance": "euclidean", "k": 50}, average validation MSE (log) 0.3853
+k-nearest neighbours | {"distance": "euclidean", "k": 50} | trained on 2,287,442 sales in 2715 s | test MSE (log) 0.3839, median % off 33.21
+model         neural network  random forest  k-nearest neighbours  linear regression  decision tree  support vector machine  k-means clustering  hierarchical clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584                0.4510             0.4361         0.4124                  0.4109              0.3520                   0.3486       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788                0.3839             0.3944         0.4109                  0.4120              0.4532                   0.4556       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155                0.6196             0.6280         0.6410                  0.6419              0.6732                   0.6750       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677                0.4733             0.4813         0.4906                  0.4693              0.5012                   0.5025       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949                0.5085             0.4902         0.4541                  0.4956              0.3545                   0.3499       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128           433415.9647        441384.8124    456739.8550             439039.1982         496684.7559              498450.8402  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718           176767.8268        181366.6534    186468.9012             178052.6238         195298.6495              195811.5929  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277           110531.0737        115415.2411    116206.5628             113796.2334         121170.0000              121387.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554               59.6218            62.0116        62.2164                 69.8003             71.8378                  72.1263      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248               33.2089            33.8152        34.7420                 31.6133             34.5845                  34.7374      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273                7.9072             7.4621         7.4212                  8.1746              7.5868                   7.6472       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641               15.6708            14.9372        14.8961                 16.2881             15.0736                  15.0913      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675               30.9170            30.0273        29.5870                 32.2053             29.7896                  29.7664      22.2707          22.3021           20.8855
+    peak memory 6021 MB
+=== 2026-11-03 06:15 lane neighbours finished

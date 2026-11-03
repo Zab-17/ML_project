@@ -1,0 +1,58 @@
+column,decision,reason,measured as,% blank in training homes,values,with label,strongest partner (original columns),strongest partner value,closest chosen feature,closest chosen feature value,second look,comes back (rule 3)
+taxamount,dropped: leaks the label,Leaks the label: the tax bill is about 1% of the assessed value.,number,0.08,925370,0.6530497725213809,landtaxvaluedollarcnt,0.9432758446529704,ZIP code,0.4779502396302645,True,False
+landtaxvaluedollarcnt,dropped: leaks the label,Leaks the label: building value plus land value equals the label exactly.,number,0.0,489119,0.6134832636701593,taxamount,0.9432758446529704,ZIP code,0.4644172163966363,True,False
+rawcensustractandblock,kept after a transform,"Becomes the census tract (the block digits removed), one-hot.",category,0.0,93967,0.5915142460603671,longitude,0.9987249508165148,census tract,0.9792484950782737,False,False
+censustractandblock,dropped,The same census block as rawcensustractandblock.,category,0.65,93885,0.5897387318887307,longitude,0.9946355756913801,ZIP code,0.9709828158152802,False,False
+structuretaxvaluedollarcnt,dropped: leaks the label,Leaks the label: building value plus land value equals the label exactly.,number,0.11,389320,0.5834713209008817,taxamount,0.8271752825514952,bathrooms,0.572299064946325,True,False
+finishedsquarefeet12,dropped,The same number as the living area wherever both exist.,number,6.36,10040,0.5512671955141446,calculatedfinishedsquarefeet,1.0,living area (log),0.9227863588368379,False,False
+regionidzip,kept,"ZIP code, one-hot.",category,0.19,396,0.5006530563784486,longitude,0.9972085724087576,ZIP code,0.9999862270531494,False,False
+calculatedbathnbr,dropped,The same number as bathrooms (correlation 1.000).,number,0.02,36,0.48512341225472283,bathroomcnt,1.0,bathrooms,1.0,False,False
+bathroomcnt,kept,"Bathrooms, halves included.",number,0.0,38,0.48507597770885574,calculatedbathnbr,1.0,bathrooms,1.0,False,False
+fullbathcnt,dropped,Part of bathrooms (correlation 0.987).,number,0.02,22,0.46392746927187595,bathroomcnt,0.987220375892554,bathrooms,0.987220375892554,False,False
+calculatedfinishedsquarefeet,kept after a transform,"Living area, as its log (skewed like the label).",number,0.0,10105,0.43547887860064005,finishedsquarefeet12,1.0,living area (log),0.7727087281165272,False,False
+buildingqualitytypeid,kept,"Building quality, 1 (best) to 12, one-hot. Recorded only in Los Angeles; elsewhere 'not recorded'.",category,32.74,12,0.43435091355051947,roomcnt,0.7627382337669594,building quality,0.9999995628282476,False,False
+propertyzoningdesc,kept,"Zoning, one-hot; recorded only in Los Angeles, so 'not recorded' elsewhere. Phase 2 dropped it, but on held-out homes it is 0.41 with the label and only 0.51 with ZIP code and 0.68 with city, so it adds something the location columns do not (King County dropped zoning because there it repeated them).",category,32.0,4863,0.41084830281760765,latitude,0.7759517221517288,zoning,0.9989630962591305,False,False
+regionidcity,kept,"City, one-hot.",category,1.81,184,0.39937964802518494,fips,0.9901232417303385,ZIP code,0.8129632021746428,False,False
+finishedfloor1squarefeet,dropped,"First-floor area, part of the living area; 93.2% empty.",number,92.91,4359,0.3800576065608817,finishedsquarefeet50,0.9541177422581861,living area (log),0.643232512253194,True,False
+finishedsquarefeet50,dropped,"First-floor area, part of the living area; 93.2% empty.",number,92.91,4592,0.37439356007054586,finishedfloor1squarefeet,0.9541177422581861,living area (log),0.6177465231978291,True,False
+finishedsquarefeet15,dropped,Another version of the living area; 93.6% empty.,number,93.95,5563,0.3294229538673471,finishedsquarefeet12,1.0,living area (log),0.9567027343682338,False,False
+fireplacecnt,kept,Fireplaces. Los Angeles never records it; in Orange and Ventura a blank means none and becomes 0.,number,89.12,9,0.3270366404239932,rawcensustractandblock,0.6125331245680549,fireplaces,1.0,False,False
+basementsqft,dropped,99.95% empty.,number,99.95,635,0.3236673473348702,structuretaxvaluedollarcnt,0.5211853082265158,bathrooms,0.40674008712614973,True,False
+regionidneighborhood,kept,"Neighbourhood, one-hot; blank becomes 'not recorded'.",category,60.98,525,0.32197382588749485,rawcensustractandblock,0.8024025970491242,neighbourhood,0.9999105902560612,False,False
+garagecarcnt,dropped,"The same garages as the garage area, in the same homes; the area is the finer measure.",number,69.27,23,0.30077865129581,finishedsquarefeet15,0.7381674742818359,living area (log),0.5116135184609111,True,False
+propertycountylandusecode,kept,"The county's own land-use code, one-hot (Phase 2 used frequency encoding).",category,0.0,158,0.2980614064730997,fips,0.9999661187411244,county land-use code,0.9999698345820217,False,False
+yearbuilt,kept,Year built; blanks get the training median.,number,0.1,177,0.2747289219512525,rawcensustractandblock,0.8379215857908108,year built,1.0,False,False
+garagetotalsqft,kept,"Garage area. Los Angeles never records it; in Orange and Ventura only 4% and 1.5% are blank, so a blank there means no garage and becomes 0. The county and ZIP columns tell the two kinds of 0 apart.",number,69.27,2100,0.2719340279705359,rawcensustractandblock,0.8245134376486108,county land-use code,0.7627718210854136,False,False
+bedroomcnt,kept,Bedrooms.,number,0.0,22,0.26105425487007367,finishedsquarefeet15,0.7252856226047383,bedrooms,1.0,False,False
+heatingorsystemtypeid,kept,"Heating system, one-hot; blank becomes 'not recorded'.",category,34.94,14,0.2466464190218178,roomcnt,0.7005241904227887,heating,0.9999980327299096,False,False
+numberofstories,kept,Stories. Los Angeles never records it; blanks get the training median (1 story).,number,76.95,11,0.2034766759937743,rawcensustractandblock,0.5844899513301376,stories,1.0,False,False
+yardbuildingsqft17,dropped,"Patio area: recorded only in Ventura, 97% empty.",number,97.16,1553,0.20160236314992896,finishedsquarefeet15,0.760864618924359,lot area (log),0.36470492307379976,True,False
+poolcnt,kept,"Pool, yes/no: 1 or blank in the file, so a blank means no pool.",category,81.21,1,0.19409235434504143,pooltypeid7,0.961285189622755,pool,1.0,False,False
+poolsizesum,dropped,99% empty; the pool yes/no column carries the pools.,number,99.03,864,0.18396651212266382,finishedsquarefeet15,1.0,lot area (log),0.31067129424116074,True,False
+threequarterbathnbr,dropped,Part of bathrooms; Los Angeles never records it.,number,88.95,7,0.16779007476117294,structuretaxvaluedollarcnt,0.36211259086373937,bathrooms,0.2499496750351127,True,False
+pooltypeid7,dropped,Pool without spa: the pool column flags the same homes.,category,82.39,1,0.16156616168032234,poolcnt,0.961285189622755,pool,0.9617494454284536,False,False
+hashottuborspa,kept,"Hot tub or spa, yes/no. Recorded only in Orange, where 7% of homes have one.",category,98.25,1,0.14233571991809318,pooltypeid2,0.8091900402514062,hot tub or spa,1.0,False,False
+airconditioningtypeid,kept,"Air conditioning, one-hot; blank becomes 'not recorded'.",category,71.69,7,0.13792012616475144,rawcensustractandblock,0.4197503541464914,air conditioning,0.9999993442440199,False,False
+pooltypeid2,dropped,Pool with spa: the pool and hot tub columns flag the same homes.,category,98.85,1,0.1332699078702033,hashottuborspa,0.8091900402514062,hot tub or spa,0.805546376299249,False,False
+latitude,kept after a transform,Becomes miles north of the centre of the training homes. Kept only if the correlation checks keep it.,number,0.0,782277,-0.11895614883450437,rawcensustractandblock,0.9978574674156275,ZIP code,0.9826867741797453,False,False
+taxdelinquencyyear,dropped,"Same as the delinquency flag, and 98% empty.",number,98.1,23,0.11282541791109667,finishedsquarefeet13,-0.4077954358702776,county land-use code,0.10726980819957459,False,False
+fips,kept,"County, named (Los Angeles, Orange, Ventura), one-hot.",category,0.0,3,0.10926141513202357,regionidcounty,1.0,county land-use code,0.9977295689970371,False,False
+regionidcounty,dropped,"The same three counties as fips, under different numbers.",category,0.0,3,0.10926141513202357,fips,1.0,county land-use code,0.9977295689970371,False,False
+yardbuildingsqft26,dropped,Storage shed area: 99.9% empty.,number,99.91,511,0.0920005512173513,basementsqft,0.30431350767113713,lot area (log),0.32198710335669534,False,False
+propertylandusetypeid,kept,"Property type, named from Zillow's dictionary, one-hot.",category,0.0,12,0.07688220286761534,propertycountylandusecode,0.9978763156777068,county land-use code,0.7462096835929987,False,False
+pooltypeid10,dropped,Spa only: the hot tub column flags the same homes.,category,99.4,1,0.05782917163067846,hashottuborspa,0.5807601783519241,hot tub or spa,0.5857776089394657,False,False
+decktypeid,dropped,Recorded only in Ventura; 99.4% empty.,category,99.41,1,0.04487328206106237,rawcensustractandblock,0.5770115016712838,county land-use code,0.3379942375813978,False,False
+parcelid,dropped,A record number; it never repeats on another home.,number,0.0,2287442,0.043506939869103214,regionidzip,0.905586815873459,ZIP code,0.9050045611507528,False,False
+roomcnt,dropped,Los Angeles writes 0 for every home; elsewhere it counts the rooms bedrooms and bathrooms count.,number,0.0,28,0.04150083349704864,rawcensustractandblock,0.9512490039352635,county land-use code,0.875805321793744,False,False
+taxdelinquencyflag,dropped,"About the owner's unpaid tax, which is charged on the label; not a property of the home.",category,98.1,1,0.03268403939411617,rawcensustractandblock,0.139283318838358,ZIP code,0.08794639928064857,False,False
+finishedsquarefeet6,dropped,Another version of the living area; 99.3% empty.,number,99.71,1961,0.03232687052110889,calculatedfinishedsquarefeet,1.0,living area (log),0.23942948254090296,False,False
+finishedsquarefeet13,dropped,Another version of the living area; 99.7% empty.,number,99.98,34,0.02167000595150965,calculatedfinishedsquarefeet,1.0,living area (log),0.9960455442358503,False,False
+unitcnt,dropped,"Recorded only in Los Angeles; the property type (duplex, triplex, quadruplex) already gives it.",number,31.94,22,0.01718164381444747,finishedsquarefeet6,0.9688642770591874,county land-use code,0.9136938421575339,False,False
+longitude,kept after a transform,Becomes miles east of the centre of the training homes. Kept only if the correlation checks keep it.,number,0.0,937457,-0.01279243579655512,rawcensustractandblock,0.9987249508165148,ZIP code,0.987874779568646,False,False
+architecturalstyletypeid,dropped,99.8% empty.,category,99.79,7,0.011079644912400448,fireplaceflag,0.5411009826529648,heating,0.17982346616949518,False,False
+typeconstructiontypeid,dropped,99.8% empty.,category,99.76,5,0.009732048905481077,fireplaceflag,0.5730712740849735,heating,0.19056237148592747,False,False
+storytypeid,dropped,99.95% empty.,category,99.95,1,0.004481329060489064,censustractandblock,0.3954649349399245,county land-use code,0.18638940187482142,False,False
+lotsizesquarefeet,kept after a transform,"Lot area, as its log. Blank mostly for condominiums; filled with the training median.",number,7.15,62060,-0.0009759663299226985,basementsqft,0.31899419893747244,lot area (log),0.21482146791669815,False,False
+fireplaceflag,dropped,99.8% empty; fireplaces carries the same homes.,category,99.82,1,0.0,typeconstructiontypeid,0.5730712740849735,heating,0.4029423534964012,False,False
+assessmentyear,dropped,"Only 2016 assessments are kept (row rule 2), so it never changes.",number,0.0,1,,,,,,False,False
+buildingclasstypeid,dropped,99.6% empty.,category,100.0,0,,,,,,False,False

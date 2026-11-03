@@ -1,0 +1,24 @@
+feature,with label,strongest partner,strongest partner value,dropped by the rules
+living area (log),0.5245480493345792,bathrooms,0.7906098982082959,
+ZIP code,0.4900053428254377,miles east,0.987874779568646,
+bathrooms,0.48507597770885574,living area (log),0.7906098982082959,
+building quality,0.43421171967707933,garage area,0.7625505636131609,
+city,0.3908201555368128,county,0.9852979302483624,"+0.921 with ZIP code, which is closer to the label (0.490 against 0.391)"
+zoning,0.30463565446446417,garage area,0.7765362997711591,
+county land-use code,0.28962051260605787,county,0.9977295689970371,
+neighbourhood,0.28334580439187773,ZIP code,0.7542208092734454,
+year built,0.2745555343358744,ZIP code,0.6457424529812076,
+bedrooms,0.26105425487007367,living area (log),0.6986806965558481,
+heating,0.2463890517167003,garage area,0.7091839071342254,
+pool,0.19423615096975552,county land-use code,0.7168766153155676,
+garage area,0.17397152715214922,county land-use code,0.9055432486220255,"+0.906 with county land-use code, which is closer to the label (0.290 against 0.174)"
+hot tub or spa,0.14297349194207384,ZIP code,0.320375038943313,
+census tract,0.1412111980718142,ZIP code,0.5325460908713912,
+air conditioning,0.1371050288209594,heating,0.42869768644718054,
+miles north,-0.11895614883450864,ZIP code,0.9826867741797453,"+0.983 with ZIP code, which is closer to the label (0.490 against 0.119)"
+county,0.10926141513202357,county land-use code,0.9977295689970371,"+0.998 with county land-use code, which is closer to the label (0.290 against 0.109)"
+fireplaces,0.10370460550422624,county land-use code,0.6433276803219905,
+stories,0.08093504989815684,ZIP code,0.5134407057504671,
+lot area (log),0.07337074789235254,county land-use code,0.6428549719173745,
+property type,0.07267162526741172,county land-use code,0.9354248817787242,"+0.935 with county land-use code, which is closer to the label (0.290 against 0.073)"
+miles east,-0.012792435796557092,ZIP code,0.987874779568646,"+0.988 with ZIP code, which is closer to the label (0.490 against 0.013)"

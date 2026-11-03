@@ -1,0 +1,4 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+logistic regression,"{""penalty_c"": 1.0}",test,165.3,41.24226209212045,0.3980338801234876,75.33417269961178
+perceptron,"{""passes"": 5}",test,42.6,34.879865701395445,0.3393725470521766,71.69342146679257
+naive Bayes,"{""smoothing"": 0.1}",test,6.1,38.4817962438359,0.36231726649358764,70.55905291504914

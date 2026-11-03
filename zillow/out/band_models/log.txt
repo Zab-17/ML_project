@@ -1,0 +1,46 @@
+logistic regression | {"penalty_c": 0.01} | fold 0 | validation accuracy 41.06% | 66 s
+logistic regression | {"penalty_c": 1.0} | fold 0 | validation accuracy 41.18% | 131 s
+logistic regression | {"penalty_c": 100.0} | fold 0 | validation accuracy 41.17% | 125 s
+logistic regression | {"penalty_c": 0.01} | fold 1 | validation accuracy 41.09% | 70 s
+logistic regression | {"penalty_c": 1.0} | fold 1 | validation accuracy 41.22% | 133 s
+logistic regression | {"penalty_c": 100.0} | fold 1 | validation accuracy 41.20% | 128 s
+logistic regression | {"penalty_c": 0.01} | fold 2 | validation accuracy 41.00% | 64 s
+logistic regression | {"penalty_c": 1.0} | fold 2 | validation accuracy 41.14% | 126 s
+logistic regression | {"penalty_c": 100.0} | fold 2 | validation accuracy 41.13% | 120 s
+logistic regression | {"penalty_c": 0.01} | fold 3 | validation accuracy 41.01% | 68 s
+logistic regression | {"penalty_c": 1.0} | fold 3 | validation accuracy 41.09% | 126 s
+logistic regression | {"penalty_c": 100.0} | fold 3 | validation accuracy 41.11% | 127 s
+logistic regression | {"penalty_c": 0.01} | fold 4 | validation accuracy 41.04% | 66 s
+logistic regression | {"penalty_c": 1.0} | fold 4 | validation accuracy 41.18% | 130 s
+logistic regression | {"penalty_c": 100.0} | fold 4 | validation accuracy 41.17% | 129 s
+logistic regression winner: {"penalty_c": 1.0}, average validation accuracy 41.16%
+logistic regression | {"penalty_c": 1.0} | test accuracy 41.24%, macro F1 0.398
+perceptron | {"passes": 5} | fold 0 | validation accuracy 31.86% | 17 s
+perceptron | {"passes": 20} | fold 0 | validation accuracy 27.60% | 66 s
+perceptron | {"passes": 5} | fold 1 | validation accuracy 32.33% | 17 s
+perceptron | {"passes": 20} | fold 1 | validation accuracy 32.35% | 72 s
+perceptron | {"passes": 5} | fold 2 | validation accuracy 34.09% | 19 s
+perceptron | {"passes": 20} | fold 2 | validation accuracy 34.94% | 66 s
+perceptron | {"passes": 5} | fold 3 | validation accuracy 35.40% | 53 s
+perceptron | {"passes": 20} | fold 3 | validation accuracy 29.53% | 106 s
+perceptron | {"passes": 5} | fold 4 | validation accuracy 35.82% | 33 s
+perceptron | {"passes": 20} | fold 4 | validation accuracy 34.19% | 144 s
+perceptron winner: {"passes": 5}, average validation accuracy 33.90%
+perceptron | {"passes": 5} | test accuracy 34.88%, macro F1 0.339
+naive Bayes | {"smoothing": 0.1} | fold 0 | validation accuracy 38.35% | 6 s
+naive Bayes | {"smoothing": 1.0} | fold 0 | validation accuracy 38.34% | 5 s
+naive Bayes | {"smoothing": 10.0} | fold 0 | validation accuracy 38.32% | 5 s
+naive Bayes | {"smoothing": 0.1} | fold 1 | validation accuracy 38.45% | 6 s
+naive Bayes | {"smoothing": 1.0} | fold 1 | validation accuracy 38.44% | 5 s
+naive Bayes | {"smoothing": 10.0} | fold 1 | validation accuracy 38.42% | 5 s
+naive Bayes | {"smoothing": 0.1} | fold 2 | validation accuracy 38.38% | 5 s
+naive Bayes | {"smoothing": 1.0} | fold 2 | validation accuracy 38.38% | 4 s
+naive Bayes | {"smoothing": 10.0} | fold 2 | validation accuracy 38.36% | 6 s
+naive Bayes | {"smoothing": 0.1} | fold 3 | validation accuracy 38.39% | 5 s
+naive Bayes | {"smoothing": 1.0} | fold 3 | validation accuracy 38.38% | 4 s
+naive Bayes | {"smoothing": 10.0} | fold 3 | validation accuracy 38.36% | 6 s
+naive Bayes | {"smoothing": 0.1} | fold 4 | validation accuracy 38.39% | 5 s
+naive Bayes | {"smoothing": 1.0} | fold 4 | validation accuracy 38.38% | 6 s
+naive Bayes | {"smoothing": 10.0} | fold 4 | validation accuracy 38.36% | 5 s
+naive Bayes winner: {"smoothing": 0.1}, average validation accuracy 38.39%
+naive Bayes | {"smoothing": 0.1} | test accuracy 38.48%, macro F1 0.362

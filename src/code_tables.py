@@ -19,6 +19,7 @@ RELATIONSHIP_NAMESPACE = "{http://schemas.openxmlformats.org/officeDocument/2006
 SHEET_PER_COLUMN = {
     "heatingorsystemtypeid": "HeatingOrSystemTypeID",
     "propertylandusetypeid": "PropertyLandUseTypeID",
+    "airconditioningtypeid": "AirConditioningTypeID",
 }
 # County codes (Federal Information Processing Standard) for the three counties in the file.
 COUNTY_NAMES = {"6037": "Los Angeles", "6059": "Orange", "6111": "Ventura"}

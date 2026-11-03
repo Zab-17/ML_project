@@ -8,6 +8,7 @@ Run: python3 train_models.py   (after pipeline.py)
 """
 # AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 
+import os
 from pathlib import Path
 
 import numpy as np
@@ -16,7 +17,9 @@ from scipy import sparse
 from sklearn.dummy import DummyRegressor
 from sklearn.linear_model import LinearRegression
 
-TABLE_DIR = Path(__file__).resolve().parent / "out" / "model_table"
+# Every model script reads its table from here. MODEL_TABLE_DIR points the same code at another dataset
+# (the Zillow rerun); without it the King County table is used.
+TABLE_DIR = Path(os.environ.get("MODEL_TABLE_DIR", Path(__file__).resolve().parent / "out" / "model_table"))
 RESULTS = TABLE_DIR.parent / "model_results.csv"
 CLOSE_SHARES = (0.05, 0.10, 0.20)   # a prediction within this share of the sale price counts as close
 

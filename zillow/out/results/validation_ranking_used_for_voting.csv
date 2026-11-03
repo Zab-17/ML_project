@@ -1,0 +1,4 @@
+,average validation MSE (log)
+neural network,0.3729807673756981
+random forest,0.3798931257339113
+k-nearest neighbours,0.38527053640325576

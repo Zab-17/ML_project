@@ -13,7 +13,6 @@ Run: python3 neural_search.py                 full search, every setting on all 
 import sys
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -21,9 +20,8 @@ import torch
 from scipy import sparse
 from sklearn.linear_model import LinearRegression
 
-from train_models import scores
+from train_models import TABLE_DIR, scores
 
-TABLE_DIR = Path(__file__).resolve().parent / "out" / "model_table"
 OUT_DIR = TABLE_DIR.parent / "neural_search"
 FOLDS = 5
 BATCH = 1024

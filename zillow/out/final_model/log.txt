@@ -1,0 +1,43 @@
+winner: 256-128 adam lr 0.001 dropout 0.2, trained for 27 passes (median best pass of its 5 runs)
+256-128 adam lr 0.001 dropout 0.2 | pass 1 of 27 | training MSE (log) 0.4397 | 10 s
+256-128 adam lr 0.001 dropout 0.2 | pass 2 of 27 | training MSE (log) 0.4116 | 20 s
+256-128 adam lr 0.001 dropout 0.2 | pass 3 of 27 | training MSE (log) 0.3943 | 30 s
+256-128 adam lr 0.001 dropout 0.2 | pass 4 of 27 | training MSE (log) 0.3836 | 40 s
+256-128 adam lr 0.001 dropout 0.2 | pass 5 of 27 | training MSE (log) 0.3827 | 50 s
+256-128 adam lr 0.001 dropout 0.2 | pass 6 of 27 | training MSE (log) 0.3832 | 60 s
+256-128 adam lr 0.001 dropout 0.2 | pass 7 of 27 | training MSE (log) 0.3825 | 70 s
+256-128 adam lr 0.001 dropout 0.2 | pass 8 of 27 | training MSE (log) 0.3801 | 80 s
+256-128 adam lr 0.001 dropout 0.2 | pass 9 of 27 | training MSE (log) 0.3763 | 91 s
+256-128 adam lr 0.001 dropout 0.2 | pass 10 of 27 | training MSE (log) 0.3735 | 101 s
+256-128 adam lr 0.001 dropout 0.2 | pass 11 of 27 | training MSE (log) 0.3718 | 111 s
+256-128 adam lr 0.001 dropout 0.2 | pass 12 of 27 | training MSE (log) 0.3715 | 121 s
+256-128 adam lr 0.001 dropout 0.2 | pass 13 of 27 | training MSE (log) 0.3704 | 131 s
+256-128 adam lr 0.001 dropout 0.2 | pass 14 of 27 | training MSE (log) 0.3698 | 141 s
+256-128 adam lr 0.001 dropout 0.2 | pass 15 of 27 | training MSE (log) 0.3691 | 151 s
+256-128 adam lr 0.001 dropout 0.2 | pass 16 of 27 | training MSE (log) 0.3691 | 161 s
+256-128 adam lr 0.001 dropout 0.2 | pass 17 of 27 | training MSE (log) 0.3675 | 171 s
+256-128 adam lr 0.001 dropout 0.2 | pass 18 of 27 | training MSE (log) 0.3669 | 181 s
+256-128 adam lr 0.001 dropout 0.2 | pass 19 of 27 | training MSE (log) 0.3667 | 191 s
+256-128 adam lr 0.001 dropout 0.2 | pass 20 of 27 | training MSE (log) 0.3667 | 201 s
+256-128 adam lr 0.001 dropout 0.2 | pass 21 of 27 | training MSE (log) 0.3655 | 211 s
+256-128 adam lr 0.001 dropout 0.2 | pass 22 of 27 | training MSE (log) 0.3659 | 221 s
+256-128 adam lr 0.001 dropout 0.2 | pass 23 of 27 | training MSE (log) 0.3671 | 231 s
+256-128 adam lr 0.001 dropout 0.2 | pass 24 of 27 | training MSE (log) 0.3643 | 241 s
+256-128 adam lr 0.001 dropout 0.2 | pass 25 of 27 | training MSE (log) 0.3641 | 251 s
+256-128 adam lr 0.001 dropout 0.2 | pass 26 of 27 | training MSE (log) 0.3658 | 262 s
+256-128 adam lr 0.001 dropout 0.2 | pass 27 of 27 | training MSE (log) 0.3638 | 272 s
+trained in 272 s on 2,287,442 sales; scored once on 571,860 test sales:
+model         neural network  average baseline  median baseline  linear regression
+R2 (log)              0.4673           -0.1836          -0.0039             0.4361
+MSE (log)             0.3725            0.8278           0.7021             0.3944
+RMSE (log)            0.6104            0.9098           0.8379             0.6280
+MAE (log)             0.4653            0.6909           0.6386             0.4813
+R2 ($)                0.5694           -0.0000          -0.0359             0.4902
+RMSE ($)         405642.6014       618191.7764      629191.6444        441384.8124
+MAE ($)          172804.5054       276016.5005      255151.7007        181366.6534
+median $ off     109816.5581       202976.8452      152042.0000        115415.2411
+MAPE (%)             59.2182          129.5607          91.1003            62.0116
+median % off         32.4789           53.8172          45.3729            33.8152
+within 5%             7.9436            5.5162           5.5104             7.4621
+within 10%           15.8285           10.7556          11.1620            14.9372
+within 20%           31.6280           20.8855          22.3021            30.0273

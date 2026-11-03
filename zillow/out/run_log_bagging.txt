@@ -1,0 +1,28 @@
+=== 2026-11-02 00:01 lane bagging started with a 6144 MB memory cap per step
+=== 2026-11-02 00:01 bagging
+=== 2026-11-02 02:00 lane bagging started with a 6144 MB memory cap per step
+=== 2026-11-02 02:00 bagging, still running as process 40950 after its first runner died
+bagging | {} | fold 1 | validation MSE (log) 0.3956 | 13795 s
+=== 2026-11-02 21:20 lane bagging started with a 6144 MB memory cap per step
+=== 2026-11-02 21:20 bagging, still running as process 40950 after its first runner died
+bagging | {} | fold 2 | validation MSE (log) 0.3977 | 43128 s
+bagging | {} | fold 3 | validation MSE (log) 0.3944 | 15027 s
+bagging | {} | fold 4 | validation MSE (log) 0.3980 | 13201 s
+bagging winner: {}, average validation MSE (log) 0.3962
+bagging | {} | trained on 2,287,442 sales in 6662 s | test MSE (log) 0.3953, median % off 33.20
+model         neural network  random forest  k-nearest neighbours  linear regression      bagging  decision tree  support vector machine  k-means clustering  hierarchical clustering     AdaBoost  median baseline  average baseline
+R2 (log)              0.4673         0.4584                0.4510             0.4361       0.4348         0.4124                  0.4109              0.3520                   0.3486       0.2989          -0.0039           -0.1836
+MSE (log)             0.3725         0.3788                0.3839             0.3944       0.3953         0.4109                  0.4120              0.4532                   0.4556       0.4903           0.7021            0.8278
+RMSE (log)            0.6104         0.6155                0.6196             0.6280       0.6287         0.6410                  0.6419              0.6732                   0.6750       0.7002           0.8379            0.9098
+MAE (log)             0.4653         0.4677                0.4733             0.4813       0.4762         0.4906                  0.4693              0.5012                   0.5025       0.5715           0.6386            0.6909
+R2 ($)                0.5694         0.4949                0.5085             0.4902       0.5428         0.4541                  0.4956              0.3545                   0.3499       0.3871          -0.0359           -0.0000
+RMSE ($)         405642.6014    439367.4128           433415.9647        441384.8124  417992.7893    456739.8550             439039.1982         496684.7559              498450.8402  483984.3897      629191.6444       618191.7764
+MAE ($)          172804.5054    175025.3718           176767.8268        181366.6534  176327.6371    186468.9012             178052.6238         195298.6495              195811.5929  212253.5982      255151.7007       276016.5005
+median $ off     109816.5581    109589.0277           110531.0737        115415.2411  109641.5818    116206.5628             113796.2334         121170.0000              121387.0000  127382.0309      152042.0000       202976.8452
+MAPE (%)             59.2182        59.4554               59.6218            62.0116      60.5025        62.2164                 69.8003             71.8378                  72.1263      59.2743          91.1003          129.5607
+median % off         32.4789        32.6248               33.2089            33.8152      33.1955        34.7420                 31.6133             34.5845                  34.7374      42.4468          45.3729           53.8172
+within 5%             7.9436         8.1273                7.9072             7.4621       8.4232         7.4212                  8.1746              7.5868                   7.6472       5.3917           5.5104            5.5162
+within 10%           15.8285        16.1641               15.6708            14.9372      16.3253        14.8961                 16.2881             15.0736                  15.0913      10.9387          11.1620           10.7556
+within 20%           31.6280        31.6675               30.9170            30.0273      31.4577        29.5870                 32.2053             29.7896                  29.7664      22.2707          22.3021           20.8855
+    peak memory 2673 MB
+=== 2026-11-03 08:19 lane bagging finished

@@ -27,6 +27,7 @@ from train_models import comparison_models, scores
 
 FINAL_DIR = TABLE_DIR.parent / "final_model"
 LOG = FINAL_DIR / "log.txt"
+PREDICTIONS_DIR = FINAL_DIR / "test_predictions"
 
 
 def main():
@@ -43,7 +44,9 @@ def main():
     torch.save(model.state_dict(), FINAL_DIR / "network.pt")
     test_matrix, test_label = load_test_table()
     choice["test sales"] = int(test_matrix.shape[0])
-    save_tables(choice, ranking, test_results(model, matrix, label, test_matrix, test_label))
+    predictions = test_predictions(model, matrix, label, test_matrix)
+    save_predictions(predictions)
+    save_tables(choice, ranking, test_results(predictions, test_label))
 
 
 def complete_settings_ranking(fold_results):
@@ -84,11 +87,22 @@ def load_test_table():
     return sparse.load_npz(TABLE_DIR / "test_matrix.npz").tocsr(), np.load(TABLE_DIR / "test_label.npy")
 
 
-def test_results(model, matrix, label, test_matrix, test_label):
-    """Every score on the test sales: the network, then linear regression and the baselines fitted on all of matrix."""
+def test_predictions(model, matrix, label, test_matrix):
+    """Log-price predictions for the test sales: the network, then linear regression and the baselines fitted on all
+    of matrix."""
     predictions = {"neural network": predict(model, test_matrix, np.arange(test_matrix.shape[0]))}
     for name, comparison in comparison_models(label).items():
         predictions[name] = comparison.fit(matrix, label).predict(test_matrix)
+    return predictions
+
+
+def save_predictions(predictions):
+    PREDICTIONS_DIR.mkdir(exist_ok=True)
+    for name, predicted in predictions.items():
+        np.save(PREDICTIONS_DIR / f"{name}.npy", predicted)
+
+
+def test_results(predictions, test_label):
     return pd.DataFrame([{"model": name, **scores(test_label, predicted)} for name, predicted in predictions.items()])
 
 

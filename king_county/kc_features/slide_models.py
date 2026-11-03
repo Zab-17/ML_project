@@ -38,7 +38,7 @@ PREDICTIONS_DIR = OUT_DIR / "test_predictions"
 
 NEIGHBOUR_COUNTS = [1, 3, 5, 10, 15, 20, 30, 50]
 DISTANCES = ["euclidean", "cosine"]
-QUERY_BATCH = 1024                        # sales whose neighbours are searched at once on the GPU
+DISTANCE_TABLE_BYTES = 1_500_000_000      # GPU memory for one batch of query-to-training distances
 PRUNING_STRENGTHS = [0.0, 1e-7, 1e-6, 3e-6, 1e-5, 3e-5, 1e-4]   # ccp_alpha: the error a branch must save to stay
 TREES = 50                                # 50, not 100, keeps the whole run near 2.5 hours on the M1 Pro
 FOREST_COLUMN_SHARES = ["sqrt", 0.1, 0.33]
@@ -48,12 +48,17 @@ SVM_MAX_PASSES = 2000
 
 
 def main():
+    run(MODELS, sys.argv[1:])
+
+
+def run(models, names):
+    """The four steps for every named model (every model when names is empty), then the combined test table."""
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     PREDICTIONS_DIR.mkdir(exist_ok=True)
     matrix, label, folds = load_table()
     test_matrix, test_label = load_test_table()
-    for name in sys.argv[1:] or list(MODELS):
-        model = MODELS[name]
+    for name in names or list(models):
+        model = models[name]
         search(model, matrix, label, folds)
         final_test(model, winner(model), matrix, label, test_matrix, test_label)
     save_all_test_results()
@@ -175,12 +180,21 @@ def nearest_rows(train_matrix, query_matrix, k, distance):
     The query row's own squared length is the same for every training row, so it is left out of the ranking."""
     train = on_device(train_matrix, distance)
     train_lengths = (train ** 2).sum(dim=1)
+    batch_size = query_batch_size(train.shape[0])
+    ranking = torch.empty((batch_size, train.shape[0]), dtype=train.dtype, device=train.device)
     parts = []
-    for start in range(0, query_matrix.shape[0], QUERY_BATCH):
-        query = on_device(query_matrix[start:start + QUERY_BATCH], distance)
-        ranking = train_lengths - 2 * query @ train.T
-        parts.append(torch.topk(ranking, k, dim=1, largest=False).indices.cpu().numpy())
+    for start in range(0, query_matrix.shape[0], batch_size):
+        query = on_device(query_matrix[start:start + batch_size], distance)
+        batch_ranking = ranking[:query.shape[0]]
+        torch.addmm(train_lengths, query, train.T, alpha=-2, out=batch_ranking)  # one buffer, no temporaries
+        parts.append(torch.topk(batch_ranking, k, dim=1, largest=False).indices.cpu().numpy())
     return np.concatenate(parts)
+
+
+def query_batch_size(training_rows):
+    """Query rows per GPU batch, so that one batch's distance table (4 bytes per pair) fits DISTANCE_TABLE_BYTES.
+    About 1,100 rows for King County's 341,000 training rows; about 250 for Zillow's 1.5 million."""
+    return max(1, DISTANCE_TABLE_BYTES // (4 * training_rows))
 
 
 def on_device(rows, distance):
