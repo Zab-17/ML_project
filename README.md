@@ -1,78 +1,67 @@
-# Machine Learning class project — CSCE 3602 / DSCI 3415
+# Machine Learning class project: CSCE 3602 / DSCI 3415
 
-**Predicting the assessed value of a property** from the Zillow properties file:
-2,985,217 rows and 58 columns covering Los Angeles, Orange and Ventura counties, California.
-Label: `taxvaluedollarcnt`, the total value the county assessor places on the parcel.
+**Predicting the 2016 assessed value of a home** from the Zillow Prize 2017 properties file. The file has 2,985,217 parcels and 58 columns, covering Los Angeles, Orange and Ventura counties, California. The label is `taxvaluedollarcnt`, the value the county assessor places on the parcel.
 
-Zeyad Khaled and Mohamed Elsayed.
+Zeyad Khaled and Mohamed Elsayed, The American University in Cairo.
+
+**Writing the Milestone 3 report? Start with [`HANDOFF.md`](HANDOFF.md).**
 
 ---
 
 ## Where everything is
 
-| Path | What it is | Who wrote it |
-|---|---|---|
-| `changes.md`, `changes.txt` | The feature analysis: every column, kept or dropped, with the reason | Mohamed |
-| `test.py` | The scratch script used for that analysis, one column at a time | Mohamed |
-| `src/clean.py` | **The cleaning pipeline.** Raw file in, model-ready table out | Zeyad |
-| `src/code_tables.py` | Turns Zillow's numeric codes into names, read from Zillow's own data dictionary | Zeyad |
-| `src/figures.py` | The seven figures the report needs | Zeyad |
-| `data/processed/` | **The cleaned output** — see the next section | produced by `src/clean.py` |
-| `report/figures/` | `fig1` to `fig7`, ready to drop into the report | produced by `src/figures.py` |
-| `report/phase1_report/` | The Phase 1 report that was rejected, kept for reference | both |
-| `REFERENCE.md` | **Every decision explained with its number.** Written to be read, then rewritten in our own words for the report. Not for submission | Zeyad |
-| `HANDOFF.md` | Project status, decisions already taken, what is left | Zeyad |
-| `archive/egypt-phase1/` | **Ignore this for the current project.** The Egyptian developer tables from the rejected first version | Zeyad |
-
-## The cleaned output, in `data/processed/`
-
-| File | What it holds |
+| Path | What it is |
 |---|---|
-| `train.parquet` | 2,360,761 rows × 48 columns — 47 features plus the label |
-| `test.parquet` | 590,190 rows × 48 columns, the same columns in the same order |
-| `cleaned_sample_10k.csv` | The first 10,000 training rows as a spreadsheet, for looking at |
-| `cleaning_report.json` | Every number the report quotes: rows dropped, values imputed, medians, categories kept |
-| `label_correlations.csv` | Every feature ranked by correlation with the label |
+| [`HANDOFF.md`](HANDOFF.md) | Everything needed to finish the Milestone 3 report: its state, where every number is, the rules |
+| [`changes/`](changes/) | What changed after each submission, and why. One file per milestone. |
+| [`milestone_2/`](milestone_2/) | Milestone 2 (Phase 2, data preparation) as submitted |
+| `milestone_2/report/` | The Phase 2 report (`main.tex`, `main.pdf`) and its seven figures |
+| `milestone_2/REFERENCE.md` | Every Phase 2 cleaning decision, with its number |
+| `milestone_2/feature_analysis/` | Mohamed's feature analysis (`changes.md`, `changes.txt`) and his scratch script `test.py` |
+| [`milestone_3/`](milestone_3/) | Milestone 3 (Phase III, the supervised models) |
+| `milestone_3/professor_comments.md` | **Read first:** each professor comment, what we changed, and the number behind it |
+| `milestone_3/report/` | The Phase III report (`main.tex`, `references.bib`, `figures/`) |
+| `src/` | The Phase 2 cleaning pipeline (`clean.py`, `figures.py`, `column_profile.py`), and `code_tables.py`, which turns Zillow's numeric codes into names. Milestone 3 still uses `code_tables.py`. |
+| `zillow/` | The Milestone 3 pipeline: row rules, features, checks, the model table, every model, voting and the result tables |
+| `zillow/out/` | Every Milestone 3 result. The final tables are in `zillow/out/results/`. |
+| `data/processed/` | The Phase 2 cleaned output |
+| `data/raw/` | Not in git. Put `properties_2017.csv` and `zillow_data_dictionary.xlsx` from the Zillow Prize Kaggle page here. |
 
-Reading the full table needs pandas:
+## Branches
 
-```python
-import pandas as pd
-train = pd.read_parquet("data/processed/train.parquet")
-```
+| Branch | What it holds |
+|---|---|
+| `main` | The Zillow project only |
+| `greater-cairo` | Milestone 1: the Greater Cairo version, the rejected Phase 1 report and the Egyptian developer tables |
+| `king-county` | The King County (Seattle area) sale-price project. The Zillow pipeline copies its checks and models. The branch also has its experimental report. |
 
-## What the pipeline did
-
-| | Before | After |
-|---|---|---|
-| Rows | 2,985,217 | **2,950,951** (34,266 dropped for having no label) |
-| Columns | 58 | **48** (47 features + 1 label) |
-| Raw features used | — | **12**, which become 47 after encoding |
-| Missing values | millions | **zero** |
-
-In order: drop rows with no label → split 80/20 **before** fitting anything → convert the
-coordinates and take logarithms of the two area features → fill gaps with training medians →
-one-hot encode the four small categorical columns with separate `Other` and `Unknown`
-columns, and frequency-encode the 234-category county land-use code → z-score every numeric
-feature using training statistics → drop anything correlating 0.85 or more with the
-label (nothing qualified; the highest is 0.369) and anything that never varies.
-
-`REFERENCE.md` explains why each of those steps exists.
-
-## Running it yourself
-
-The raw file is not in this repository: it is 650 megabytes and its licence forbids
-redistribution. Download `properties_2017.csv` into `data/raw/`, then:
+## Running it
 
 ```bash
-python3 src/clean.py      # about 20 seconds
-python3 src/figures.py    # about 13 seconds
+python3 src/clean.py        # Milestone 2 cleaning, about 20 seconds
+python3 src/figures.py      # Milestone 2 figures, about 13 seconds
+zsh zillow/run_all.sh       # Milestone 3, every step in order: many hours on an M1 Pro laptop
+cd zillow && python3 -m pytest test_zillow.py   # unit tests
 ```
 
-Needs pandas, numpy, pyarrow and matplotlib. Nothing else.
+- Each Milestone 3 step skips work it has already finished, so after a stop the same command picks up where it left off.
+- The model matrices, labels and predictions (`.npy` and `.npz`) are not in git. `run_all.sh` rebuilds them.
+- **Never rerun `zillow/final_training.py` on its own.** It has no skip, so a rerun would retrain the network and change the reported result.
 
-## Two things to settle before submission
+## Milestone 3 results in one table
 
-1. **The report itself** is the deliverable and is not written yet.
-2. **The licence:** this data may be used *"solely for the purpose and duration of the
-   Competition"*, which closed on 2018-01-10. The professor should hear that from us.
+Test homes: 571,860, scored once per model. MSE (log) is the mean squared error on the natural log of the assessed value; lower is better.
+
+| Model | Test MSE (log) | Median miss |
+|---|---|---|
+| Neural network (256 → 128, Adam, dropout 0.2) | **0.3725** | 32.5% |
+| Voting (neural network + random forest + k-nearest neighbours) | 0.3731 | 32.5% |
+| Random forest | 0.3788 | 32.6% |
+| Linear regression | 0.3944 | 33.8% |
+| Median baseline | 0.7021 | 45.4% |
+
+Every model, the price bands and the most expensive 1% of homes are in `HANDOFF.md` and `zillow/out/results/`.
+
+## Use of AI
+
+AI (Claude, by Anthropic) helped write and debug this code. Every code file carries the statement "AI was used to help write this code, but the resulting code was reviewed and edited by a human."

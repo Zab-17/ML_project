@@ -9,7 +9,7 @@ training homes for every query home.
 
 import torch
 
-import shared_code  # noqa: F401  (King County code on the path)
+import shared_code  # noqa: F401  (model scripts pointed at the Zillow table)
 from neural_search import DEVICE
 from slide_models import NearestNeighbours, on_device
 

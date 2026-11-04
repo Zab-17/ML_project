@@ -11,7 +11,7 @@ from functools import lru_cache
 import numpy as np
 import pandas as pd
 
-import shared_code  # noqa: F401  (puts the King County code on the import path)
+import shared_code  # noqa: F401  (puts src/ on the import path)
 from code_tables import decode_tables
 from features import FeatureTable, fold_rare_values, only_training_labels
 from zillow_rows import LABEL

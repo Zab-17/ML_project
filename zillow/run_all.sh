@@ -6,7 +6,6 @@
 set -e -o pipefail
 
 ZILLOW="${0:A:h}"
-KING_COUNTY="$ZILLOW/../king_county/kc_features"
 export MODEL_TABLE_DIR="$ZILLOW/out/model_table"
 LOG="$ZILLOW/out/run_log.txt"
 mkdir -p "$ZILLOW/out"
@@ -19,13 +18,11 @@ if [[ ! -f "$MODEL_TABLE_DIR/train_matrix.npz" ]]; then
   step "model table and checks"; run zillow_table.py
 fi
 
-cd "$KING_COUNTY"
 step "baselines and linear regression";         run train_models.py
 step "neural network: short trial";             run neural_search.py --smoke
 step "neural network: five-fold search";        run neural_search.py
 step "neural network: final training and test"; run final_training.py
 
-cd "$ZILLOW"
 for model in "decision tree" "random forest" "bagging" "support vector machine" "AdaBoost" \
              "k-means clustering" "hierarchical clustering" "k-nearest neighbours"; do
   step "$model"; run zillow_models.py "$model"

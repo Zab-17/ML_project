@@ -1,4 +1,4 @@
-"""Draws the figures for the Phase 2 report and saves them to report/figures/.
+"""Draws the figures for the Phase 2 report and saves them to milestone_2/report/figures/.
 
 Covers missingness, the distributions, the log transformations and the two
 correlation views. Run this after src/clean.py: two of the figures read the
@@ -18,7 +18,7 @@ from clean import (COUNT_FEATURES, FREQUENCY_FEATURES, LABEL, ONE_HOT_FEATURES, 
                    PROCESSED_DIR, RAW_PATH, SKEWED_AREA_FEATURES,
                    SMALLEST_KEPT_CATEGORY_SHARE, named_categories)
 
-FIGURE_DIR = Path(__file__).resolve().parent.parent / "report" / "figures"
+FIGURE_DIR = Path(__file__).resolve().parent.parent / "milestone_2" / "report" / "figures"
 KEPT_COLOUR = "#3b6fd4"
 DROPPED_COLOUR = "#d4713b"
 SECOND_COLOUR = "#7a51b8"

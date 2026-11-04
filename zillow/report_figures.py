@@ -1,17 +1,15 @@
-"""Report figures, drawn from the training rows of a model table: the Zillow Phase III report or the King County
-experimental report.
+"""Report figures for the Zillow Phase III report, drawn from the training rows of the model table.
 
 1. distributions.png: the label and the living area, in their raw units and after the natural log, with the skew
    of each. This answers the Phase 2 comments "no distribution analysis" and "log with no analysis".
 2. correlation_heatmap.png: the check heatmap with its title strip removed (the report caption replaces it).
 The skew numbers also go to distribution_stats.json, so the report quotes the same values the figure shows.
 
-Run: python3 report_figures.py [zillow | king-county]   (default zillow; after the dataset's table is built)
+Run: python3 report_figures.py   (after the model table is built)
 """
 # AI was used to help write this code, but the resulting code was reviewed and edited by a human.
 
 import json
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -46,19 +44,13 @@ class ReportData:
     figure_dir: Path
 
 
-KING_COUNTY_OUT = PROJECT / "king_county" / "kc_features" / "out"
-DATASETS = {
-    "zillow": ReportData(CHECKS_DIR.parent / "model_table", "assessed value", "living area (log)", "training homes",
-                         CHECKS_DIR / "chosen_23_features_heatmap.png", 180,
-                         PROJECT / "report" / "phase3_report" / "figures"),
-    "king-county": ReportData(KING_COUNTY_OUT / "model_table", "sale price", "above-ground living area (log)",
-                              "training sales", KING_COUNTY_OUT / "chosen_60_features_heatmap.png", 240,
-                              PROJECT / "report" / "experimental_report" / "figures"),
-}
+ZILLOW_REPORT = ReportData(CHECKS_DIR.parent / "model_table", "assessed value", "living area (log)", "training homes",
+                           CHECKS_DIR / "chosen_23_features_heatmap.png", 180,
+                           PROJECT / "milestone_3" / "report" / "figures")
 
 
 def main():
-    data = DATASETS[sys.argv[1] if len(sys.argv) > 1 else "zillow"]
+    data = ZILLOW_REPORT
     data.figure_dir.mkdir(parents=True, exist_ok=True)
     log_value, log_area = np.load(data.table_dir / "train_label.npy"), training_log_living_area(data)
     stats = {data.label_name: distribution_stats(log_value), "living area": distribution_stats(log_area)}

@@ -23,7 +23,7 @@ from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
 from sklearn.metrics import pairwise_distances_argmin
 from sklearn.tree import DecisionTreeRegressor
 
-import shared_code  # noqa: F401  (King County code on the path; model scripts pointed at the Zillow table)
+import shared_code  # noqa: F401  (src/ on the path; model scripts pointed at the Zillow table)
 from neural_search import SEED
 from slide_models import MARGIN_PENALTIES, MARGIN_WIDTHS, FittedModel, dense_rows, run, support_vector_machine
 from zillow_neighbours import QUERY_BATCH, TRAINING_BLOCK, BlockNearestNeighbours, BlockSearch
