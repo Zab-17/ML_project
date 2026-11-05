@@ -531,7 +531,7 @@ We choose the neural network: two hidden layers of 256 and 128 units, Adam at a 
 \section{Source Code}
 \label{sec:code}
 
-The scripts are submitted with this report. Table~\ref{tab:code} lists what each one runs; \texttt{run\_all.sh} runs every step in order, and each step skips work it has already finished. The folder \texttt{training\_code} also holds one training file and one results page for every model, including the four slide classifier forms (\texttt{knn\_classifier.py}, \texttt{linear\_svm\_classifier.py}, \texttt{mixture\_of\_experts.py}, \texttt{bayesian\_network.py}) and their shared runner \texttt{band\_runner.py}. The files for the other models run the same code as the scripts in Table~\ref{tab:code}.
+The scripts are submitted with this report. Table~\ref{tab:code} lists what each one runs; \texttt{run\_all.sh} runs every step in order, and each step skips work it has already finished. The folder \texttt{training\_code} also holds one training file and one results page for every model, including the four slide classifier forms (\texttt{knn\_classifier.py}, \texttt{linear\_svm\_classifier.py}, \texttt{mixture\_of\_experts.py}, \texttt{bayesian\_network.py}). Each file holds the exact code that trained its model; for the other models that code is copied unchanged from the scripts in Table~\ref{tab:code}, and running a file again retrains nothing.
 
 \begin{table}[t]
 \caption{The scripts and what each one runs.}
