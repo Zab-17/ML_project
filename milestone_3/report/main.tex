@@ -27,14 +27,14 @@
   \city{Cairo}
   \country{Egypt}}
 
-\author{Mohamed Akram}
+\author{Mohamed Elsayed}
 \affiliation{%
   \institution{The American University in Cairo}
   \city{Cairo}
   \country{Egypt}}
 
 \begin{abstract}
-We compare the supervised models covered in the course on the Zillow property file for Los Angeles, Orange and Ventura counties, predicting the natural log of each home's 2016 assessed value. Before training anything we rebuilt the dataset to answer the Phase 1 and Phase 2 feedback, and Section~\ref{sec:feedback} maps each comment to the change it caused. The rebuilt table holds 2,859,302 homes described by 17 features, which expand to 606 model columns. Every model followed one protocol: a five-fold search for its settings on 2,287,442 training homes, one final fit on all of them, and a single score on 571,860 test homes that played no part in any choice. The regression models were also scored as five-band price classifiers, next to logistic regression, the perceptron and naive Bayes. On the test homes the neural network reached $R^2 = 0.467$ on the log value with a median miss of 32.5\%, against 0.436 and 33.8\% for linear regression. The three strongest models were \X, \X{} and \X. We choose \X{} \pending{provisional: the neural network, to be confirmed when every model has finished}.
+We compare the supervised models covered in the course on the Zillow property file for Los Angeles, Orange and Ventura counties, predicting the natural log of each home's 2016 assessed value. Before training anything we rebuilt the dataset to answer the Phase 1 and Phase 2 feedback, and Section~\ref{sec:feedback} maps each comment to the change it caused. The rebuilt table holds 2,859,302 homes described by 17 features, which expand to 606 model columns. Every model followed one protocol: a five-fold search for its settings on 2,287,442 training homes, one final fit on all of them, and a single score on 571,860 test homes that played no part in any choice. The regression models were also scored as five-band price classifiers, next to seven classifiers trained on the bands: logistic regression, the perceptron, naive Bayes, and the forms the slides teach for K-nearest neighbours, the support vector machine, the mixture of experts and the Bayesian network. The Bayesian network placed the most homes in the right band (42.6\%). On the test homes the neural network reached $R^2 = 0.467$ on the log value with a median miss of 32.5\%, against 0.436 and 33.8\% for linear regression. Ranked on validation, the three strongest models were the neural network, the random forest and K-nearest neighbours. Averaging those three by voting did not beat the network alone (0.3731 against 0.3725 on the log scale). We choose the neural network.
 \end{abstract}
 
 \keywords{model comparison, cross-validation, regression, classification, property valuation}
@@ -157,7 +157,11 @@ The winner is picked on MSE of the log because most of the models minimise squar
 For each model we report the MSE and the coefficient of determination ($R^2$) on the log value, $R^2$ and the root mean squared error (RMSE) in dollars, the median miss as a percentage of the true value, and the share of homes predicted within 20\% of their value. $R^2$ in dollars is pulled around by the most expensive homes, which is why the selection works on the log.
 
 \subsection{Price bands for the classification models}
-The brief asks a regression project to also try classifiers on a discretised label. We cut the log value into five bands of equal size at the training quintiles. The edges fall at \$165,080, \$269,041, \$387,279 and \$580,090, and each band holds about 457,400 training homes. Logistic regression, the perceptron and naive Bayes were trained on these bands with the same four steps, choosing the winner by the highest average validation accuracy. Each regression model's test predictions were also cut at the same edges, so every model appears in one band table. Band results report accuracy, the macro-averaged F1 score (equal weight to each band) and the share of homes placed within one band of the true band.
+The brief asks a regression project to also try classifiers on a discretised label. We cut the log value into five bands of equal size at the training quintiles. The edges fall at \$165,080, \$269,041, \$387,279 and \$580,090, and each band holds about 457,400 training homes. Seven classifiers were trained on these bands with the same four steps, choosing the winner by the highest average validation accuracy. Logistic regression, the perceptron, naive Bayes and the Bayesian network used every training home. To fit the time available, K-nearest neighbours and the mixture of experts were trained on a random sample of 100,000 training homes and the linear support vector classifier on 20,000 (seed 42). All seven were tested on all 571,860 test homes. Each regression model's test predictions were also cut at the same edges, so every model appears in one band table. Band results report accuracy, the macro-averaged F1 score (equal weight to each band) and the share of homes placed within one band of the true band.
+
+\subsection{Regression and classifier forms}
+\label{sec:forms}
+The slides teach linear regression as a regression model, and decision trees and random forests in both forms (Lecture 10). They teach K-nearest neighbours, the support vector machine and the ensembles of Lecture 13 as classifiers only. We first ran every model that has a regression form on the log value, because one score, the MSE of the log, can then rank them all. We then trained on the bands the classifier forms the slides teach for K-nearest neighbours and the support vector machine, and two models from the slides we had not run, the mixture of experts and the Bayesian network (Section~\ref{sec:slideforms}). The classifier forms of bagging, AdaBoost and voting, and the ID3 tree of Lecture 9, were not trained in this phase, so those three ensembles appear in regression form only.
 
 \subsection{Hardware and software}
 Everything ran on an Apple M1 Pro laptop with 16 GB of memory. The code is Python 3.12 with scikit-learn 1.8 \cite{pedregosa2011} and PyTorch 2.11 \cite{paszke2019}, which ran the neural network and the nearest-neighbour search on the laptop's graphics processor. Every random step uses seed 42 (or 42 plus the fold number), so a rerun repeats the same splits, samples and starting weights.
@@ -176,18 +180,22 @@ Model & Lecture & Settings searched & Held fixed & Winner \\
 Average and median baselines & -- & none & predict one number for every home & -- \\
 Linear regression & 4 & none & ordinary least squares, all 606 columns & -- \\
 Neural network & 7 & hidden layers 256--128, 128--64, 512--256; dropout 0 or 0.2; SGD at learning rate 0.1 or Adam at 0.001 (12 settings) & ReLU; batch 1,024; MSE loss; at most 100 passes; stop after 5 passes without improvement & 256--128, Adam 0.001, dropout 0.2 \\
-K-nearest neighbours & 3 & $k$ = 1, 3, 5, 10, 15, 20, 30, 50; Euclidean or cosine distance (16 settings) & exact search; prediction = mean log value of the $k$ neighbours & \X \\
+K-nearest neighbours & 3 & $k$ = 1, 3, 5, 10, 15, 20, 30, 50; Euclidean or cosine distance (16 settings) & exact search; prediction = mean log value of the $k$ neighbours & $k$ = 50, Euclidean \\
 Decision tree & 9, 10 & smallest leaf 1, 5, 20, 50, 200 homes & squared-error splits; no depth limit & smallest leaf 200 \\
-Random forest & 10, 13 & columns per split: square root (24), 10\% (60), 33\% (199) & 50 trees; bootstrap samples; smallest leaf 5 & \X \\
+Random forest & 10, 13 & columns per split: square root (24), 10\% (60), 33\% (199) & 50 trees; bootstrap samples; smallest leaf 5 & 10\% (60 columns) \\
 Bagging & 10, 13 & none & a forest that may split on all 606 columns; 50 trees; smallest leaf 5 & -- \\
-Support vector machine & 12 & penalty $C$ = 0.01 or 1; margin width $\epsilon$ = 0 or 0.05 (4 settings) & linear kernel; $\epsilon$-insensitive loss; at most 2,000 passes & \X \\
-AdaBoost.R2 & 13 & tree depth 4 or 8 & 50 rounds; linear loss & \X \\
-K-means clustering & 14 & 50, 200 or 1,000 clusters & mini-batches of 4,096; 3 restarts; home priced at its cluster's median & \X \\
-Hierarchical clustering & 14 & 50, 200 or 1,000 clusters & Ward linkage on 10,000 sampled homes; home joins nearest cluster centre & \X \\
-Voting & 13 & none & average of the three regression models with the best validation scores & \X, \X, \X \\
-Logistic regression & 5 & penalty $C$ = 0.01, 1, 100 & five bands; L2 penalty; at most 300 passes & \X \\
-Perceptron & 6 & 5 or 20 passes & five bands, one against the rest; no penalty & \X \\
-Naive Bayes & 11 & smoothing 0.1, 1, 10 & five bands; normal model for numbers, yes/no model for 0/1 columns & \X \\
+Support vector machine & 12 & penalty $C$ = 0.01 or 1; margin width $\epsilon$ = 0 or 0.05 (4 settings) & linear kernel; $\epsilon$-insensitive loss; at most 2,000 passes & $C$ = 0.01, $\epsilon$ = 0.05 \\
+AdaBoost.R2 & 13 & tree depth 4 or 8 & 50 rounds; linear loss & depth 8 \\
+K-means clustering & 14 & 50, 200 or 1,000 clusters & mini-batches of 4,096; 3 restarts; home priced at its cluster's median & 1,000 clusters \\
+Hierarchical clustering & 14 & 50, 200 or 1,000 clusters & Ward linkage on 10,000 sampled homes; home joins nearest cluster centre & 1,000 clusters \\
+Voting & 13 & none & average of the three regression models with the best validation scores & neural network, random forest, K-nearest neighbours \\
+Logistic regression & 5 & penalty $C$ = 0.01, 1, 100 & five bands; L2 penalty; at most 300 passes & $C$ = 1 \\
+Perceptron & 6 & 5 or 20 passes & five bands, one against the rest; no penalty & 5 passes \\
+Naive Bayes & 11 & smoothing 0.1, 1, 10 & five bands; normal model for numbers, yes/no model for 0/1 columns & smoothing 0.1 \\
+K-nearest neighbours, vote & 3 & $k$ = 1 to 50; Euclidean or cosine & majority vote; MinMax scaling; 100,000-home sample & $k$ = 30, Euclidean \\
+Linear SVM classifier & 12 & $C$ = 0.01, 0.1, 1, 10 & hinge loss; soft margin; one per band; 20,000-home sample & $C$ = 0.1 \\
+Mixture of experts & 13 & 2, 4 or 8 experts & linear softmax experts; softmax gate; Adam 0.001; 100,000-home sample & 8 experts \\
+Bayesian network & 11 & four parent sets for the band & counting with Laplace smoothing; all homes & ZIP code, living area, quality, year built \\
 \bottomrule
 \end{tabularx}
 \end{table*}
@@ -196,15 +204,19 @@ Naive Bayes & 11 & smoothing 0.1, 1, 10 & five bands; normal model for numbers, 
 \section{The Models One by One}
 \label{sec:models}
 
-Each subsection gives the model's setup and why its settings were chosen, its validation and test results, and how well it fits this problem. Table~\ref{tab:test} collects the test scores.
+Each subsection gives the model's setup and why its settings were chosen, its validation and test results, and how well it fits this problem. Each one ends with a verdict: whether the result is good or bad, why, and what we would change next. We judge every model against three marks on the test homes: the median baseline (MSE of the log 0.702), linear regression (0.394) and the best model (0.373). Section~\ref{sec:top} explains why no model here gets far below 0.37. Table~\ref{tab:test} collects the test scores.
 
 \subsection{Baselines}
 The average baseline predicts the average training value in dollars for every home, and the median baseline predicts the median. They learn nothing about homes, so they mark the score a model must beat to have learned anything. On the test homes the median baseline misses by a median of 45.4\% (MSE of the log 0.702) and the average baseline by 53.8\% (0.828). The average baseline's $R^2$ on the log is negative ($-0.18$): the average dollar value sits above the typical home, because a few very expensive homes pull it up.
+
+\emph{Verdict.} Both are bad by design. They set the floor, and every trained model beats them; even the weakest, AdaBoost at 0.4903, cuts the median baseline's error by 30\%.
 
 \subsection{Linear regression}
 Ordinary least squares fits one weight per model column \cite{hastie2009}. It has no setting to tune, so it ran on the five folds only to give a comparable validation score. The five fold scores sit between 0.3928 and 0.3952 (average 0.3943, spread 0.0010), and the test score is 0.3944, with $R^2 = 0.436$ on the log and a median miss of 33.8\%. Thirty percent of test homes land within 20\% of their value.
 
 Linear regression cuts the median baseline's error by 44\% using nothing but additive effects. On the log scale each column adds a fixed percentage to the value, so a ZIP code adds the same percentage to a small condominium as to a large house. The model cannot learn that the price of an extra square foot depends on where the home is. That limit is its main weakness here. In its favour, it fits in seconds and every weight can be read and checked.
+
+\emph{Verdict: good for so simple a model.} At 0.3944 it is only 0.0219 behind the best model, and it is the steadiest result in the study: a fold spread of 0.0010 and a test score within 0.0001 of validation. Two choices in our pipeline made a straight line work this well. The log label turns each column's effect into a percentage, and the one-hot location groups let every ZIP code, neighbourhood and tract carry a percentage of its own. What it cannot do is combine columns. Next we would add interaction columns, such as living area within each county, and a finer location signal through target encoding of the census block (Section~\ref{sec:limits}).
 
 \subsection{Neural network}
 The network is a fully connected feed-forward network trained by backpropagation \cite{rumelhart1986}: 606 inputs, two hidden layers with the ReLU activation, dropout after each hidden layer \cite{srivastava2014}, and one output for the log value. Training minimises the squared error in batches of 1,024 homes, reshuffled every pass. A run stops when the validation error has not improved for five passes, at most 100, and keeps the weights from its best pass.
@@ -243,10 +255,14 @@ The final network (256--128, Adam, dropout 0.2) trained from fresh weights on al
 
 The network can combine location with size and age, which linear regression cannot, and it trains on all 2.3 million homes in minutes because it reads them in batches. It is harder to explain to a homeowner than a list of weights, it depends on the optimiser and learning rate being right, and runs on the graphics processor can differ in the last digits between reruns.
 
+\emph{Verdict: good, the best model in the study.} It has the lowest validation and test error (0.3730 and 0.3725) and the best $R^2$ in dollars (0.569). Three parts of the process got it there. The search showed that dropout mattered most: with Adam, every size without dropout ranked last (0.3788 to 0.3798) and every size with it ranked first. Early stopping on the validation fold kept each run from training past its best pass. Training in batches let it learn from all 2.3 million homes. More tuning is unlikely to move it much, because the three best sizes are tied within 0.0007, and its remaining error looks like the label's rather than the model's (Section~\ref{sec:top}). The gains we would look for are in the data: a finer location signal, for example a learned embedding of the census block, and a label closer to market value if one can be found.
+
 \subsection{K-nearest neighbours}
 A home is priced at the mean log value of the $k$ training homes closest to it in the 606-column space \cite{cover1967}. Training only stores the homes, so all eight values of $k$ were scored from one neighbour search per distance. The search is exact, computed on the graphics processor in batches of 204 query homes against the 1.8 million homes of each fitting fold. Cosine distance compares the direction of two homes' columns and ignores their length, which is a different idea of ``similar'' from Euclidean distance; both were tried.
 
-The best setting was \X{} with a validation MSE of \X, and the final model scored \X{} on the test homes (median miss \X\%). \pending{Comment on the result once known: whether small $k$ copied label noise, and how the one-hot columns shaped the distances.} The model is easy to explain, since each prediction can be traced to real neighbouring homes. It is slow to query, though, because each new home is compared with every training home, and every one-hot column counts as much as the living area in the distance.
+The best setting was $k = 50$ with Euclidean distance, at a validation MSE of 0.3853, and the final model scored 0.3839 on the test homes (median miss 33.2\%). Small $k$ copied the label noise. With a single neighbour the validation MSE was 0.7307, worse than predicting the median for every home, and the error fell at every step up to $k = 50$, the largest value in the grid. It was still falling there (0.3872 at $k = 30$), so a larger $k$ might have done slightly better. The two distances were tied at every $k$ (0.3859 for cosine against 0.3853 at $k = 50$), most likely because 597 of the 606 columns are one-hot, so under either measure the distance mostly counts the groups two homes do not share. The model is easy to explain, since each prediction can be traced to real neighbouring homes. It is slow to query, though, because each new home is compared with every training home, and every one-hot column counts as much as the living area in the distance.
+
+\emph{Verdict: good, third on validation.} At 0.3839 it beats linear regression with no training at all. The choice of $k$ made it work: averaging 50 neighbours smooths away the noise a single neighbour copies (0.7307 at $k = 1$). One-hot location helped too, since the nearest homes usually share a ZIP code. Its weaknesses are cost and weighting. The final run took 45 minutes, almost all of it spent searching neighbours, and every column counts the same in the distance. Next we would extend the grid past $k = 50$, where the error was still falling, weight each neighbour by its distance, and scale the column groups so that location and size count by how much they matter.
 
 \subsection{Decision tree}
 A regression tree splits the homes in two again and again, choosing each split to cut the squared error most, and predicts the average log value of the homes in a leaf \cite{breiman1984}. We controlled its size by the smallest number of homes a leaf may hold. Pruning a grown tree by cost complexity would have been closer to the lecture, but a single full tree here takes about three minutes and the pruning grid would have taken days.
@@ -255,33 +271,127 @@ Leaf size mattered a great deal. With one home per leaf the tree memorised the t
 
 A tree reads like a set of rules a valuer would recognise, and it needs no scaling. Here, though, a single tree is beaten by linear regression, because it gives every home in a leaf the same value and so predicts in steps. Its main role in this study is as the building block of the forest, bagging and AdaBoost.
 
+\emph{Verdict: weak on its own.} At 0.4109 it trails linear regression. A tree predicts in steps, one value per leaf, and the leaves had to hold 200 homes before it stopped memorising noise. The search over leaf size is what made it usable at all, since one home per leaf scored 0.724. Cost-complexity pruning on a sample of homes is the next thing to try, but the larger gain comes from averaging many trees, as the next sections show.
+
 \subsection{Random forest}
 A random forest averages many trees, each grown on a bootstrap sample of the homes and allowed to split on only a random share of the columns at each split \cite{breiman2001}. We searched that share (24, 60 or 199 of the 606 columns) and fixed 50 trees with at least 5 homes per leaf. One forest tree grown to single-home leaves on these homes has about two million nodes; with 5 homes per leaf it has about 276,000, which is what lets 50 of them fit in memory.
 
-The best share was \X{} (validation MSE \X), and the final forest scored \X{} on the test homes with a median miss of \X\%. \pending{Comment once known: did averaging fix the single tree's overfitting, and which share won.} Forests are strong on tabular data and rarely need careful tuning. They are large in memory, slow to train on this many homes, and much harder to read than one tree.
+The best share was 10\% of the columns, 60 per split (validation MSE 0.3799), and the final forest scored 0.3788 on the test homes with a median miss of 32.6\%. Averaging fixed most of the single tree's overfitting. A single tree with 5-home leaves scored 0.531 on validation, yet 50 such trees averaged together scored 0.3799, ahead of the best single tree (0.4136) and of linear regression (0.3943). The middle share won: 24 columns scored 0.3831 and 199 scored 0.3861. With too few columns each tree is weak, and with too many the trees grow alike, so their errors stop cancelling when they are averaged. Forests are strong on tabular data and rarely need careful tuning. They are large in memory, slow to train on this many homes, and much harder to read than one tree.
+
+\emph{Verdict: good, second on validation.} At 0.3788 the forest is the best tree model by a wide margin, 0.0321 ahead of the single tree. Two choices made it work: averaging 50 trees removes most of each tree's noise, and the search over the column share found the setting, 60 columns per split, where each tree is strong but the trees still differ. Memory was the limit. With 16 GB we could not grow deeper trees or more of them, and the final forest took 21 minutes. On a larger machine we would try more trees with smaller leaves, and compare against gradient-boosted trees, which the course does not cover.
 
 \subsection{Bagging}
-Bagging is the same forest with every column available at every split \cite{breiman1996}, so the trees differ only through their bootstrap samples. Comparing it with the random forest shows how much the random column choice adds. Bagging scored \X{} on validation and \X{} on the test homes. \pending{Comment once known: whether bagging's trees were too alike compared with the forest's.}
+Bagging is the same forest with every column available at every split \cite{breiman1996}, so the trees differ only through their bootstrap samples. Comparing it with the random forest shows how much the random column choice adds. Bagging scored 0.3962 on validation and 0.3953 on the test homes, behind the forest (0.3799) and even slightly behind linear regression. With every column open at every split, the trees most likely choose the same strong columns, living area and ZIP code, near the top, so they make similar mistakes and averaging cancels fewer of them. It was also the slowest final fit of any model: 1.9 hours, against 21 minutes for the forest.
+
+\emph{Verdict: bad next to the forest.} It trails the forest by 0.0165 and took five times as long. The cause is the one this comparison was built to show: without a random choice of columns the trees are too much alike. As a control, bagging did its job. The fix is the forest itself; if bagging had to stay, smaller bootstrap samples would at least cut its time.
 
 \subsection{Support vector machine}
-A linear support vector machine for regression ignores misses smaller than a margin $\epsilon$ and penalises larger ones in proportion to their size, weighted by $C$ \cite{cortes1995}. A kernel version would need a comparison between every pair of the 1.8 million homes, so we used the linear solver built for large data \cite{ho2012}. We searched $C$ (0.01 or 1) and $\epsilon$ (0 or 0.05 on the log scale, where 0.05 means misses under about 5\% cost nothing). The best setting was \X{} with validation MSE \X, and the test score was \X. \pending{Comment once known: a linear model with absolute-error loss should land close to linear regression; say whether it did.}
+A linear support vector machine for regression ignores misses smaller than a margin $\epsilon$ and penalises larger ones in proportion to their size, weighted by $C$ \cite{cortes1995}. A kernel version would need a comparison between every pair of the 1.8 million homes, so we used the linear solver built for large data \cite{ho2012}. We searched $C$ (0.01 or 1) and $\epsilon$ (0 or 0.05 on the log scale, where 0.05 means misses under about 5\% cost nothing). The best setting was $C = 0.01$ with $\epsilon = 0.05$, at a validation MSE of 0.4120, and the test score was also 0.4120. All four settings scored between 0.4120 and 0.4125, inside one fold spread, so neither the penalty nor the margin mattered. The model did not land close to linear regression; it finished 0.018 behind it. Its loss grows with the size of a miss rather than with its square, so it fits the median home rather than the mean. The scores show this: it has the best median miss of any model (31.6\%) but a worse squared error, which is the score we rank on.
+
+\emph{Verdict: mixed.} Ranked by squared error it is sixth on validation (0.4120), but it has the best median miss of every model (31.6\%) and the largest share of homes within 20\% (32.2\%). Both come from its loss: a miss counts by its size, not its square, so the few homes with huge misses, many of them probably mislabelled, do not pull the fit around. On this label that is a strength. The weakness is the linear kernel, which cannot combine columns. Next we would approximate a nonlinear kernel with random features, which keeps the cost manageable on this many homes, and report the median miss beside the MSE when ranking models.
 
 \subsection{AdaBoost}
-AdaBoost.R2 \cite{freund1997,drucker1997} fits trees one after another, drawing each round's sample so that the homes earlier rounds missed most appear more often, and combines the rounds by a weighted median. We ran 50 rounds and searched the depth of each tree (4 or 8). The best depth was \X{} (validation MSE \X), and the test score was \X. \pending{Comment once known: boosting chases the hardest homes, and in this file many of those are homes whose assessed value lags their market value, so it may chase noise.}
+AdaBoost.R2 \cite{freund1997,drucker1997} fits trees one after another, drawing each round's sample so that the homes earlier rounds missed most appear more often, and combines the rounds by a weighted median. We ran 50 rounds and searched the depth of each tree (4 or 8). The best depth was 8 (validation MSE 0.4843; depth 4 scored 0.5017), and the test score was 0.4903, the weakest of the supervised models and behind a single tree. Its fold spread was also the largest we measured: 0.0048 at depth 8 and 0.0085 at depth 4. Each round gives more weight to the homes earlier rounds missed. In this file many of those are probably homes whose assessed value lags their market value, so boosting spends its rounds on errors no feature can explain.
+
+\emph{Verdict: bad, the weakest supervised model.} At 0.4903 it is behind even a single tree, and its fold spread is the largest in the study, so it is also the least predictable. Boosting assumes that the homes it misses are hard but learnable. Here many of them are probably homes whose label no feature can explain, and AdaBoost.R2 samples them more and more often. We would replace it with gradient boosting under a loss that caps the pull of large misses, such as the Huber loss, and a small learning rate, so that no single home can dominate the later rounds.
 
 \subsection{K-means clustering}
-Clustering is unsupervised, so we turned it into a predictor: the training homes are grouped into $k$ clusters without looking at the label, and a home is priced at the median log value of the training homes in its cluster. K-means \cite{lloyd1982} ran in mini-batches of 4,096 homes \cite{sculley2010}, which keeps it fast on 1.8 million rows, with three restarts. The best number of clusters was \X{} (validation MSE \X), and the test score was \X. \pending{Comment once known: the clusters follow ZIP code and size, which the label also follows, but each cluster gets one price.}
+Clustering is unsupervised, so we turned it into a predictor: the training homes are grouped into $k$ clusters without looking at the label, and a home is priced at the median log value of the training homes in its cluster. K-means \cite{lloyd1982} ran in mini-batches of 4,096 homes \cite{sculley2010}, which keeps it fast on 1.8 million rows, with three restarts. The best number of clusters was 1,000 (validation MSE 0.4541), and the test score was 0.4532. More clusters helped at every step (0.5074 with 50, 0.4778 with 200), and 1,000 was the largest value tried. Even so, the model trails linear regression by 0.059 on the test homes. The clusters are formed without looking at the label, and every home in a cluster gets the same price.
+
+\emph{Verdict: bad, as expected for a model that never sees the label.} The clusters group homes that look alike across 606 columns, not homes that cost alike, and every home in a cluster gets one price. Since more clusters helped at every step, the next run should go past 1,000. The better use of the clusters is probably as an extra column for a supervised model rather than as the predictor itself.
 
 \subsection{Hierarchical clustering}
-Ward's agglomerative method \cite{ward1963} merges the two clusters whose merge adds the least spread, starting from single homes. It needs the distance between every pair of homes, about $1.7 \times 10^{12}$ pairs for all the training homes, so we built the hierarchy on a random sample of 10,000 and then assigned every home to the nearest cluster centre. Prices come from cluster medians, as in K-means. The best number of clusters was \X{} (validation MSE \X), and the test score was \X. The sample is the obvious weakness: a cluster structure learned from about half a percent of the homes may miss small expensive neighbourhoods.
+Ward's agglomerative method \cite{ward1963} merges the two clusters whose merge adds the least spread, starting from single homes. It needs the distance between every pair of homes, about $1.7 \times 10^{12}$ pairs for all the training homes, so we built the hierarchy on a random sample of 10,000 and then assigned every home to the nearest cluster centre. Prices come from cluster medians, as in K-means. The best number of clusters was 1,000 (validation MSE 0.4559), and the test score was 0.4556. At every number of clusters it finished within 0.002 of K-means, so building the hierarchy on a sample cost little overall. The sample is still the obvious weakness: a cluster structure learned from about half a percent of the homes may miss small expensive neighbourhoods.
+
+\emph{Verdict: bad, for the same reason as K-means.} Its 0.4556 is within 0.003 of K-means, so the 10,000-home sample cost little, but one price per cluster still holds it back. With more memory we would build the hierarchy on a larger sample. The bigger change is the one proposed for K-means: use the clusters as a feature, not as the prediction.
 
 \subsection{Voting}
-Voting averages the log predictions of the three regression models with the lowest average validation MSE \cite{dietterich2000}. The members were picked on validation scores only, so the test homes still played no part. The members were \X, \X{} and \X, and the vote scored \X{} on the test homes. Voting has no validation score of its own, so it cannot be ranked against the other models on validation and is reported on the test homes only. \pending{Comment once known: averaging helps most when the members make different mistakes.}
+Voting averages the log predictions of the three regression models with the lowest average validation MSE \cite{dietterich2000}. The members were picked on validation scores only, so the test homes still played no part. The members were the neural network, the random forest and K-nearest neighbours, and the vote scored 0.3731 on the test homes. Voting has no validation score of its own, so it cannot be ranked against the other models on validation and is reported on the test homes only. It did slightly worse than the network alone (0.3725). Averaging helps when the members make different mistakes, and these three do not: the correlation between any two members' test errors is 0.977 to 0.981, and 88\% of the network's worst tenth of homes are also among the forest's worst tenth. So the vote pulled the network toward its two weaker partners rather than cancelling errors.
 
-\subsection{Price-band classifiers}
-Logistic regression \cite{cox1958} models the probability of each band as a softmax of a linear score, with an L2 penalty whose strength is set by $C$; we searched $C$ = 0.01, 1 and 100. The perceptron \cite{rosenblatt1958} learns one linear boundary per band against the rest, and we searched 5 or 20 passes. Naive Bayes \cite{domingos1997} treats the columns as independent within a band; it uses a normal distribution for each of the seven standardized numbers and a yes/no probability for each 0/1 column, with smoothing 0.1, 1 or 10.
+\emph{Verdict: no gain.} It is second on the test homes but 0.0006 worse than the network alone. Our rule chose members by validation score only, which picks three good models but not three different ones. Next time we would pick members whose errors differ, for example a model with a different loss such as the support vector machine, or learn the weight of each member on the validation folds instead of averaging equally.
 
-The winners were \X, \X{} and \X. On the test homes they placed \X\%, \X\% and \X\% of homes in the right band (macro F1 \X, \X, \X). Guessing the most common band would score about 20\%. \pending{Comment once known: compare with the regression models cut into bands in Table~\ref{tab:bands}; the independence assumption of naive Bayes is badly broken by groups such as ZIP code and neighbourhood, which describe the same place.}
+\subsection{Logistic regression}
+\label{sec:logistic}
+Logistic regression \cite{cox1958} is the first of the three classifiers. It predicts a price band, not a value. For each of the five bands it computes a linear score from the 606 columns, turns the five scores into probabilities with the softmax function, and gives the home the most probable band. Training minimises the cross-entropy between those probabilities and the true bands, with an L2 penalty on the weights whose strength is set by $C$; a smaller $C$ means a stronger penalty. We searched $C$ = 0.01, 1 and 100 with the L-BFGS solver and at most 300 passes. Guessing the most common band would be right about 20\% of the time.
+
+\begin{table}[t]
+\caption{Logistic regression search: average over the five validation folds. Spread is the standard deviation of the five accuracies.}
+\label{tab:logistic}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+$C$ & Accuracy & Spread & Macro & Within one & Seconds \\
+ & (\%) & & F1 & band (\%) & per fold \\
+\midrule
+0.01 & 41.04 & 0.04 & 0.396 & 75.08 & 67 \\
+1 & 41.16 & 0.05 & 0.397 & 75.26 & 129 \\
+100 & 41.16 & 0.04 & 0.397 & 75.27 & 126 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+$C = 1$ won with an average validation accuracy of 41.16\% (Table~\ref{tab:logistic}), ahead of $C = 100$ by less than 0.01 points and of $C = 0.01$ by 0.12. The penalty hardly mattered: with 2.3 million training homes and 606 columns the model has little room to overfit, so a penalty has little to correct. One caveat. With $C$ = 1 and 100, every fit, the final one included, stopped at the 300-pass limit before the solver's convergence test was met; with $C$ = 0.01 it converged. Because the three settings score almost the same, more passes would probably change little, but we did not test it.
+
+The final model was fitted and scored in 2.8 minutes. It placed 41.2\% of test homes in the right band, with a macro F1 of 0.398, and 75.3\% within one band. That beats every regression model cut into bands, the best of which is the neural network at 38.8\%; of the models trained on the bands, only the Bayesian network and the mixture of experts did better (Section~\ref{sec:slideforms}). Logistic regression is trained for exactly this task, while the regression models are trained to get the value close, not to land on the right side of a band edge. On the looser score the regression models win: the network puts 81.8\% of homes within one band.
+
+\begin{table}[t]
+\caption{Logistic regression on the test homes: the share of each true band given each predicted band. Rows add up to 100\%.}
+\label{tab:logistic-bands}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+True band & 1 & 2 & 3 & 4 & 5 \\
+\midrule
+1 (under \$165,080) & \textbf{46.6} & 22.2 & 7.5 & 14.3 & 9.4 \\
+2 & 32.9 & \textbf{32.5} & 14.0 & 13.9 & 6.7 \\
+3 & 24.5 & 21.3 & \textbf{17.8} & 25.8 & 10.7 \\
+4 & 18.4 & 8.1 & 13.8 & \textbf{35.9} & 23.7 \\
+5 (over \$580,090) & 7.3 & 0.9 & 1.6 & 16.7 & \textbf{73.4} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:logistic-bands} shows where it goes wrong. The dearest band is the easiest (73.4\% correct) and the middle band the hardest (17.8\%), because a middle band can be confused with a neighbour on either side. The cheapest band shows the label problem again: 23.7\% of its homes are placed in band 4 or 5, at least three bands too high. A home bought decades ago in an expensive area keeps a low assessed value under Proposition 13 while its features describe an expensive home. That is the likely cause, though the file cannot confirm it.
+
+\emph{Verdict: good at its own task, with two weaknesses.} It beats every regression model at the exact band (41.2\%), because it is trained to choose a band; only the Bayesian network and the mixture of experts, also trained on the bands, do better. First, it treats the five bands as unordered labels, so placing a band-1 home in band 5 costs no more than placing it in band 2. That is likely one reason 9.4\% of band-1 homes land in band 5. An ordinal model, which knows the bands are ordered, would be our next step. Second, the two weaker penalties stopped at the pass limit; a rerun with more passes would confirm that the score has settled.
+
+\subsection{Perceptron and naive Bayes}
+The perceptron \cite{rosenblatt1958} learns one linear boundary per band against the rest, and we searched 5 or 20 passes. Naive Bayes \cite{domingos1997} treats the columns as independent within a band. It uses a normal distribution for each of the seven standardized numbers and a yes/no probability for each 0/1 column, with smoothing 0.1, 1 or 10.
+
+The perceptron won with 5 passes (validation accuracy 33.90\%) and naive Bayes with smoothing 0.1 (38.39\%; the three smoothing values were within 0.03 points). On the test homes they placed 34.9\% and 38.5\% of homes in the right band, with macro F1 scores of 0.339 and 0.362 and 71.7\% and 70.6\% within one band. Both trail logistic regression. The perceptron was the least steady model in the study. Its validation accuracy varied by 1.8 points between folds with 5 passes and by 3.1 with 20, against 0.05 or less for the other two classifiers. When straight boundaries cannot separate the bands, the perceptron never settles, so where it stops depends on the last homes it saw; 20 passes did worse (31.72\%). Naive Bayes trails logistic regression by 2.8 points. Its independence assumption is badly broken here: ZIP code, neighbourhood, census tract and zoning all describe the same place, and the model counts that evidence several times.
+
+\emph{Verdict: both bad, for different reasons.} The perceptron (34.9\%) is the weakest classifier and the least steady, because it has no probability to optimise and never settles on bands that straight lines cannot separate. The usual fix is the averaged perceptron, which averages its weights over every pass. Naive Bayes (38.5\%) is the fastest classifier, 6 seconds for the final fit, but its independence assumption double-counts location. Giving it a single location group, ZIP code, would be the first thing to try.
+
+\subsection{K-nearest neighbours as a classifier}
+\label{sec:slideforms}
+The next four models were trained on the bands in the form the slides teach. This one is Lecture 3's: a home gets the most common band among its $k$ nearest training homes, and the features are MinMax scaled, so each of the seven number columns runs from 0 to 1 over the homes the model is fitted on. A tie goes to the tied band that holds the nearest neighbour. We searched $k$ from 1 to 50 with Euclidean and cosine distance on a random sample of 100,000 training homes, and tested on all test homes.
+
+$k = 30$ with Euclidean distance won (validation accuracy 39.27\%), and the final model placed 39.6\% of test homes in the right band (macro F1 0.386, 73.2\% within one band). A single neighbour scored 36.5\%. Accuracy rose steeply up to $k = 15$ and then levelled off between 39.1\% and 39.3\%. Euclidean matched or beat cosine at every $k$, by up to 0.6 points.
+
+\emph{Verdict: fair, held back by its sample.} It beats naive Bayes and the perceptron but trails logistic regression by 1.7 points, and logistic regression saw 23 times as many homes. Trained for the band directly, the vote does better than its own regression form cut into bands (38.3\%), even with a twentieth of the homes. Next we would run it on every training home, about six hours of neighbour search on the laptop's graphics processor, and weight each column group by its importance in the distance.
+
+\subsection{Linear support vector classifier}
+This is the classifier Lecture 12 teaches: a maximum-margin hyperplane with the hinge loss. The bands overlap, so the hard margin of the slides has no solution; we used the soft margin, where each mistake costs $C$ times its distance past the margin. The slides cover two classes, so there is one machine per band against the rest. We searched $C$ = 0.01, 0.1, 1 and 10 on a random sample of 20,000 training homes and tested on all test homes.
+
+$C = 0.1$ won (34.38\% on validation), and the test accuracy was 34.2\% (macro F1 0.294, 64.4\% within one band).
+
+\emph{Verdict: bad, the weakest band model.} It trails logistic regression, also a linear model, by 7.1 points. It saw 20,000 homes, under a hundredth of what logistic regression saw, and its folds varied by 0.7 to 1.4 points, so the sample was too small to be steady. With $C$ of 0.1 and above, 11 of the 15 search fits stopped at 10,000 passes before converging; the final fit converged. The hinge loss also gives no probabilities, so the five machines are compared on raw scores that share no common scale. Next we would train it on every home, which the linear form allows in one to three hours, before judging the method itself.
+
+\subsection{Mixture of experts}
+Lecture 13 presents the mixture of experts as the answer to boosting's sequential training: several expert classifiers are trained at the same time on the same homes, and a gating network with a softmax decides how much to trust each expert for each home. Our experts are linear softmax classifiers over the 606 columns, and a band's probability is the gate-weighted sum of the experts' probabilities. Experts and gate were trained together with Adam at a learning rate of 0.001 in batches of 1,024, stopping when the error on 10\% of the fitting homes, held out for the purpose, had not improved for five passes. We searched 2, 4 or 8 experts on a random sample of 100,000 training homes and tested on all test homes.
+
+Eight experts won (42.06\% on validation), and the final model placed 42.3\% of test homes in the right band (macro F1 0.411, 76.3\% within one band), second of all models.
+
+\emph{Verdict: good.} With a twentieth of the homes it beats logistic regression trained on all of them (41.2\%). The gain comes from the gate: a mixture with a single expert is logistic regression, and accuracy rose with every expert added (41.31\%, 41.58\%, 42.06\%). A likely reason is that the three counties record different columns and price the same features differently, so experts that specialise in one part of the market help, and the gate lets them. Eight was the largest number tried and accuracy was still rising, so the next run should try more experts on every training home.
+
+\subsection{Bayesian network}
+Lecture 11 builds the network from causal relationships and learns each node's table by counting. A home's location, size, quality and age cause its value, so the price band is a child of those features. The slides say to try several structures and keep the best performing one, so we compared four parent sets for the band by five-fold cross-validation, each with ZIP code and living area, adding building quality, year built, or both. Number features were cut at the quintiles of the fitting homes. Each table entry is $P(\text{band} \mid \text{parents}) = (n + 1)/(N + 5)$, where $n$ counts the homes with that band and those parent values and $N$ the homes with those parent values; the $+1$ (Laplace smoothing) keeps an unseen band from probability 0. Every feature is known when a home is priced, so the prediction reads only the band's own table, and edges between features do not change it. One step goes beyond the slides: a home whose parent values never occur among the fitting homes falls back to fewer parents (back-off). The network only counts, so it ran on every training home in about 12 seconds per fold.
+
+The four-parent structure won (42.44\% on validation): ZIP code, living area, building quality and year built. The final network placed 42.6\% of test homes in the right band (macro F1 0.411, 74.9\% within one band), the best exact-band score of any model.
+
+\emph{Verdict: good, the best band model.} It leads the mixture of experts (42.3\%) and logistic regression (41.2\%), with a fold spread of only 0.10 points. The causal structure is what made it work: with only four parents each table entry is learned from many homes, and the table lets location and size combine, which a linear model cannot do. Each added parent helped: 40.74\% with two, 41.73\% or 42.09\% with three, 42.44\% with four. Year built helped more than building quality, possibly because older homes were more often bought long ago, which ties to the Proposition 13 effect. Its weakness is the size of its tables: every added parent multiplies the number of combinations, so a fifth parent would leave many combinations with too few homes. Next we would try more structures with the slide's ordering method, and finer location such as the census tract as a parent.
 
 %% ---------------------------------------------------------------------------------------------------------------
 \section{All Models Side by Side}
@@ -297,16 +407,16 @@ Model & Validation MSE & Test MSE & Test $R^2$ & Test $R^2$ & RMSE & Median & Wi
  & (log) & (log) & (log) & (\$) & (\$) & miss (\%) & 20\% (\%) \\
 \midrule
 Neural network & 0.3730 & 0.3725 & 0.467 & 0.569 & 405,643 & 32.5 & 31.6 \\
+Random forest & 0.3799 & 0.3788 & 0.458 & 0.495 & 439,367 & 32.6 & 31.7 \\
+K-nearest neighbours & 0.3853 & 0.3839 & 0.451 & 0.508 & 433,416 & 33.2 & 30.9 \\
 Linear regression & 0.3943 & 0.3944 & 0.436 & 0.490 & 441,385 & 33.8 & 30.0 \\
+Bagging & 0.3962 & 0.3953 & 0.435 & 0.543 & 417,993 & 33.2 & 31.5 \\
+Support vector machine & 0.4120 & 0.4120 & 0.411 & 0.496 & 439,039 & 31.6 & 32.2 \\
 Decision tree & 0.4136 & 0.4109 & 0.412 & 0.454 & 456,740 & 34.7 & 29.6 \\
-Random forest & \X & \X & \X & \X & \X & \X & \X \\
-Bagging & \X & \X & \X & \X & \X & \X & \X \\
-Support vector machine & \X & \X & \X & \X & \X & \X & \X \\
-AdaBoost.R2 & \X & \X & \X & \X & \X & \X & \X \\
-K-nearest neighbours & \X & \X & \X & \X & \X & \X & \X \\
-K-means clustering & \X & \X & \X & \X & \X & \X & \X \\
-Hierarchical clustering & \X & \X & \X & \X & \X & \X & \X \\
-Voting (top three) & -- & \X & \X & \X & \X & \X & \X \\
+K-means clustering & 0.4541 & 0.4532 & 0.352 & 0.354 & 496,685 & 34.6 & 29.8 \\
+Hierarchical clustering & 0.4559 & 0.4556 & 0.349 & 0.350 & 498,451 & 34.7 & 29.8 \\
+AdaBoost.R2 & 0.4843 & 0.4903 & 0.299 & 0.387 & 483,984 & 42.4 & 22.3 \\
+Voting (top three) & -- & 0.3731 & 0.466 & 0.527 & 425,368 & 32.5 & 31.8 \\
 Median baseline & 0.7011 & 0.7021 & $-0.004$ & $-0.036$ & 629,192 & 45.4 & 22.3 \\
 Average baseline & 0.8261 & 0.8278 & $-0.184$ & 0.000 & 618,192 & 53.8 & 20.9 \\
 \bottomrule
@@ -314,7 +424,7 @@ Average baseline & 0.8261 & 0.8278 & $-0.184$ & 0.000 & 618,192 & 53.8 & 20.9 \\
 \end{table*}
 
 \begin{table}[t]
-\caption{Every model on the five price bands of the test homes. Band models were trained on the bands; regression models had their predictions cut at the same edges.}
+\caption{Every model on the five price bands of the test homes. Band models were trained on the bands; regression models had their predictions cut at the same edges. $^{a}$Trained on 100,000 sampled homes; $^{b}$on 20,000.}
 \label{tab:bands}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -324,24 +434,38 @@ Model & Accuracy & Macro & Within one \\
  & (\%) & F1 & band (\%) \\
 \midrule
 \multicolumn{4}{@{}l}{\emph{Trained on the bands}} \\
-Logistic regression & \X & \X & \X \\
-Perceptron & \X & \X & \X \\
-Naive Bayes & \X & \X & \X \\
+Bayesian network & 42.6 & 0.411 & 74.9 \\
+Mixture of experts$^{a}$ & 42.3 & 0.411 & 76.3 \\
+Logistic regression & 41.2 & 0.398 & 75.3 \\
+K-nearest neighbours, vote$^{a}$ & 39.6 & 0.386 & 73.2 \\
+Naive Bayes & 38.5 & 0.362 & 70.6 \\
+Perceptron & 34.9 & 0.339 & 71.7 \\
+Linear SVM classifier$^{b}$ & 34.2 & 0.294 & 64.4 \\
 \multicolumn{4}{@{}l}{\emph{Regression models, cut into bands}} \\
-Neural network & \X & \X & \X \\
-Linear regression & \X & \X & \X \\
-\pending{every other regression model} & \X & \X & \X \\
+Neural network & 38.8 & 0.394 & 81.8 \\
+Random forest & 38.7 & 0.393 & 81.6 \\
+K-nearest neighbours & 38.3 & 0.390 & 81.1 \\
+Linear regression & 37.3 & 0.379 & 80.7 \\
+Bagging & 38.7 & 0.395 & 80.6 \\
+Support vector machine & 38.7 & 0.383 & 82.4 \\
+Decision tree & 36.7 & 0.371 & 80.0 \\
+K-means clustering & 34.8 & 0.335 & 79.7 \\
+Hierarchical clustering & 34.7 & 0.333 & 79.8 \\
+AdaBoost.R2 & 30.6 & 0.300 & 70.8 \\
+Voting (top three) & 38.8 & 0.394 & 81.8 \\
+Median baseline & 20.0 & 0.067 & 60.0 \\
+Average baseline & 20.1 & 0.067 & 60.1 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:test} ranks the regression models by validation and shows their test scores next to it. Table~\ref{tab:bands} shows the same comparison as a five-class problem. \pending{Two or three sentences once the tables are full: which family won, how far the best model is from linear regression, and whether the band table agrees with the regression ranking.}
+Table~\ref{tab:test} ranks the regression models by validation and shows their test scores next to it. Table~\ref{tab:bands} shows the same comparison as a five-class problem. The neural network won, followed by the two models that average many predictions, the forest and K-nearest neighbours. The field is close, though. The network beats linear regression by only 0.0219 on the log scale, 5.6\% of linear regression's error, and apart from AdaBoost and the two clusterings every model lands between 0.3725 and 0.4120 on the test homes. The band table keeps roughly the same order among the regression models, but the top six sit within 0.6 points of each other, so the bands cannot separate them. The models trained on the bands themselves stand clear at the exact band: the Bayesian network (42.6\%), the mixture of experts (42.3\%) and logistic regression (41.2\%) all beat every regression model cut into bands.
 
 %% ---------------------------------------------------------------------------------------------------------------
 \section{The Top Three Models}
 \label{sec:top}
 
-Ranked by average validation MSE of the log, the three strongest models are \X, \X{} and \X{} (Table~\ref{tab:top}). \pending{At the time of writing, the neural network leads with 0.3730.}
+Ranked by average validation MSE of the log, the three strongest models are the neural network, the random forest and K-nearest neighbours (Table~\ref{tab:top}). The network leads the forest by 0.0069 on validation, several times the fold spread of about 0.001, and the order holds on the test homes. For the forest and K-nearest neighbours the final time includes predicting the test homes; for K-nearest neighbours that prediction is nearly all of it, because training only stores the homes.
 
 \begin{table}[t]
 \caption{The three strongest models. Spread is the standard deviation of the five validation folds; county and band rows give the test median miss.}
@@ -350,18 +474,19 @@ Ranked by average validation MSE of the log, the three strongest models are \X, 
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrr@{}}
 \toprule
- & \X & \X & \X \\
+ & Neural & Random & K-nearest \\
+ & network & forest & neighbours \\
 \midrule
-Validation MSE (log) & \X & \X & \X \\
-Fold spread & \X & \X & \X \\
-Test MSE (log) & \X & \X & \X \\
-Test median miss (\%) & \X & \X & \X \\
-\quad Los Angeles & \X & \X & \X \\
-\quad Orange & \X & \X & \X \\
-\quad Ventura & \X & \X & \X \\
-\quad cheapest band & \X & \X & \X \\
-\quad dearest band & \X & \X & \X \\
-Final training time & \X & \X & \X \\
+Validation MSE (log) & 0.3730 & 0.3799 & 0.3853 \\
+Fold spread & 0.0010 & 0.0011 & 0.0013 \\
+Test MSE (log) & 0.3725 & 0.3788 & 0.3839 \\
+Test median miss (\%) & 32.5 & 32.6 & 33.2 \\
+\quad Los Angeles & 33.6 & 33.9 & 34.5 \\
+\quad Orange & 31.0 & 31.0 & 31.4 \\
+\quad Ventura & 28.4 & 28.0 & 28.6 \\
+\quad cheapest band & 162.6 & 162.0 & 155.5 \\
+\quad dearest band & 35.8 & 36.4 & 36.8 \\
+Final run (minutes) & 4.5 & 21.4 & 45.2 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -369,11 +494,11 @@ Final training time & \X & \X & \X \\
 \subsection{Where the variability comes from}
 \textbf{Between folds.} The five fold scores of one setting vary very little: the spread is 0.0010 for linear regression, between 0.0006 and 0.0033 for the network settings, and between 0.0011 and 0.0021 for the decision trees. Each fold holds about 457,000 homes, so a fold's average error is already a very stable number. The practical rule we draw from this is that two settings closer than about 0.002 are tied. The three best network settings fall inside that margin, and so do the decision trees with leaves of 50 and 200 homes. SGD runs varied more than Adam runs (0.0019 to 0.0033 against 0.0006 to 0.0014), and their best pass ranged from 14 to 39. A large fixed learning rate makes the error bounce from pass to pass, so where a run stops depends on luck.
 
-\textbf{Between validation and test.} The test scores agree with validation to within a fold spread: 0.3730 against 0.3725 for the network, 0.3943 against 0.3944 for linear regression. \pending{add the other top-three models}. The test homes were never used to choose anything, so this agreement suggests the search did not overfit the folds. The decision tree did slightly better on the test homes than on validation (0.4109 against 0.4136). Its final fit saw all 2.3 million training homes instead of the 1.8 million of a fold, and with a fixed minimum of 200 homes per leaf, more homes allow more and finer leaves.
+\textbf{Between validation and test.} The test scores agree with validation to within a fold spread: 0.3730 against 0.3725 for the network, 0.3943 against 0.3944 for linear regression, 0.3799 against 0.3788 for the forest and 0.3853 against 0.3839 for K-nearest neighbours. AdaBoost moved the most, 0.0060 worse on the test homes, in line with its unusually large fold spread (0.0048). The test homes were never used to choose anything, so this agreement suggests the search did not overfit the folds. The decision tree did slightly better on the test homes than on validation (0.4109 against 0.4136). Its final fit saw all 2.3 million training homes instead of the 1.8 million of a fold, and with a fixed minimum of 200 homes per leaf, more homes allow more and finer leaves.
 
-\textbf{Between models.} The differences between models are larger than the differences between folds, and they follow how each model handles noise. The decision tree with one home per leaf copies each training home's label, including its noise, and its error nearly doubles. Averaging (forest, bagging, voting) and larger leaves smooth that noise away. \pending{expand with the forest and K-nearest-neighbour results.}
+\textbf{Between models.} The differences between models are larger than the differences between folds, and they follow how each model handles noise. The decision tree with one home per leaf copies each training home's label, including its noise, and its error nearly doubles. Averaging (forest, bagging, voting) and larger leaves smooth that noise away. K-nearest neighbours shows the same pattern: one neighbour scored 0.7307 on validation and 50 neighbours 0.3853. The forest averages 50 trees with 5-home leaves, a leaf size that scored 0.531 as a single tree, and becomes the second-best model at 0.3799.
 
-\textbf{Between parts of the market.} \pending{Fill from Table~\ref{tab:top}: whether the top models miss more in one county or one price band. Los Angeles never records garage area, fireplaces or stories, so homes there are described by fewer columns.}
+\textbf{Between parts of the market.} All three top models miss most in Los Angeles (median miss 33.6\% to 34.5\%) and least in Ventura (28.0\% to 28.6\%), with Orange in between (Table~\ref{tab:top}). One likely reason is that Los Angeles never records garage area, fireplaces or stories, so its homes are described by fewer columns; it also holds 68\% of the test homes. The price bands split far more sharply. In the cheapest fifth of homes the median miss is 155\% to 163\%, and the models price those homes too high, at about 2.6 times their assessed value for the median home. In the dearest fifth the miss is 36\% to 37\% and the models price too low, by about 34\%. This is the pattern Proposition 13 would produce: a home bought long ago keeps a low assessed value that its features cannot explain, and the models price it like its neighbours.
 
 \textbf{The ceiling set by the label.} Every model stops well short of a perfect fit, and the gap between the best model and linear regression is small (0.0219 on the log scale). We think most of the remaining error belongs to the label rather than to the models. Under Proposition 13 a California home's assessed value is set at its purchase price and can then rise by at most 2\% a year until the home sells again \cite{prop13}. Two identical neighbouring houses, one bought in 1980 and one in 2015, can carry assessed values several times apart. The file does not record when a home last sold, so no feature can explain that gap, and every model meets the same floor.
 
@@ -381,13 +506,13 @@ Final training time & \X & \X & \X \\
 \section{Choice of Model}
 \label{sec:choice}
 
-\pending{Provisional. To be confirmed once every model has finished.} We choose the neural network: two hidden layers of 256 and 128 units, Adam at a learning rate of 0.001, dropout 0.2, trained for 27 passes.
+We choose the neural network: two hidden layers of 256 and 128 units, Adam at a learning rate of 0.001, dropout 0.2, trained for 27 passes.
 
-\emph{Performance.} It has the lowest validation error so far (0.3730) and kept it on the test homes (0.3725), with a fold spread of 0.0010. \X{} \pending{compare with the second and third models}.
+\emph{Performance.} It has the lowest validation error of every model (0.3730) and kept it on the test homes (0.3725), with a fold spread of 0.0010. The random forest and K-nearest neighbours follow at 0.3799 and 0.3853 on validation and 0.3788 and 0.3839 on the test homes, so the gap is several fold spreads wide and holds on homes no model saw during the search. Voting, which averages all three, scored 0.3731 and did not beat the network alone.
 
 \emph{Nature of the model.} A network can learn that the value of a square foot depends on the ZIP code and the age of a home. Linear regression has to add those effects separately. A network also does it without a hand-built list of interactions.
 
-\emph{Fit to the problem.} The table is large (2.3 million training homes) and wide (606 columns, mostly one-hot). The network reads it in batches, so its memory use stays flat as the data grows. It trained on every home in 4.5 minutes and prices a new home in a fraction of a second, which suits the service planned for Phase V. Its weakness is explanation: a valuer cannot read why it gave a value, so for that purpose linear regression stays as the reference.
+\emph{Fit to the problem.} The table is large (2.3 million training homes) and wide (606 columns, mostly one-hot). The network reads it in batches, so its memory use stays flat as the data grows. It trained on every home in 4.5 minutes, against 21 minutes for the forest and 45 for K-nearest neighbours, and prices a new home in a fraction of a second, which suits the service planned for Phase V. Its weakness is explanation: a valuer cannot read why it gave a value, so for that purpose linear regression stays as the reference.
 
 %% ---------------------------------------------------------------------------------------------------------------
 \section{Limitations}
@@ -399,13 +524,14 @@ Final training time & \X & \X & \X \\
 \item \textbf{Garage area was dropped} at 0.906 with the county land-use code. That value comes mostly from Los Angeles never recording garages, so the rule removed a column that does carry information in Orange and Ventura.
 \item \textbf{Implausible living areas remain}, from 1 square foot to 952,576. The log limits their pull, but we did not clip them.
 \item \textbf{Smaller grids than ideal.} Forests use at least five homes per leaf and 50 trees, the single tree is pre-pruned, and hierarchical clustering uses a sample of 10,000 homes, all because of the 16 GB laptop.
+\item \textbf{Not every slide classifier was trained.} The classifier forms of bagging, AdaBoost and voting, and the ID3 tree of Lecture 9, were not run, so those three ensembles appear in regression form only. K-nearest neighbours and the mixture of experts as classifiers were trained on 100,000 sampled homes and the linear support vector classifier on 20,000, so their scores likely understate what they would reach on every home.
 \end{itemize}
 
 %% ---------------------------------------------------------------------------------------------------------------
 \section{Source Code}
 \label{sec:code}
 
-The scripts are submitted with this report. Table~\ref{tab:code} lists what each one runs; \texttt{run\_all.sh} runs every step in order, and each step skips work it has already finished.
+The scripts are submitted with this report. Table~\ref{tab:code} lists what each one runs; \texttt{run\_all.sh} runs every step in order, and each step skips work it has already finished. The folder \texttt{training\_code} also holds one training file and one results page for every model, including the four slide classifier forms (\texttt{knn\_classifier.py}, \texttt{linear\_svm\_classifier.py}, \texttt{mixture\_of\_experts.py}, \texttt{bayesian\_network.py}) and their shared runner \texttt{band\_runner.py}. The files for the other models run the same code as the scripts in Table~\ref{tab:code}.
 
 \begin{table}[t]
 \caption{The scripts and what each one runs.}
@@ -428,7 +554,9 @@ Script & Runs \\
 \texttt{band\_models.py} & logistic regression, perceptron, naive Bayes \\
 \texttt{zillow\_results.py} & voting and the result tables \\
 \texttt{report\_figures.py} & Figure~\ref{fig:distributions} \\
-\texttt{test\_zillow.py} & seven unit tests \\
+helper modules & \texttt{shared\_code}, \texttt{features}, \texttt{pipeline}, \texttt{associations}, \texttt{correlations}, \texttt{feature\_table}, \texttt{grid\_table}, \texttt{location\_table}, \texttt{measure}: setup, the feature table, encoding, column selection and association measures, imported by the scripts above \\
+\texttt{test\_zillow.py} & eight unit tests \\
+\texttt{training\_code/} & one training file and one results page per model \\
 \texttt{run\_all.sh} & every step in order \\
 \bottomrule
 \end{tabularx}
@@ -438,7 +566,7 @@ Script & Runs \\
 \section{Use of AI}
 \label{sec:ai}
 
-\pending{Check that this statement matches what you did before submitting.} We used Claude (Anthropic), an AI assistant, to help write and debug the code and to draft parts of this report. We set the rules, chose or approved every setting, ran every experiment, checked the reported numbers against the output files, and edited the text. Every code file opens with the line: ``AI was used to help write this code, but the resulting code was reviewed and edited by a human.''
+We used Claude (Anthropic), an AI assistant, to help write and debug the code and to draft parts of this report. We set the rules, chose or approved every setting, ran every experiment, checked the reported numbers against the output files, and edited the text. Every code file opens with the line: ``AI was used to help write this code, but the resulting code was reviewed and edited by a human.''
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

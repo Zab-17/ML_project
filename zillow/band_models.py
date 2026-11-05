@@ -37,7 +37,8 @@ PERCEPTRON_PASSES = [5, 20]
 SMOOTHING = [0.1, 1.0, 10.0]               # Laplace smoothing for the 0/1 columns
 
 
-def main():
+def main(names=None):
+    """The named models (every model when none are named), from the command line unless names is given."""
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     PREDICTIONS_DIR.mkdir(exist_ok=True)
     matrix, label, folds = load_table()
@@ -46,7 +47,7 @@ def main():
     (OUT_DIR / "band_edges.json").write_text(json.dumps({"log value edges": edges.tolist(),
                                                           "dollar edges": np.exp(edges).round().tolist()}))
     bands, test_bands = price_bands(label, edges), price_bands(test_label, edges)
-    for name in sys.argv[1:] or list(MODELS):
+    for name in (sys.argv[1:] if names is None else names) or list(MODELS):
         search(name, matrix, bands, folds)
         final_test(name, winner(name), matrix, bands, test_matrix, test_bands)
 

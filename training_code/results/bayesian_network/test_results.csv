@@ -1,0 +1,2 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",test,4.4,42.634211170566225,0.41126194744067723,74.93424964152065

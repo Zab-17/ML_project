@@ -1,0 +1,22 @@
+2026-11-05 02:55 {"margin_penalty": 0.01} | fold 0 | accuracy 34.09% | 2 s
+2026-11-05 02:55 {"margin_penalty": 0.1} | fold 0 | accuracy 35.22% | 4 s
+2026-11-05 02:55 {"margin_penalty": 1.0} | fold 0 | accuracy 34.26% | 4 s
+2026-11-05 02:55 {"margin_penalty": 10.0} | fold 0 | accuracy 34.85% | 7 s
+2026-11-05 02:55 {"margin_penalty": 0.01} | fold 1 | accuracy 34.27% | 3 s
+2026-11-05 02:55 {"margin_penalty": 0.1} | fold 1 | accuracy 33.61% | 3 s
+2026-11-05 02:55 {"margin_penalty": 1.0} | fold 1 | accuracy 32.79% | 5 s
+2026-11-05 02:55 {"margin_penalty": 10.0} | fold 1 | accuracy 32.54% | 7 s
+2026-11-05 02:55 {"margin_penalty": 0.01} | fold 2 | accuracy 33.11% | 2 s
+2026-11-05 02:55 {"margin_penalty": 0.1} | fold 2 | accuracy 35.46% | 4 s
+2026-11-05 02:55 {"margin_penalty": 1.0} | fold 2 | accuracy 32.56% | 6 s
+2026-11-05 02:55 {"margin_penalty": 10.0} | fold 2 | accuracy 33.26% | 7 s
+2026-11-05 02:55 {"margin_penalty": 0.01} | fold 3 | accuracy 34.62% | 3 s
+2026-11-05 02:56 {"margin_penalty": 0.1} | fold 3 | accuracy 34.55% | 2 s
+2026-11-05 02:56 {"margin_penalty": 1.0} | fold 3 | accuracy 35.19% | 3 s
+2026-11-05 02:56 {"margin_penalty": 10.0} | fold 3 | accuracy 33.91% | 5 s
+2026-11-05 02:56 {"margin_penalty": 0.01} | fold 4 | accuracy 32.98% | 2 s
+2026-11-05 02:56 {"margin_penalty": 0.1} | fold 4 | accuracy 33.06% | 2 s
+2026-11-05 02:56 {"margin_penalty": 1.0} | fold 4 | accuracy 31.75% | 3 s
+2026-11-05 02:56 {"margin_penalty": 10.0} | fold 4 | accuracy 32.93% | 4 s
+2026-11-05 02:56 winner: {"margin_penalty": 0.1}, average validation accuracy 34.38%
+2026-11-05 02:56 test | {"margin_penalty": 0.1} | accuracy 34.15%, macro F1 0.294

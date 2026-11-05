@@ -1,0 +1,22 @@
+2026-11-05 02:50 {"parents": ["ZIP code", "living area (log)"]} | fold 0 | accuracy 40.75% | 12 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)", "building quality"]} | fold 0 | accuracy 41.69% | 12 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)", "year built"]} | fold 0 | accuracy 42.04% | 11 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | fold 0 | accuracy 42.36% | 11 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)"]} | fold 1 | accuracy 40.80% | 8 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)", "building quality"]} | fold 1 | accuracy 41.76% | 7 s
+2026-11-05 02:51 {"parents": ["ZIP code", "living area (log)", "year built"]} | fold 1 | accuracy 42.09% | 7 s
+2026-11-05 02:52 {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | fold 1 | accuracy 42.42% | 20 s
+2026-11-05 02:52 {"parents": ["ZIP code", "living area (log)"]} | fold 2 | accuracy 40.71% | 18 s
+2026-11-05 02:52 {"parents": ["ZIP code", "living area (log)", "building quality"]} | fold 2 | accuracy 41.68% | 15 s
+2026-11-05 02:52 {"parents": ["ZIP code", "living area (log)", "year built"]} | fold 2 | accuracy 42.06% | 15 s
+2026-11-05 02:53 {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | fold 2 | accuracy 42.37% | 14 s
+2026-11-05 02:53 {"parents": ["ZIP code", "living area (log)"]} | fold 3 | accuracy 40.79% | 20 s
+2026-11-05 02:53 {"parents": ["ZIP code", "living area (log)", "building quality"]} | fold 3 | accuracy 41.82% | 20 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)", "year built"]} | fold 3 | accuracy 42.22% | 33 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | fold 3 | accuracy 42.62% | 12 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)"]} | fold 4 | accuracy 40.68% | 4 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)", "building quality"]} | fold 4 | accuracy 41.68% | 5 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)", "year built"]} | fold 4 | accuracy 42.05% | 3 s
+2026-11-05 02:54 {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | fold 4 | accuracy 42.43% | 3 s
+2026-11-05 02:54 winner: {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]}, average validation accuracy 42.44%
+2026-11-05 02:54 test | {"parents": ["ZIP code", "living area (log)", "building quality", "year built"]} | accuracy 42.63%, macro F1 0.411

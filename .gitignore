@@ -16,3 +16,6 @@ king_county/
 # Zillow model matrices, labels and predictions: rebuilt by the zillow/ scripts
 zillow/**/*.npy
 zillow/**/*.npz
+
+# Test predictions of the per-model training files
+training_code/**/*.npy

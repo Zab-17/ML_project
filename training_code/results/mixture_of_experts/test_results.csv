@@ -1,0 +1,2 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+mixture of experts,"{""experts"": 8}",test,11.1,42.25212464589235,0.41140321350964404,76.27391319553738

@@ -1,0 +1,99 @@
+2026-11-05 02:50 {"distance": "euclidean", "k": 1} | fold 0 | accuracy 36.52% | 9 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 3} | fold 0 | accuracy 37.52% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 5} | fold 0 | accuracy 37.78% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 10} | fold 0 | accuracy 38.92% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 15} | fold 0 | accuracy 39.15% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 20} | fold 0 | accuracy 39.23% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 30} | fold 0 | accuracy 39.05% | 0 s
+2026-11-05 02:50 {"distance": "euclidean", "k": 50} | fold 0 | accuracy 38.98% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 1} | fold 0 | accuracy 36.52% | 4 s
+2026-11-05 02:50 {"distance": "cosine", "k": 3} | fold 0 | accuracy 37.43% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 5} | fold 0 | accuracy 37.56% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 10} | fold 0 | accuracy 38.75% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 15} | fold 0 | accuracy 38.77% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 20} | fold 0 | accuracy 38.63% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 30} | fold 0 | accuracy 38.71% | 0 s
+2026-11-05 02:50 {"distance": "cosine", "k": 50} | fold 0 | accuracy 38.46% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 1} | fold 1 | accuracy 36.61% | 5 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 3} | fold 1 | accuracy 37.75% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 5} | fold 1 | accuracy 38.72% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 10} | fold 1 | accuracy 39.34% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 15} | fold 1 | accuracy 39.55% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 20} | fold 1 | accuracy 39.51% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 30} | fold 1 | accuracy 39.56% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 50} | fold 1 | accuracy 39.17% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 1} | fold 1 | accuracy 36.74% | 6 s
+2026-11-05 02:51 {"distance": "cosine", "k": 3} | fold 1 | accuracy 37.85% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 5} | fold 1 | accuracy 38.49% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 10} | fold 1 | accuracy 39.17% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 15} | fold 1 | accuracy 39.06% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 20} | fold 1 | accuracy 38.91% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 30} | fold 1 | accuracy 39.15% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 50} | fold 1 | accuracy 38.54% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 1} | fold 2 | accuracy 36.59% | 11 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 3} | fold 2 | accuracy 37.60% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 5} | fold 2 | accuracy 38.12% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 10} | fold 2 | accuracy 38.87% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 15} | fold 2 | accuracy 38.78% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 20} | fold 2 | accuracy 38.71% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 30} | fold 2 | accuracy 39.11% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 50} | fold 2 | accuracy 39.10% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 1} | fold 2 | accuracy 36.54% | 9 s
+2026-11-05 02:51 {"distance": "cosine", "k": 3} | fold 2 | accuracy 37.55% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 5} | fold 2 | accuracy 38.18% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 10} | fold 2 | accuracy 38.82% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 15} | fold 2 | accuracy 38.42% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 20} | fold 2 | accuracy 38.64% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 30} | fold 2 | accuracy 38.55% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 50} | fold 2 | accuracy 38.39% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 1} | fold 3 | accuracy 36.28% | 10 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 3} | fold 3 | accuracy 37.42% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 5} | fold 3 | accuracy 37.58% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 10} | fold 3 | accuracy 38.39% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 15} | fold 3 | accuracy 39.08% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 20} | fold 3 | accuracy 38.96% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 30} | fold 3 | accuracy 38.94% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 50} | fold 3 | accuracy 39.04% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 1} | fold 3 | accuracy 36.08% | 8 s
+2026-11-05 02:51 {"distance": "cosine", "k": 3} | fold 3 | accuracy 37.29% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 5} | fold 3 | accuracy 37.76% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 10} | fold 3 | accuracy 38.17% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 15} | fold 3 | accuracy 38.27% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 20} | fold 3 | accuracy 38.74% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 30} | fold 3 | accuracy 38.88% | 0 s
+2026-11-05 02:51 {"distance": "cosine", "k": 50} | fold 3 | accuracy 38.56% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 1} | fold 4 | accuracy 36.74% | 6 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 3} | fold 4 | accuracy 37.56% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 5} | fold 4 | accuracy 38.60% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 10} | fold 4 | accuracy 39.32% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 15} | fold 4 | accuracy 39.53% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 20} | fold 4 | accuracy 39.29% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 30} | fold 4 | accuracy 39.67% | 0 s
+2026-11-05 02:51 {"distance": "euclidean", "k": 50} | fold 4 | accuracy 39.19% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 1} | fold 4 | accuracy 36.81% | 7 s
+2026-11-05 02:52 {"distance": "cosine", "k": 3} | fold 4 | accuracy 37.59% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 5} | fold 4 | accuracy 38.52% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 10} | fold 4 | accuracy 38.80% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 15} | fold 4 | accuracy 39.09% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 20} | fold 4 | accuracy 39.10% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 30} | fold 4 | accuracy 39.17% | 0 s
+2026-11-05 02:52 {"distance": "cosine", "k": 50} | fold 4 | accuracy 38.42% | 0 s
+2026-11-05 02:52 winner: {"distance": "euclidean", "k": 30}, average validation accuracy 39.27%
+2026-11-05 02:54 test | {"distance": "euclidean", "k": 30} | accuracy 39.57%, macro F1 0.386
+2026-11-05 02:55 {"experts": 2} | fold 0 | accuracy 41.12% | 14 s
+2026-11-05 02:55 {"experts": 4} | fold 0 | accuracy 41.50% | 9 s
+2026-11-05 02:55 {"experts": 8} | fold 0 | accuracy 42.06% | 8 s
+2026-11-05 02:55 {"experts": 2} | fold 1 | accuracy 41.69% | 14 s
+2026-11-05 02:55 {"experts": 4} | fold 1 | accuracy 41.75% | 11 s
+2026-11-05 02:55 {"experts": 8} | fold 1 | accuracy 42.46% | 10 s
+2026-11-05 02:56 {"experts": 2} | fold 2 | accuracy 40.97% | 14 s
+2026-11-05 02:56 {"experts": 4} | fold 2 | accuracy 41.03% | 12 s
+2026-11-05 02:56 {"experts": 8} | fold 2 | accuracy 41.34% | 9 s
+2026-11-05 02:56 {"experts": 2} | fold 3 | accuracy 40.87% | 15 s
+2026-11-05 02:56 {"experts": 4} | fold 3 | accuracy 41.59% | 11 s
+2026-11-05 02:57 {"experts": 8} | fold 3 | accuracy 42.03% | 9 s
+2026-11-05 02:57 {"experts": 2} | fold 4 | accuracy 41.92% | 15 s
+2026-11-05 02:57 {"experts": 4} | fold 4 | accuracy 42.04% | 10 s
+2026-11-05 02:57 {"experts": 8} | fold 4 | accuracy 42.42% | 9 s
+2026-11-05 02:57 winner: {"experts": 8}, average validation accuracy 42.06%
+2026-11-05 02:57 test | {"experts": 8} | accuracy 42.25%, macro F1 0.411

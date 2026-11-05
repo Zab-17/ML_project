@@ -1,0 +1,2 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+k-nearest neighbours (majority vote),"{""distance"": ""euclidean"", ""k"": 30}",test,165.0,39.57454621760571,0.386120377274178,73.17630189207148

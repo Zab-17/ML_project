@@ -1,0 +1,2 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+support vector machine (linear classifier),"{""margin_penalty"": 0.1}",test,1.8,34.152589794704994,0.2944117116648681,64.43762459343196

@@ -44,3 +44,5 @@ naive Bayes | {"smoothing": 1.0} | fold 4 | validation accuracy 38.38% | 6 s
 naive Bayes | {"smoothing": 10.0} | fold 4 | validation accuracy 38.36% | 5 s
 naive Bayes winner: {"smoothing": 0.1}, average validation accuracy 38.39%
 naive Bayes | {"smoothing": 0.1} | test accuracy 38.48%, macro F1 0.362
+perceptron winner: {"passes": 5}, average validation accuracy 33.90%
+perceptron was already scored on the test homes; not scoring it again

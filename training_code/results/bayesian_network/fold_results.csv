@@ -1,0 +1,21 @@
+model,setting,fold,seconds,accuracy (%),macro F1,within one band (%)
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)""]}",0,12.0,40.74523302190898,0.38829286411820485,74.50428891438563
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality""]}",0,12.1,41.68737365459214,0.40093156315956585,74.83013713598864
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""year built""]}",0,10.6,42.04469212697372,0.40344558024874655,74.36289132929028
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",0,10.6,42.35895754794296,0.4094794292604481,74.79014369229088
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)""]}",1,8.4,40.795881544026834,0.3894827817105904,74.5081852341704
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality""]}",1,6.5,41.75936550201894,0.40209697666359273,75.06175056276221
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""year built""]}",1,7.2,42.09373823016756,0.4038826786012516,74.52767388695706
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",1,19.8,42.41825714510944,0.4099128748354034,75.06744387705945
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)""]}",2,17.7,40.70912155588737,0.38891333390332444,74.57166530756803
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality""]}",2,15.4,41.680020812791994,0.40141727010934203,75.05809873396136
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""year built""]}",2,14.7,42.060422683319814,0.40334530445552064,74.4794069228768
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",2,14.3,42.369553858564835,0.4091019142605819,74.93086086692274
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)""]}",3,20.2,40.79431906631753,0.3884757733446189,74.5012067841546
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality""]}",3,20.1,41.81948602114434,0.40155104149544496,75.03711924161193
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""year built""]}",3,32.6,42.21564262618907,0.40518534098866493,74.56072838744421
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",3,12.1,42.61550570469872,0.4113193375362859,74.98392044599778
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)""]}",4,4.2,40.67986078145269,0.3881573921524137,74.38282475395025
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality""]}",4,5.1,41.683966897312104,0.40125909473233995,75.05376014770641
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""year built""]}",4,3.3,42.05017030427259,0.40340269078617813,74.52151827845022
+Bayesian network,"{""parents"": [""ZIP code"", ""living area (log)"", ""building quality"", ""year built""]}",4,3.1,42.432561914408154,0.41011240406744615,74.90872259763783

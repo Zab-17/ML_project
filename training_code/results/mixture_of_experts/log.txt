@@ -1,0 +1,17 @@
+2026-11-05 02:55 {"experts": 2} | fold 0 | accuracy 41.12% | 14 s
+2026-11-05 02:55 {"experts": 4} | fold 0 | accuracy 41.50% | 9 s
+2026-11-05 02:55 {"experts": 8} | fold 0 | accuracy 42.06% | 8 s
+2026-11-05 02:55 {"experts": 2} | fold 1 | accuracy 41.69% | 14 s
+2026-11-05 02:55 {"experts": 4} | fold 1 | accuracy 41.75% | 11 s
+2026-11-05 02:55 {"experts": 8} | fold 1 | accuracy 42.46% | 10 s
+2026-11-05 02:56 {"experts": 2} | fold 2 | accuracy 40.97% | 14 s
+2026-11-05 02:56 {"experts": 4} | fold 2 | accuracy 41.03% | 12 s
+2026-11-05 02:56 {"experts": 8} | fold 2 | accuracy 41.34% | 9 s
+2026-11-05 02:56 {"experts": 2} | fold 3 | accuracy 40.87% | 15 s
+2026-11-05 02:56 {"experts": 4} | fold 3 | accuracy 41.59% | 11 s
+2026-11-05 02:57 {"experts": 8} | fold 3 | accuracy 42.03% | 9 s
+2026-11-05 02:57 {"experts": 2} | fold 4 | accuracy 41.92% | 15 s
+2026-11-05 02:57 {"experts": 4} | fold 4 | accuracy 42.04% | 10 s
+2026-11-05 02:57 {"experts": 8} | fold 4 | accuracy 42.42% | 9 s
+2026-11-05 02:57 winner: {"experts": 8}, average validation accuracy 42.06%
+2026-11-05 02:57 test | {"experts": 8} | accuracy 42.25%, macro F1 0.411

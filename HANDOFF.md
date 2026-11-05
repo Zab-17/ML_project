@@ -33,35 +33,27 @@ Project: CSCE 3602 / DSCI 3415, The American University in Cairo. Team: Zeyad Kh
 
 ## 3. The state of the report
 
-File: `milestone_3/report/main.tex` (ACM format), with `references.bib` and `figures/` next to it. The `main.pdf` in that folder is an old build that still shows the red placeholders.
+File: `milestone_3/report/main.tex` (ACM format), with `references.bib` and `figures/` next to it. `main.pdf` is the current build: 18 pages, compiled with tectonic, no errors.
 
-Two macros mark what is missing. Both print in red, so nothing missed can slip through:
+**The report is complete.** No red `\X` number or `\pending` note is left. The authors are Zeyad Khaled and Mohamed Elsayed, and the "Use of AI" statement is confirmed.
 
-- **`\X`**: a number still to fill in. There are **161** of them, mostly in the result tables.
-- **`\pending{...}`**: a note to replace with text. There are **18**:
+| The brief asks for | Where it is |
+|---|---|
+| A report in ACM format | `milestone_3/report/main.pdf` |
+| Classification on a binned label (regression projects) | Five price bands: seven classifiers trained on the bands, plus every regression model cut into the bands |
+| For each model: setup, parameter choice, evaluation | Section 4, one subsection per model, and the settings table |
+| A comment on each model's performance and fit | The "Verdict" paragraph that ends every model subsection |
+| The top 3 compared, with the variability discussed | Section 6 |
+| A choice from the top 3 | Section 7: the neural network |
+| The source code | `zillow/` (the pipeline) and `training_code/` (one file per model) |
 
-| Near line | Section | What to write | Where the answer is |
-|---|---|---|---|
-| 37 | Abstract | "provisional: the neural network": confirmed. Remove the note. | Neural network test MSE (log) 0.3725, best of all models |
-| 249 | K-nearest neighbours | Whether a small k copied label noise, and how the one-hot columns shaped the distances | k = 50 with Euclidean distance won the search; test 0.3839, 4th of 11 models |
-| 261 | Random forest | Whether averaging fixed the single tree's overfitting, and which column share won | 10% of the columns per split won; forest 0.3788 against the single tree's 0.4109 |
-| 264 | Bagging | Whether bagging's trees were too alike compared with the forest's | Bagging 0.3953 against the forest's 0.3788 |
-| 267 | Support vector machine | Whether the linear model with absolute-error loss landed close to linear regression | Section 5, point 4 |
-| 270 | AdaBoost | Whether boosting chased noise | AdaBoost 0.4903, worst model above the baselines; depth 8 won |
-| 273 | Both clusterings | One price per cluster | 1,000 clusters won for both; 0.4532 and 0.4556 |
-| 279 | Voting | Whether averaging helped | Section 5, point 1 |
-| 284 | Price-band classifiers | Compare with the number models cut into bands | Band table, Section 4 |
-| 333, 338 | All models side by side | Fill the tables, then two or three sentences on which family won, how far the best model is from linear regression, and whether the band table agrees with the number ranking | Section 4 |
-| 344 | The top three models | "At the time of writing, the neural network leads with 0.3730": 0.3730 was its validation score. Its test score is 0.3725. | `zillow/out/results/` |
-| 372, 374, 376 | Where the variability comes from | Add the other top models and their spread across the five folds | `zillow/out/slide_models/fold_results.csv`, `zillow/out/neural_search/fold_results.csv` |
-| 384, 386 | Choice of model | No longer provisional. Compare the winner with the second and third models. | Section 5 |
-| 441 | Use of AI | Mohamed and Zeyad must check that the statement matches what they did | Ask them |
-
-**Two decisions for the team.** Ask before writing either one:
-- **Which "top three"?** By test score the top three are the neural network, voting and random forest. By validation score they are the neural network, random forest and k-nearest neighbours, and voting averages exactly those three.
-- **The "Source Code" table (Section "Source Code") is out of date.** It says `test_zillow.py` has seven unit tests; it now has eight. It also lists 15 scripts, but `zillow/` now also holds the 8 shared helper files: `associations.py`, `correlations.py`, `features.py`, `feature_table.py`, `grid_table.py`, `location_table.py`, `measure.py` and `pipeline.py`.
+- **Regression or classifier form:** Section 3, "Regression and classifier forms", says which models ran in which form.
+- **Not run** (stated in the Limitations section): the classifier forms of bagging, AdaBoost and voting, and the ID3 tree of Lecture 9.
+- **Still to decide before submitting:** how the code reaches the professor. Either zip `zillow/`, `src/` and `training_code/` without the data files, or link the GitHub repository. The repository is public, and `data/processed/` holds Zillow rows that the licence forbids sharing.
 
 ## 4. Where every number lives
+
+Every model also has its own results page in `training_code/results/`, with every metric. `milestone_3/all_training_results.md` collects them in one file.
 
 | File | What it holds |
 |---|---|
@@ -119,6 +111,15 @@ Median miss: half the homes are off by less than this. Average miss: the mean ab
 | average baseline | number model, cut into bands | 20.1% | 0.067 | 60.1% |
 | median baseline | number model, cut into bands | 20.0% | 0.067 | 60.0% |
 
+### The classifiers added on 5 November (as the slides teach them)
+
+| Model | Lecture | Trained on | Winning setting | Test accuracy | Macro F1 | Within one band |
+|---|---|---|---|---|---|---|
+| Bayesian network | 11 | all homes | band's parents: ZIP code, living area, building quality, year built | 42.63% | 0.411 | 74.9% |
+| Mixture of experts | 13 | 100,000-home sample | 8 experts | 42.25% | 0.411 | 76.3% |
+| K-nearest neighbours, majority vote | 3 | 100,000-home sample | k = 30, Euclidean | 39.57% | 0.386 | 73.2% |
+| Linear SVM classifier | 12 | 20,000-home sample | C = 0.1 | 34.15% | 0.294 | 64.4% |
+
 ### The most expensive 1% of homes (5,719 test homes)
 
 | Model | Median miss (minus = too low) | Share of all squared dollar error |
@@ -147,6 +148,9 @@ Each point is marked **measured** (it is in the files) or **likely** (an explana
 6. **Why every model plateaus around 0.37** (likely): the label. Under California's Proposition 13, a home's assessed value is set at its last sale and then rises at most 2% a year. Two identical neighbouring houses, one bought in 1985 and one in 2015, carry very different labels, and no column says when a home last sold. The same explanation fits the cheapest band: 24% of band-1 homes are predicted as band 4 or 5.
 7. **Logistic regression picks the exact band best** (measured), at 41.2%. The number models cut into bands are more often off by at most one band: about 82%, against 75%.
 8. **AdaBoost is the weakest model above the baselines** (measured), at 0.4903. A likely reason is that boosting focuses on the hardest homes, and here many of those are homes whose assessed value lags their market value, so it chases noise.
+
+9. **The Bayesian network is the best band model** (measured): 42.6%, ahead of the mixture of experts (42.3%) and logistic regression (41.2%). Each parent added to the band helped, and year built helped more than building quality.
+10. **The mixture of experts beat logistic regression with a twentieth of the homes** (measured). Accuracy rose with every expert added: 41.31%, 41.58% and 42.06% for 2, 4 and 8 experts. A likely reason is that experts can specialise in different parts of the market.
 
 ## 6. Limits the report must state
 
